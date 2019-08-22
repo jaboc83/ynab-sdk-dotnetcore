@@ -3,7 +3,7 @@
 ## Setup
 
 - Install the [.NET Core SDK][dotnet], which includes the dotnet CLI.
-- Note: [Docker][docker] is required to generate the swagger code
+- Note: [Docker][docker] is required to generate the Open API code
 - Build the project with method of your choice
   - [ vscode ] run task `Build Debug Mode`
   - [ shell ] `dotnet build ./YNAB.SDK/YNAB.SDK.csproj`

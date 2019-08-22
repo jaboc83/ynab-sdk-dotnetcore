@@ -1,33 +1,29 @@
 # YNAB API .NET Core Library
 
-Please read the [YNAB API documentation](https://api.youneedabudget.com) for an overview of using the API and a complete list of available resources.
+Please read the [YNAB API documentation][ynabapi] for an overview of using the
+API and a complete list of available resources.
 
-This client is generated using the [Swagger Code Generator](https://github.com/swagger-api/swagger-codegen).
+This client is generated using the [OpenAPI Code Generator][openapi]
 
-## Installation
+## Include the Package
 
-TODO Write installation documentation.
-First, install the module with :
+First, include the nuget package YNAB.SDK:
 
 ```shell
-npm install ynab
+dotnet add package YNAB.SDK
 ```
-
-Then, depending upon your usage context, add a reference to it:
 
 ## Usage
 
-TODO Write Usage documentation.
-To use this client, you must
-[obtain an access token](https://api.youneedabudget.com/#authentication-overview) from
-the [My Account](https://app.youneedabudget.com/settings) area of the YNAB web
-application.
+To use this client, you must [obtain an access token][accesstoken] from the
+[My Account][myaccount] area of the YNAB web application.
 
+FIXME Replace with working code example
 ``` csharp
 var accessToken = "b43439eaafe2_this_is_fake_b43439eaafe2";
 var ynabAPI = new YNAB.API(accessToken);
 
-async function ListBudgets() {
+public async Task ListBudgets() {
   var budgetsResponse = await ynabAPI.Budgets.GetBudgets();
   var budgets = budgetsResponse.Data.Budgets;
   budgets.ForEach(budget => {
@@ -38,10 +34,10 @@ async function ListBudgets() {
 
 ### Error Handling
 
-TODO Write Error handling documentation.
 If a response is returned with a code >= 300, instead of returning the response,
 the response will be thrown as an error to be caught.
 
+FIXME Replace with working code example
 ``` csharp
 var accessToken = "invalid_token";
 var ynabAPI = new YNAB.API(accessToken);
@@ -68,12 +64,12 @@ async function ListBudgets() {
 ## Examples
 
 TODO Write example documentation.
-See the [examples](https://github.com/jaboc83/ynab-sdk-dotnetcore/tree/master/examples)
+See the [examples][examples]
 folder for example usage scenarios.
 
 ## Methods
 
-TODO Write method documentation.
+FIXME method documentation.
 The following methods are available in this library.
 
 |                            | Method                                                                                                                                                         | Description                                           |
@@ -106,16 +102,14 @@ The following methods are available in this library.
 | **Scheduled Transactions** | ScheduledTransactions.GetScheduledTransactions(budgetId) | Returns all scheduled transactions                    |
 |                            | ScheduledTransactions.GetScheduledTransactionById(budgetId, scheduledTransactionId) | Returns a single scheduled transaction                |
 
-### Utilities
-
-TODO Update Utilities documentation.
-There are several utilities available on the `utils` export to make working
-with [ISO dates and milliunits](https://api.youneedabudget.com/#formats) a bit
-easier.
-
-
 ## License
 
 Copyright (c) 2019 Jake Moening
 
 Licensed under the Apache-2.0 license
+
+[openapi]: https://github.com/OpenAPITools/openapi-generator
+[ynabapi]: https://api.youneedabudget.com
+[accesstoken]: https://api.youneedabudget.com/#authentication-overview
+[myaccount]: https://app.youneedabudget.com/settings
+[examples]: https://github.com/jaboc83/ynab-sdk-dotnetcore/tree/master/examples

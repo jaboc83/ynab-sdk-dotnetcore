@@ -7,7 +7,7 @@
     <PackageTags>ynab;api;client;dotnetcore;sdk</PackageTags>
     <Version>1.0.0</Version>
     <Authors>Jake Moening</Authors>
-    <PackageProjectUrl>TODO Project URL </PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/jaboc83/ynab-sdk-dotnetcore</PackageProjectUrl>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <RootNamespace>YNAB.SDK</RootNamespace>
     <Copyright>2019 Jake Moening</Copyright>
