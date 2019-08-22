@@ -1,0 +1,6 @@
+# log files
+*.log
+
+# Artifacts
+bin/
+obj/
