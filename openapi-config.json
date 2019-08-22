@@ -1,0 +1,7 @@
+{
+  "packageName": "YNAB.SDK",
+  "targetFramework": "netcoreapp2.0",
+  "sourceFolder": "",
+  "optionalProjectFile": false,
+  "optionalAssemblyInfo": false
+}

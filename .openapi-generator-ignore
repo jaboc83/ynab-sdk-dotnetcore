@@ -1,0 +1,17 @@
+# OpenAPI Codegen Ignore
+
+# OpenAPI scripts
+/git_push.sh
+
+# Build Scripts
+/scripts/
+
+# Test Project
+/YNAB.SDK.Tests/
+
+# Project metadata
+/*.md
+/.gitignore
+/.editorconfig
+/icon.png
+/*.code-workspace

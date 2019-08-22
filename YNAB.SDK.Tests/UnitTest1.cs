@@ -1,22 +1,23 @@
 using System;
 using Xunit;
-using YNAB.SDK;
+using YNAB.SDK.Api;
 
 namespace YNAB.SDK.Tests
 {
   public class UnitTest1
   {
-    private readonly Main _main;
+    private readonly BudgetsApi _budgetsApi;
 
     public UnitTest1() {
-      _main = new Main();
+      _budgetsApi = new BudgetsApi();
     }
 
     [Fact]
     public void Test1()
     {
-      var result = _main.Test();
-      Assert.False(result, "Test should not be true!");
+      Assert.True(true, "test");
+      //var result = _budgetsApi.GetBudgets();
+      //Assert.False(result.Data.Budgets.Count == 1, "budget count should be 0");
     }
   }
 }

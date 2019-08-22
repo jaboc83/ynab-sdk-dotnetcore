@@ -1,0 +1,9 @@
+# YNAB.SDK.Model.BudgetSettingsResponseData
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Settings** | [**BudgetSettings**](BudgetSettings.md) |  | 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+

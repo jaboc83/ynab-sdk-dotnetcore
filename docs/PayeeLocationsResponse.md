@@ -1,0 +1,9 @@
+# YNAB.SDK.Model.PayeeLocationsResponse
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Data** | [**PayeeLocationsResponseData**](PayeeLocationsResponseData.md) |  | 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
