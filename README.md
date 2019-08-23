@@ -18,15 +18,13 @@ dotnet add package YNAB.SDK
 To use this client, you must [obtain an access token][accesstoken] from the
 [My Account][myaccount] area of the YNAB web application.
 
-FIXME Replace with working code example
 ``` csharp
-var accessToken = "b43439eaafe2_this_is_fake_b43439eaafe2";
-var ynabAPI = new YNAB.API(accessToken);
+var accessToken = "NOT_A_REAL_TOKEN";
+var ynabApi = new YNAB.SDK.API(accessToken);
 
 public async Task ListBudgets() {
-  var budgetsResponse = await ynabAPI.Budgets.GetBudgets();
-  var budgets = budgetsResponse.Data.Budgets;
-  budgets.ForEach(budget => {
+  var budgetsResponse = await ynabApi.Budgets.GetBudgetsAsync();
+  budgetsResponse.Data.Budgets.ForEach(budget => {
     Console.WriteLine($"Budget Name: {budget.Name}");
   });
 }
@@ -37,40 +35,29 @@ public async Task ListBudgets() {
 If a response is returned with a code >= 300, instead of returning the response,
 the response will be thrown as an error to be caught.
 
-FIXME Replace with working code example
 ``` csharp
 var accessToken = "invalid_token";
-var ynabAPI = new YNAB.API(accessToken);
+var ynabApi = new YNAB.SDK.API(accessToken);
 
-async function ListBudgets() {
+public async Task ListBudgets() {
   try {
     var budgetsResponse = await ynabAPI.Budgets.GetBudgets();
     // Won't get here because an error will be thrown
-  } catch (Exception ex) {
-    Console.WriteLine(ex);
-    /*
-     *  {
-     *    error: {
-     *      id: "401",
-     *      name: "unauthorized",
-     *      detail: "unauthorized"
-     *    }
-     *  }
-     */
+  } catch (YNAB.SDK.Client.ApiException ex) {
+    Console.WriteLine(ex.ErrorCode); // 401
   }
 }
 ```
 
 ## Examples
 
-TODO Write example documentation.
-See the [examples][examples]
-folder for example usage scenarios.
+TODO Write examples.
+See the [examples][examples] folder for example usage scenarios.
 
 ## Methods
 
-FIXME method documentation.
-The following methods are available in this library.
+The following methods are available in this library from the YNAB.SDK.API class.
+See [the Open API generated docs][docs] for more details on lower level objects.
 
 |                            | Method                                                                                                                                                         | Description                                           |
 |----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|
@@ -113,3 +100,4 @@ Licensed under the Apache-2.0 license
 [accesstoken]: https://api.youneedabudget.com/#authentication-overview
 [myaccount]: https://app.youneedabudget.com/settings
 [examples]: https://github.com/jaboc83/ynab-sdk-dotnetcore/tree/master/examples
+[docs]: https://github.com/jaboc83/ynab-sdk-dotnetcore/tree/master/docs

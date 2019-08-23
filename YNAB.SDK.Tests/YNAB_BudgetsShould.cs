@@ -16,6 +16,25 @@ namespace YNAB.SDK.Tests
     }
 
     [Fact]
+    public void Budgets_FailWithBadAccessTokens() {
+      // Arrange
+      var badToken = "INVALID_TOKEN";
+      var ynabApi = new YNAB.SDK.API(badToken);
+
+      // Act
+      try{
+      ynabApi.Budgets.GetBudgets();
+      } catch (YNAB.SDK.Client.ApiException ex) {
+        var x = 1;
+      }
+
+      // Assert
+      Assert.Throws<YNAB.SDK.Client.ApiException>(() => {
+        ynabApi.Budgets.GetBudgets();
+      });
+    }
+
+    [Fact]
     public async Task Budgets_AreNotEmpty()
     {
       // Arrange
