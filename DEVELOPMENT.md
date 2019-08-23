@@ -13,6 +13,8 @@
 - Run tests with method of your choice
   - [ vscode ] run task `Run Tests`
   - [ shell ] `dotnet test ./YNAB.SDK.Tests/YNAB.SDK.Tests.csproj`
+  - NOTE: These tests will not work for anyone else since it's currently testing
+    against a real YNAB budget. I'll consider moving to some kind of mock in the future.
 
 ## Releasing
 

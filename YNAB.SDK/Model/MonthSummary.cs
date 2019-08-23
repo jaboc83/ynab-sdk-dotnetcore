@@ -45,9 +45,8 @@ namespace YNAB.SDK.Model
         /// <param name="budgeted">The total amount budgeted in the month (required).</param>
         /// <param name="activity">The total amount in transactions in the month, excluding those categorized to &#39;Inflow: To be Budgeted&#39; (required).</param>
         /// <param name="toBeBudgeted">The available amount for &#39;To be Budgeted&#39; (required).</param>
-        /// <param name="ageOfMoney">The Age of Money as of the month (required).</param>
         /// <param name="deleted">Whether or not the month has been deleted.  Deleted months will only be included in delta requests. (required).</param>
-        public MonthSummary(DateTime month = default(DateTime), string note = default(string), long income = default(long), long budgeted = default(long), long activity = default(long), long toBeBudgeted = default(long), int ageOfMoney = default(int), bool deleted = default(bool))
+        public MonthSummary(DateTime month = default(DateTime), string note = default(string), long income = default(long), long budgeted = default(long), long activity = default(long), long toBeBudgeted = default(long), bool deleted = default(bool))
         {
             // to ensure "month" is required (not null)
             if (month == null)
@@ -109,16 +108,6 @@ namespace YNAB.SDK.Model
                 this.ToBeBudgeted = toBeBudgeted;
             }
 
-            // to ensure "ageOfMoney" is required (not null)
-            if (ageOfMoney == null)
-            {
-                throw new InvalidDataException("ageOfMoney is a required property for MonthSummary and cannot be null");
-            }
-            else
-            {
-                this.AgeOfMoney = ageOfMoney;
-            }
-
             // to ensure "deleted" is required (not null)
             if (deleted == null)
             {
@@ -173,13 +162,6 @@ namespace YNAB.SDK.Model
         public long ToBeBudgeted { get; set; }
 
         /// <summary>
-        /// The Age of Money as of the month
-        /// </summary>
-        /// <value>The Age of Money as of the month</value>
-        [DataMember(Name="age_of_money", EmitDefaultValue=false)]
-        public int AgeOfMoney { get; set; }
-
-        /// <summary>
         /// Whether or not the month has been deleted.  Deleted months will only be included in delta requests.
         /// </summary>
         /// <value>Whether or not the month has been deleted.  Deleted months will only be included in delta requests.</value>
@@ -200,7 +182,6 @@ namespace YNAB.SDK.Model
             sb.Append("  Budgeted: ").Append(Budgeted).Append("\n");
             sb.Append("  Activity: ").Append(Activity).Append("\n");
             sb.Append("  ToBeBudgeted: ").Append(ToBeBudgeted).Append("\n");
-            sb.Append("  AgeOfMoney: ").Append(AgeOfMoney).Append("\n");
             sb.Append("  Deleted: ").Append(Deleted).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -263,10 +244,6 @@ namespace YNAB.SDK.Model
                     this.ToBeBudgeted.Equals(input.ToBeBudgeted)
                 ) && 
                 (
-                    this.AgeOfMoney == input.AgeOfMoney ||
-                    this.AgeOfMoney.Equals(input.AgeOfMoney)
-                ) && 
-                (
                     this.Deleted == input.Deleted ||
                     this.Deleted.Equals(input.Deleted)
                 );
@@ -289,7 +266,6 @@ namespace YNAB.SDK.Model
                 hashCode = hashCode * 59 + this.Budgeted.GetHashCode();
                 hashCode = hashCode * 59 + this.Activity.GetHashCode();
                 hashCode = hashCode * 59 + this.ToBeBudgeted.GetHashCode();
-                hashCode = hashCode * 59 + this.AgeOfMoney.GetHashCode();
                 hashCode = hashCode * 59 + this.Deleted.GetHashCode();
                 return hashCode;
             }

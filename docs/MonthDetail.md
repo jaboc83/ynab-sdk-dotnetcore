@@ -9,7 +9,6 @@ Name | Type | Description | Notes
 **Budgeted** | **long** | The total amount budgeted in the month | 
 **Activity** | **long** | The total amount in transactions in the month, excluding those categorized to &#39;Inflow: To be Budgeted&#39; | 
 **ToBeBudgeted** | **long** | The available amount for &#39;To be Budgeted&#39; | 
-**AgeOfMoney** | **int** | The Age of Money as of the month | 
 **Deleted** | **bool** | Whether or not the month has been deleted.  Deleted months will only be included in delta requests. | 
 **Categories** | [**List&lt;Category&gt;**](Category.md) | The budget month categories.  Amounts (budgeted, activity, balance, etc.) are specific to the {month} parameter specified. | 
 

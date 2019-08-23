@@ -166,7 +166,7 @@ namespace YNAB.SDK.Model
         /// <param name="importId">If the Transaction was imported, this field is a unique (by account) import identifier.  If this transaction was imported through File Based Import or Direct Import and not through the API, the import_id will have the format: &#39;YNAB:[milliunit_amount]:[iso_date]:[occurrence]&#39;.  For example, a transaction dated 2015-12-30 in the amount of -$294.23 USD would have an import_id of &#39;YNAB:-294230:2015-12-30:1&#39;.  If a second transaction on the same account was imported and had the same date and same amount, its import_id would be &#39;YNAB:-294230:2015-12-30:2&#39;. (required).</param>
         /// <param name="deleted">Whether or not the transaction has been deleted.  Deleted transactions will only be included in delta requests. (required).</param>
         /// <param name="type">Whether the hybrid transaction represents a regular transaction or a subtransaction (required).</param>
-        /// <param name="parentTransactionId">For subtransaction types, this is the id of the pararent transaction.  For transaction types, this id will be always be null. (required).</param>
+        /// <param name="parentTransactionId">For subtransaction types, this is the id of the parent transaction.  For transaction types, this id will be always be null. (required).</param>
         /// <param name="accountName">accountName (required).</param>
         /// <param name="payeeName">payeeName (required).</param>
         /// <param name="categoryName">categoryName (required).</param>
@@ -435,9 +435,9 @@ namespace YNAB.SDK.Model
         public bool Deleted { get; set; }
 
         /// <summary>
-        /// For subtransaction types, this is the id of the pararent transaction.  For transaction types, this id will be always be null.
+        /// For subtransaction types, this is the id of the parent transaction.  For transaction types, this id will be always be null.
         /// </summary>
-        /// <value>For subtransaction types, this is the id of the pararent transaction.  For transaction types, this id will be always be null.</value>
+        /// <value>For subtransaction types, this is the id of the parent transaction.  For transaction types, this id will be always be null.</value>
         [DataMember(Name="parent_transaction_id", EmitDefaultValue=false)]
         public string ParentTransactionId { get; set; }
 

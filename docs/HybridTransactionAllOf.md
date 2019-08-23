@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | **string** | Whether the hybrid transaction represents a regular transaction or a subtransaction | 
-**ParentTransactionId** | **string** | For subtransaction types, this is the id of the pararent transaction.  For transaction types, this id will be always be null. | 
+**ParentTransactionId** | **string** | For subtransaction types, this is the id of the parent transaction.  For transaction types, this id will be always be null. | 
 **AccountName** | **string** |  | 
 **PayeeName** | **string** |  | 
 **CategoryName** | **string** |  | 

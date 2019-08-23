@@ -32,45 +32,6 @@ namespace YNAB.SDK.Model
     public partial class Category :  IEquatable<Category>, IValidatableObject
     {
         /// <summary>
-        /// The type of goal, if the cagegory has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding)
-        /// </summary>
-        /// <value>The type of goal, if the cagegory has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding)</value>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum GoalTypeEnum
-        {
-            /// <summary>
-            /// Enum TB for value: TB
-            /// </summary>
-            [EnumMember(Value = "TB")]
-            TB = 1,
-
-            /// <summary>
-            /// Enum TBD for value: TBD
-            /// </summary>
-            [EnumMember(Value = "TBD")]
-            TBD = 2,
-
-            /// <summary>
-            /// Enum MF for value: MF
-            /// </summary>
-            [EnumMember(Value = "MF")]
-            MF = 3,
-
-            /// <summary>
-            /// Enum NEED for value: NEED
-            /// </summary>
-            [EnumMember(Value = "NEED")]
-            NEED = 4
-
-        }
-
-        /// <summary>
-        /// The type of goal, if the cagegory has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding)
-        /// </summary>
-        /// <value>The type of goal, if the cagegory has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding)</value>
-        [DataMember(Name="goal_type", EmitDefaultValue=false)]
-        public GoalTypeEnum GoalType { get; set; }
-        /// <summary>
         /// Initializes a new instance of the <see cref="Category" /> class.
         /// </summary>
         [JsonConstructorAttribute]
@@ -82,18 +43,13 @@ namespace YNAB.SDK.Model
         /// <param name="categoryGroupId">categoryGroupId (required).</param>
         /// <param name="name">name (required).</param>
         /// <param name="hidden">Whether or not the category is hidden (required).</param>
-        /// <param name="originalCategoryGroupId">If category is hidden this is the id of the category group it originally belonged to before it was hidden..</param>
         /// <param name="note">note (required).</param>
         /// <param name="budgeted">Budgeted amount in milliunits format (required).</param>
         /// <param name="activity">Activity amount in milliunits format (required).</param>
         /// <param name="balance">Balance in milliunits format (required).</param>
-        /// <param name="goalType">The type of goal, if the cagegory has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding) (required).</param>
-        /// <param name="goalCreationMonth">The month a goal was created (required).</param>
         /// <param name="goalTarget">The goal target amount in milliunits (required).</param>
-        /// <param name="goalTargetMonth">If the goal type is &#39;TBD&#39; (Target Category Balance by Date), this is the target month for the goal to be completed (required).</param>
-        /// <param name="goalPercentageComplete">The percentage completion of the goal (required).</param>
         /// <param name="deleted">Whether or not the category has been deleted.  Deleted categories will only be included in delta requests. (required).</param>
-        public Category(Guid id = default(Guid), Guid categoryGroupId = default(Guid), string name = default(string), bool hidden = default(bool), Guid originalCategoryGroupId = default(Guid), string note = default(string), long budgeted = default(long), long activity = default(long), long balance = default(long), GoalTypeEnum goalType = default(GoalTypeEnum), DateTime goalCreationMonth = default(DateTime), long goalTarget = default(long), DateTime goalTargetMonth = default(DateTime), int goalPercentageComplete = default(int), bool deleted = default(bool))
+        public Category(Guid id = default(Guid), Guid categoryGroupId = default(Guid), string name = default(string), bool hidden = default(bool), string note = default(string), long budgeted = default(long), long activity = default(long), long balance = default(long), long goalTarget = default(long), bool deleted = default(bool))
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -175,17 +131,6 @@ namespace YNAB.SDK.Model
                 this.Balance = balance;
             }
 
-            this.GoalType = goalType;
-            // to ensure "goalCreationMonth" is required (not null)
-            if (goalCreationMonth == null)
-            {
-                throw new InvalidDataException("goalCreationMonth is a required property for Category and cannot be null");
-            }
-            else
-            {
-                this.GoalCreationMonth = goalCreationMonth;
-            }
-
             // to ensure "goalTarget" is required (not null)
             if (goalTarget == null)
             {
@@ -194,26 +139,6 @@ namespace YNAB.SDK.Model
             else
             {
                 this.GoalTarget = goalTarget;
-            }
-
-            // to ensure "goalTargetMonth" is required (not null)
-            if (goalTargetMonth == null)
-            {
-                throw new InvalidDataException("goalTargetMonth is a required property for Category and cannot be null");
-            }
-            else
-            {
-                this.GoalTargetMonth = goalTargetMonth;
-            }
-
-            // to ensure "goalPercentageComplete" is required (not null)
-            if (goalPercentageComplete == null)
-            {
-                throw new InvalidDataException("goalPercentageComplete is a required property for Category and cannot be null");
-            }
-            else
-            {
-                this.GoalPercentageComplete = goalPercentageComplete;
             }
 
             // to ensure "deleted" is required (not null)
@@ -226,7 +151,6 @@ namespace YNAB.SDK.Model
                 this.Deleted = deleted;
             }
 
-            this.OriginalCategoryGroupId = originalCategoryGroupId;
         }
         
         /// <summary>
@@ -253,13 +177,6 @@ namespace YNAB.SDK.Model
         /// <value>Whether or not the category is hidden</value>
         [DataMember(Name="hidden", EmitDefaultValue=false)]
         public bool Hidden { get; set; }
-
-        /// <summary>
-        /// If category is hidden this is the id of the category group it originally belonged to before it was hidden.
-        /// </summary>
-        /// <value>If category is hidden this is the id of the category group it originally belonged to before it was hidden.</value>
-        [DataMember(Name="original_category_group_id", EmitDefaultValue=false)]
-        public Guid OriginalCategoryGroupId { get; set; }
 
         /// <summary>
         /// Gets or Sets Note
@@ -289,34 +206,11 @@ namespace YNAB.SDK.Model
         public long Balance { get; set; }
 
         /// <summary>
-        /// The month a goal was created
-        /// </summary>
-        /// <value>The month a goal was created</value>
-        [DataMember(Name="goal_creation_month", EmitDefaultValue=false)]
-        [JsonConverter(typeof(OpenAPIDateConverter))]
-        public DateTime GoalCreationMonth { get; set; }
-
-        /// <summary>
         /// The goal target amount in milliunits
         /// </summary>
         /// <value>The goal target amount in milliunits</value>
         [DataMember(Name="goal_target", EmitDefaultValue=false)]
         public long GoalTarget { get; set; }
-
-        /// <summary>
-        /// If the goal type is &#39;TBD&#39; (Target Category Balance by Date), this is the target month for the goal to be completed
-        /// </summary>
-        /// <value>If the goal type is &#39;TBD&#39; (Target Category Balance by Date), this is the target month for the goal to be completed</value>
-        [DataMember(Name="goal_target_month", EmitDefaultValue=false)]
-        [JsonConverter(typeof(OpenAPIDateConverter))]
-        public DateTime GoalTargetMonth { get; set; }
-
-        /// <summary>
-        /// The percentage completion of the goal
-        /// </summary>
-        /// <value>The percentage completion of the goal</value>
-        [DataMember(Name="goal_percentage_complete", EmitDefaultValue=false)]
-        public int GoalPercentageComplete { get; set; }
 
         /// <summary>
         /// Whether or not the category has been deleted.  Deleted categories will only be included in delta requests.
@@ -337,16 +231,11 @@ namespace YNAB.SDK.Model
             sb.Append("  CategoryGroupId: ").Append(CategoryGroupId).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Hidden: ").Append(Hidden).Append("\n");
-            sb.Append("  OriginalCategoryGroupId: ").Append(OriginalCategoryGroupId).Append("\n");
             sb.Append("  Note: ").Append(Note).Append("\n");
             sb.Append("  Budgeted: ").Append(Budgeted).Append("\n");
             sb.Append("  Activity: ").Append(Activity).Append("\n");
             sb.Append("  Balance: ").Append(Balance).Append("\n");
-            sb.Append("  GoalType: ").Append(GoalType).Append("\n");
-            sb.Append("  GoalCreationMonth: ").Append(GoalCreationMonth).Append("\n");
             sb.Append("  GoalTarget: ").Append(GoalTarget).Append("\n");
-            sb.Append("  GoalTargetMonth: ").Append(GoalTargetMonth).Append("\n");
-            sb.Append("  GoalPercentageComplete: ").Append(GoalPercentageComplete).Append("\n");
             sb.Append("  Deleted: ").Append(Deleted).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -402,11 +291,6 @@ namespace YNAB.SDK.Model
                     this.Hidden.Equals(input.Hidden)
                 ) && 
                 (
-                    this.OriginalCategoryGroupId == input.OriginalCategoryGroupId ||
-                    (this.OriginalCategoryGroupId != null &&
-                    this.OriginalCategoryGroupId.Equals(input.OriginalCategoryGroupId))
-                ) && 
-                (
                     this.Note == input.Note ||
                     (this.Note != null &&
                     this.Note.Equals(input.Note))
@@ -424,26 +308,8 @@ namespace YNAB.SDK.Model
                     this.Balance.Equals(input.Balance)
                 ) && 
                 (
-                    this.GoalType == input.GoalType ||
-                    this.GoalType.Equals(input.GoalType)
-                ) && 
-                (
-                    this.GoalCreationMonth == input.GoalCreationMonth ||
-                    (this.GoalCreationMonth != null &&
-                    this.GoalCreationMonth.Equals(input.GoalCreationMonth))
-                ) && 
-                (
                     this.GoalTarget == input.GoalTarget ||
                     this.GoalTarget.Equals(input.GoalTarget)
-                ) && 
-                (
-                    this.GoalTargetMonth == input.GoalTargetMonth ||
-                    (this.GoalTargetMonth != null &&
-                    this.GoalTargetMonth.Equals(input.GoalTargetMonth))
-                ) && 
-                (
-                    this.GoalPercentageComplete == input.GoalPercentageComplete ||
-                    this.GoalPercentageComplete.Equals(input.GoalPercentageComplete)
                 ) && 
                 (
                     this.Deleted == input.Deleted ||
@@ -467,20 +333,12 @@ namespace YNAB.SDK.Model
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 hashCode = hashCode * 59 + this.Hidden.GetHashCode();
-                if (this.OriginalCategoryGroupId != null)
-                    hashCode = hashCode * 59 + this.OriginalCategoryGroupId.GetHashCode();
                 if (this.Note != null)
                     hashCode = hashCode * 59 + this.Note.GetHashCode();
                 hashCode = hashCode * 59 + this.Budgeted.GetHashCode();
                 hashCode = hashCode * 59 + this.Activity.GetHashCode();
                 hashCode = hashCode * 59 + this.Balance.GetHashCode();
-                hashCode = hashCode * 59 + this.GoalType.GetHashCode();
-                if (this.GoalCreationMonth != null)
-                    hashCode = hashCode * 59 + this.GoalCreationMonth.GetHashCode();
                 hashCode = hashCode * 59 + this.GoalTarget.GetHashCode();
-                if (this.GoalTargetMonth != null)
-                    hashCode = hashCode * 59 + this.GoalTargetMonth.GetHashCode();
-                hashCode = hashCode * 59 + this.GoalPercentageComplete.GetHashCode();
                 hashCode = hashCode * 59 + this.Deleted.GetHashCode();
                 return hashCode;
             }
