@@ -99,5 +99,5 @@ Licensed under the Apache-2.0 license
 [ynabapi]: https://api.youneedabudget.com
 [accesstoken]: https://api.youneedabudget.com/#authentication-overview
 [myaccount]: https://app.youneedabudget.com/settings
-[examples]: https://github.com/jaboc83/ynab-sdk-dotnetcore/tree/master/examples
+[examples]: https://github.com/jaboc83/ynab-sdk-dotnetcore/tree/master/YNAB.SDK/examples
 [docs]: https://github.com/jaboc83/ynab-sdk-dotnetcore/tree/master/docs
