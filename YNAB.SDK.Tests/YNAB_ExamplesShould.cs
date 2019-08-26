@@ -4,6 +4,7 @@ using YNAB.SDK.Api;
 using YNAB.SDK.Examples;
 using System.Threading.Tasks;
 using System.Linq;
+using YNAB.SDK.Client;
 
 namespace YNAB.SDK.Tests
 {
@@ -15,12 +16,17 @@ namespace YNAB.SDK.Tests
     [Fact]
     public async Task Examples_RunSuccessfully() {
       // Arrange
-      var budgetMonthId = new Guid();
+      GlobalConfiguration.Instance = GlobalConfiguration.MergeConfigurations(GlobalConfiguration.Instance, new Configuration
+      {
+        DateTimeFormat = "yyyy-MM-dd"
+      });
+      var budgetMonthId = "2019-07-01";
+      var budgetId = new Guid("14235236-8085-4cf6-9fa6-92c34ed44b0c");
       // Act
       // Assert
       try {
         await new BudgetList(_token).FetchBudgets();
-        await new BudgetMonth(_token).FetchBudgetMonth(budgetMonthId);
+        await new BudgetMonth(_token).FetchBudgetMonth(budgetId, budgetMonthId);
       } catch (Exception ex) {
         Assert.True(false, ex.Message);
       }

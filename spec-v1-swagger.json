@@ -1853,11 +1853,6 @@
         "budgeted",
         "activity",
         "balance",
-        "goal_type",
-        "goal_creation_month",
-        "goal_target",
-        "goal_target_month",
-        "goal_percentage_complete",
         "deleted"
       ],
       "properties": {
@@ -1878,7 +1873,7 @@
         },
         "original_category_group_id": {
           "description": "If category is hidden this is the id of the category group it originally belonged to before it was hidden.",
-          "type": ["string", "null"],
+          "type": "string",
           "format": "uuid"
         },
         "note": {
@@ -1900,12 +1895,12 @@
           "description": "Balance in milliunits format"
         },
         "goal_type": {
-          "type": ["string", null],
+          "type": "string",
           "enum": ["TB", "TBD", "MF", "NEED", null],
-          "description": "The type of goal, if the category has a goal (TB=Target Category Balance, TBD=Target Category Balance by Date, MF=Monthly Funding)"
+          "description": "The type of goal, if the cagegory has a goal (TB=Target Category Balance, TBD=Target Category Balance by Date, MF=Monthly Funding)"
         },
         "goal_creation_month": {
-          "type": ["string", "null"],
+          "type": "string",
           "format": "date",
           "description": "The month a goal was created"
         },
@@ -1915,12 +1910,12 @@
           "description": "The goal target amount in milliunits"
         },
         "goal_target_month": {
-          "type": ["string", "null"],
+          "type": "string",
           "format": "date",
           "description": "If the goal type is 'TBD' (Target Category Balance by Date), this is the target month for the goal to be completed"
         },
         "goal_percentage_complete": {
-          "type": ["integer", "null"],
+          "type": "integer",
           "format": "int32",
           "description": "The percentage completion of the goal"
         },
@@ -2403,7 +2398,7 @@
             },
             "parent_transaction_id": {
               "type": "string",
-              "description": "For subtransaction types, this is the id of the parent transaction.  For transaction types, this id will be always be null."
+              "description": "For subtransaction types, this is the id of the pararent transaction.  For transaction types, this id will be always be null."
             },
             "account_name": {
               "type": "string"
@@ -2768,7 +2763,7 @@
     },
     "MonthSummary": {
       "type": "object",
-      "required": ["month", "note", "income", "budgeted", "activity", "to_be_budgeted", "age_of_money", "deleted"],
+      "required": ["month", "note", "income", "budgeted", "activity", "to_be_budgeted", "deleted"],
       "properties": {
         "month": {
           "type": "string",
@@ -2798,7 +2793,7 @@
           "description": "The available amount for 'To be Budgeted'"
         },
         "age_of_money": {
-          "type": ["integer", "null"],
+          "type": "integer",
           "format": "int32",
           "description": "The Age of Money as of the month"
         },

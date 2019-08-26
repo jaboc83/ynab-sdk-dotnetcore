@@ -67,7 +67,7 @@ namespace YNAB.SDK.Model
         /// Initializes a new instance of the <see cref="HybridTransactionAllOf" /> class.
         /// </summary>
         /// <param name="type">Whether the hybrid transaction represents a regular transaction or a subtransaction (required).</param>
-        /// <param name="parentTransactionId">For subtransaction types, this is the id of the parent transaction.  For transaction types, this id will be always be null. (required).</param>
+        /// <param name="parentTransactionId">For subtransaction types, this is the id of the pararent transaction.  For transaction types, this id will be always be null. (required).</param>
         /// <param name="accountName">accountName (required).</param>
         /// <param name="payeeName">payeeName (required).</param>
         /// <param name="categoryName">categoryName (required).</param>
@@ -117,9 +117,9 @@ namespace YNAB.SDK.Model
         }
         
         /// <summary>
-        /// For subtransaction types, this is the id of the parent transaction.  For transaction types, this id will be always be null.
+        /// For subtransaction types, this is the id of the pararent transaction.  For transaction types, this id will be always be null.
         /// </summary>
-        /// <value>For subtransaction types, this is the id of the parent transaction.  For transaction types, this id will be always be null.</value>
+        /// <value>For subtransaction types, this is the id of the pararent transaction.  For transaction types, this id will be always be null.</value>
         [DataMember(Name="parent_transaction_id", EmitDefaultValue=false)]
         public string ParentTransactionId { get; set; }
 

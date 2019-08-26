@@ -9,19 +9,18 @@ namespace YNAB.SDK.Examples {
       _ynabAPI = new API(accessToken);
     }
 
-    public async Task FetchBudgetMonth(Guid monthId)
+    public async Task FetchBudgetMonth(Guid budgetId, string monthId)
     {
       try {
-        var monthResponse = await _ynabAPI.Months.GetBudgetMonthAsync(monthId.ToString(), DateTime.Parse(Utils.GetCurrentMonthInISOFormat()));
+        var monthResponse = await _ynabAPI.Months.GetBudgetMonthAsync(budgetId.ToString(), DateTime.Parse(monthId));
         var budgetMonth = monthResponse.Data.Month;
-        // FIXME: JS example shows AgeOfMoney, our Month doesn't have that property. Maybe a bug in the generator?
-        // Age Of Money: ${budgetMonth.AgeOfMoney}
         Console.WriteLine($@"
 ============
 BUDGET MONTH
 ============
              Month: ${budgetMonth.Month}
               Note: ${budgetMonth.Note ?? ""}
+      Age Of Money: ${budgetMonth.AgeOfMoney}
  Category Balances:
 ");
         budgetMonth.Categories.ForEach(category => {
