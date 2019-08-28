@@ -20,7 +20,7 @@ namespace YNAB.SDK.Tests
       {
         DateTimeFormat = "yyyy-MM-dd"
       });
-      var budgetMonthId = "2019-07-01";
+      var budgetMonthId = "2019-08-01";
       var budgetId = new Guid("14235236-8085-4cf6-9fa6-92c34ed44b0c");
       // Act
       // Assert

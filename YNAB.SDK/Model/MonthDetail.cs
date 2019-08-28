@@ -48,7 +48,7 @@ namespace YNAB.SDK.Model
         /// <param name="ageOfMoney">The Age of Money as of the month.</param>
         /// <param name="deleted">Whether or not the month has been deleted.  Deleted months will only be included in delta requests. (required).</param>
         /// <param name="categories">The budget month categories.  Amounts (budgeted, activity, balance, etc.) are specific to the {month} parameter specified. (required).</param>
-        public MonthDetail(DateTime month = default(DateTime), string note = default(string), long? income = default(long), long? budgeted = default(long), long? activity = default(long), long? toBeBudgeted = default(long), int? ageOfMoney = default(int), bool deleted = default(bool), List<Category> categories = default(List<Category>))
+        public MonthDetail(DateTime month = default(DateTime), string note = default(string), long income = default(long), long budgeted = default(long), long activity = default(long), long toBeBudgeted = default(long), int ageOfMoney = default(int), bool deleted = default(bool), List<Category> categories = default(List<Category>))
         {
             // to ensure "month" is required (not null)
             if (month == null)
@@ -142,28 +142,28 @@ namespace YNAB.SDK.Model
         /// </summary>
         /// <value>The total amount in transactions categorized to &#39;Inflow: To be Budgeted&#39; in the month</value>
         [DataMember(Name="income", EmitDefaultValue=false)]
-        public long? Income { get; set; }
+        public long Income { get; set; }
 
         /// <summary>
         /// The total amount budgeted in the month
         /// </summary>
         /// <value>The total amount budgeted in the month</value>
         [DataMember(Name="budgeted", EmitDefaultValue=false)]
-        public long? Budgeted { get; set; }
+        public long Budgeted { get; set; }
 
         /// <summary>
         /// The total amount in transactions in the month, excluding those categorized to &#39;Inflow: To be Budgeted&#39;
         /// </summary>
         /// <value>The total amount in transactions in the month, excluding those categorized to &#39;Inflow: To be Budgeted&#39;</value>
         [DataMember(Name="activity", EmitDefaultValue=false)]
-        public long? Activity { get; set; }
+        public long Activity { get; set; }
 
         /// <summary>
         /// The available amount for &#39;To be Budgeted&#39;
         /// </summary>
         /// <value>The available amount for &#39;To be Budgeted&#39;</value>
         [DataMember(Name="to_be_budgeted", EmitDefaultValue=false)]
-        public long? ToBeBudgeted { get; set; }
+        public long ToBeBudgeted { get; set; }
 
         /// <summary>
         /// The Age of Money as of the month
