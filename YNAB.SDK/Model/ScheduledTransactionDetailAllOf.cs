@@ -40,8 +40,8 @@ namespace YNAB.SDK.Model
         /// Initializes a new instance of the <see cref="ScheduledTransactionDetailAllOf" /> class.
         /// </summary>
         /// <param name="accountName">accountName (required).</param>
-        /// <param name="payeeName">payeeName (required).</param>
-        /// <param name="categoryName">categoryName (required).</param>
+        /// <param name="payeeName">payeeName.</param>
+        /// <param name="categoryName">categoryName.</param>
         /// <param name="subtransactions">If a split scheduled transaction, the subtransactions. (required).</param>
         public ScheduledTransactionDetailAllOf(string accountName = default(string), string payeeName = default(string), string categoryName = default(string), List<ScheduledSubTransaction> subtransactions = default(List<ScheduledSubTransaction>))
         {
@@ -55,26 +55,6 @@ namespace YNAB.SDK.Model
                 this.AccountName = accountName;
             }
 
-            // to ensure "payeeName" is required (not null)
-            if (payeeName == null)
-            {
-                throw new InvalidDataException("payeeName is a required property for ScheduledTransactionDetailAllOf and cannot be null");
-            }
-            else
-            {
-                this.PayeeName = payeeName;
-            }
-
-            // to ensure "categoryName" is required (not null)
-            if (categoryName == null)
-            {
-                throw new InvalidDataException("categoryName is a required property for ScheduledTransactionDetailAllOf and cannot be null");
-            }
-            else
-            {
-                this.CategoryName = categoryName;
-            }
-
             // to ensure "subtransactions" is required (not null)
             if (subtransactions == null)
             {
@@ -85,6 +65,8 @@ namespace YNAB.SDK.Model
                 this.Subtransactions = subtransactions;
             }
 
+            this.PayeeName = payeeName;
+            this.CategoryName = categoryName;
         }
         
         /// <summary>

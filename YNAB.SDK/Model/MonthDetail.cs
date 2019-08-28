@@ -40,7 +40,7 @@ namespace YNAB.SDK.Model
         /// Initializes a new instance of the <see cref="MonthDetail" /> class.
         /// </summary>
         /// <param name="month">month (required).</param>
-        /// <param name="note">note (required).</param>
+        /// <param name="note">note.</param>
         /// <param name="income">The total amount in transactions categorized to &#39;Inflow: To be Budgeted&#39; in the month (required).</param>
         /// <param name="budgeted">The total amount budgeted in the month (required).</param>
         /// <param name="activity">The total amount in transactions in the month, excluding those categorized to &#39;Inflow: To be Budgeted&#39; (required).</param>
@@ -48,7 +48,7 @@ namespace YNAB.SDK.Model
         /// <param name="ageOfMoney">The Age of Money as of the month.</param>
         /// <param name="deleted">Whether or not the month has been deleted.  Deleted months will only be included in delta requests. (required).</param>
         /// <param name="categories">The budget month categories.  Amounts (budgeted, activity, balance, etc.) are specific to the {month} parameter specified. (required).</param>
-        public MonthDetail(DateTime month = default(DateTime), string note = default(string), long? income = default(long), long budgeted = default(long), long activity = default(long), long? toBeBudgeted = default(long), int ageOfMoney = default(int), bool deleted = default(bool), List<Category> categories = default(List<Category>))
+        public MonthDetail(DateTime month = default(DateTime), string note = default(string), long? income = default(long), long? budgeted = default(long), long? activity = default(long), long? toBeBudgeted = default(long), int? ageOfMoney = default(int), bool deleted = default(bool), List<Category> categories = default(List<Category>))
         {
             // to ensure "month" is required (not null)
             if (month == null)
@@ -60,14 +60,44 @@ namespace YNAB.SDK.Model
                 this.Month = month;
             }
 
-            // to ensure "note" is required (not null)
-            if (note == null)
+            // to ensure "income" is required (not null)
+            if (income == null)
             {
-                throw new InvalidDataException("note is a required property for MonthDetail and cannot be null");
+                throw new InvalidDataException("income is a required property for MonthDetail and cannot be null");
             }
             else
             {
-                this.Note = note;
+                this.Income = income;
+            }
+
+            // to ensure "budgeted" is required (not null)
+            if (budgeted == null)
+            {
+                throw new InvalidDataException("budgeted is a required property for MonthDetail and cannot be null");
+            }
+            else
+            {
+                this.Budgeted = budgeted;
+            }
+
+            // to ensure "activity" is required (not null)
+            if (activity == null)
+            {
+                throw new InvalidDataException("activity is a required property for MonthDetail and cannot be null");
+            }
+            else
+            {
+                this.Activity = activity;
+            }
+
+            // to ensure "toBeBudgeted" is required (not null)
+            if (toBeBudgeted == null)
+            {
+                throw new InvalidDataException("toBeBudgeted is a required property for MonthDetail and cannot be null");
+            }
+            else
+            {
+                this.ToBeBudgeted = toBeBudgeted;
             }
 
             // to ensure "deleted" is required (not null)
@@ -90,10 +120,7 @@ namespace YNAB.SDK.Model
                 this.Categories = categories;
             }
 
-            this.ToBeBudgeted = toBeBudgeted;
-            this.Activity = activity;
-            this.Budgeted = budgeted;
-            this.Income = income;
+            this.Note = note;
             this.AgeOfMoney = ageOfMoney;
         }
 

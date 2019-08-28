@@ -67,23 +67,13 @@ namespace YNAB.SDK.Model
         /// Initializes a new instance of the <see cref="HybridTransactionAllOf" /> class.
         /// </summary>
         /// <param name="type">Whether the hybrid transaction represents a regular transaction or a subtransaction (required).</param>
-        /// <param name="parentTransactionId">For subtransaction types, this is the id of the pararent transaction.  For transaction types, this id will be always be null. (required).</param>
+        /// <param name="parentTransactionId">For subtransaction types, this is the id of the parent transaction.  For transaction types, this id will be always be null..</param>
         /// <param name="accountName">accountName (required).</param>
-        /// <param name="payeeName">payeeName (required).</param>
-        /// <param name="categoryName">categoryName (required).</param>
+        /// <param name="payeeName">payeeName.</param>
+        /// <param name="categoryName">categoryName.</param>
         public HybridTransactionAllOf(TypeEnum type = default(TypeEnum), string parentTransactionId = default(string), string accountName = default(string), string payeeName = default(string), string categoryName = default(string))
         {
             this.Type = type;
-            // to ensure "parentTransactionId" is required (not null)
-            if (parentTransactionId == null)
-            {
-                throw new InvalidDataException("parentTransactionId is a required property for HybridTransactionAllOf and cannot be null");
-            }
-            else
-            {
-                this.ParentTransactionId = parentTransactionId;
-            }
-
             // to ensure "accountName" is required (not null)
             if (accountName == null)
             {
@@ -94,32 +84,15 @@ namespace YNAB.SDK.Model
                 this.AccountName = accountName;
             }
 
-            // to ensure "payeeName" is required (not null)
-            if (payeeName == null)
-            {
-                throw new InvalidDataException("payeeName is a required property for HybridTransactionAllOf and cannot be null");
-            }
-            else
-            {
-                this.PayeeName = payeeName;
-            }
-
-            // to ensure "categoryName" is required (not null)
-            if (categoryName == null)
-            {
-                throw new InvalidDataException("categoryName is a required property for HybridTransactionAllOf and cannot be null");
-            }
-            else
-            {
-                this.CategoryName = categoryName;
-            }
-
+            this.ParentTransactionId = parentTransactionId;
+            this.PayeeName = payeeName;
+            this.CategoryName = categoryName;
         }
         
         /// <summary>
-        /// For subtransaction types, this is the id of the pararent transaction.  For transaction types, this id will be always be null.
+        /// For subtransaction types, this is the id of the parent transaction.  For transaction types, this id will be always be null.
         /// </summary>
-        /// <value>For subtransaction types, this is the id of the pararent transaction.  For transaction types, this id will be always be null.</value>
+        /// <value>For subtransaction types, this is the id of the parent transaction.  For transaction types, this id will be always be null.</value>
         [DataMember(Name="parent_transaction_id", EmitDefaultValue=false)]
         public string ParentTransactionId { get; set; }
 

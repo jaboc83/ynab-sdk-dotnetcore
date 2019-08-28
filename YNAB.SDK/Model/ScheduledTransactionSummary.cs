@@ -172,7 +172,7 @@ namespace YNAB.SDK.Model
         /// </summary>
         /// <value>The scheduled transaction flag</value>
         [DataMember(Name="flag_color", EmitDefaultValue=false)]
-        public FlagColorEnum FlagColor { get; set; }
+        public FlagColorEnum? FlagColor { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduledTransactionSummary" /> class.
         /// </summary>
@@ -186,14 +186,14 @@ namespace YNAB.SDK.Model
         /// <param name="dateNext">The next date for which the Scheduled Transaction is scheduled. (required).</param>
         /// <param name="frequency">frequency (required).</param>
         /// <param name="amount">The scheduled transaction amount in milliunits format (required).</param>
-        /// <param name="memo">memo (required).</param>
-        /// <param name="flagColor">The scheduled transaction flag (required).</param>
+        /// <param name="memo">memo.</param>
+        /// <param name="flagColor">The scheduled transaction flag.</param>
         /// <param name="accountId">accountId (required).</param>
-        /// <param name="payeeId">payeeId (required).</param>
-        /// <param name="categoryId">categoryId (required).</param>
-        /// <param name="transferAccountId">If a transfer, the account_id which the scheduled transaction transfers to (required).</param>
+        /// <param name="payeeId">payeeId.</param>
+        /// <param name="categoryId">categoryId.</param>
+        /// <param name="transferAccountId">If a transfer, the account_id which the scheduled transaction transfers to.</param>
         /// <param name="deleted">Whether or not the scheduled transaction has been deleted.  Deleted scheduled transactions will only be included in delta requests. (required).</param>
-        public ScheduledTransactionSummary(Guid id = default(Guid), DateTime dateFirst = default(DateTime), DateTime dateNext = default(DateTime), FrequencyEnum frequency = default(FrequencyEnum), long amount = default(long), string memo = default(string), FlagColorEnum flagColor = default(FlagColorEnum), Guid accountId = default(Guid), Guid payeeId = default(Guid), Guid categoryId = default(Guid), Guid transferAccountId = default(Guid), bool deleted = default(bool))
+        public ScheduledTransactionSummary(Guid id = default(Guid), DateTime dateFirst = default(DateTime), DateTime dateNext = default(DateTime), FrequencyEnum frequency = default(FrequencyEnum), long amount = default(long), string memo = default(string), FlagColorEnum? flagColor = default(FlagColorEnum?), Guid accountId = default(Guid), Guid payeeId = default(Guid), Guid categoryId = default(Guid), Guid transferAccountId = default(Guid), bool deleted = default(bool))
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -236,17 +236,6 @@ namespace YNAB.SDK.Model
                 this.Amount = amount;
             }
 
-            // to ensure "memo" is required (not null)
-            if (memo == null)
-            {
-                throw new InvalidDataException("memo is a required property for ScheduledTransactionSummary and cannot be null");
-            }
-            else
-            {
-                this.Memo = memo;
-            }
-
-            this.FlagColor = flagColor;
             // to ensure "accountId" is required (not null)
             if (accountId == null)
             {
@@ -255,36 +244,6 @@ namespace YNAB.SDK.Model
             else
             {
                 this.AccountId = accountId;
-            }
-
-            // to ensure "payeeId" is required (not null)
-            if (payeeId == null)
-            {
-                throw new InvalidDataException("payeeId is a required property for ScheduledTransactionSummary and cannot be null");
-            }
-            else
-            {
-                this.PayeeId = payeeId;
-            }
-
-            // to ensure "categoryId" is required (not null)
-            if (categoryId == null)
-            {
-                throw new InvalidDataException("categoryId is a required property for ScheduledTransactionSummary and cannot be null");
-            }
-            else
-            {
-                this.CategoryId = categoryId;
-            }
-
-            // to ensure "transferAccountId" is required (not null)
-            if (transferAccountId == null)
-            {
-                throw new InvalidDataException("transferAccountId is a required property for ScheduledTransactionSummary and cannot be null");
-            }
-            else
-            {
-                this.TransferAccountId = transferAccountId;
             }
 
             // to ensure "deleted" is required (not null)
@@ -297,6 +256,11 @@ namespace YNAB.SDK.Model
                 this.Deleted = deleted;
             }
 
+            this.Memo = memo;
+            this.FlagColor = flagColor;
+            this.PayeeId = payeeId;
+            this.CategoryId = categoryId;
+            this.TransferAccountId = transferAccountId;
         }
         
         /// <summary>

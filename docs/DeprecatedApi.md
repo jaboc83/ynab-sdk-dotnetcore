@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **201** | The bulk request was processed sucessfully |  -  |
+| **201** | The bulk request was processed successfully |  -  |
 | **400** | The request could not be understood due to malformed syntax or validation error(s) |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

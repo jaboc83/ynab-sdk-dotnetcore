@@ -114,7 +114,7 @@ namespace YNAB.SDK.Model
         /// </summary>
         /// <value>The transaction flag</value>
         [DataMember(Name="flag_color", EmitDefaultValue=false)]
-        public FlagColorEnum FlagColor { get; set; }
+        public FlagColorEnum? FlagColor { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="TransactionDetail" /> class.
         /// </summary>
@@ -126,23 +126,23 @@ namespace YNAB.SDK.Model
         /// <param name="id">id (required).</param>
         /// <param name="date">The transaction date in ISO format (e.g. 2016-12-01) (required).</param>
         /// <param name="amount">The transaction amount in milliunits format (required).</param>
-        /// <param name="memo">memo (required).</param>
+        /// <param name="memo">memo.</param>
         /// <param name="cleared">The cleared status of the transaction (required).</param>
         /// <param name="approved">Whether or not the transaction is approved (required).</param>
-        /// <param name="flagColor">The transaction flag (required).</param>
+        /// <param name="flagColor">The transaction flag.</param>
         /// <param name="accountId">accountId (required).</param>
-        /// <param name="payeeId">payeeId (required).</param>
-        /// <param name="categoryId">categoryId (required).</param>
-        /// <param name="transferAccountId">If a transfer transaction, the account to which it transfers (required).</param>
-        /// <param name="transferTransactionId">If a transfer transaction, the id of transaction on the other side of the transfer (required).</param>
-        /// <param name="matchedTransactionId">If transaction is matched, the id of the matched transaction (required).</param>
-        /// <param name="importId">If the Transaction was imported, this field is a unique (by account) import identifier.  If this transaction was imported through File Based Import or Direct Import and not through the API, the import_id will have the format: &#39;YNAB:[milliunit_amount]:[iso_date]:[occurrence]&#39;.  For example, a transaction dated 2015-12-30 in the amount of -$294.23 USD would have an import_id of &#39;YNAB:-294230:2015-12-30:1&#39;.  If a second transaction on the same account was imported and had the same date and same amount, its import_id would be &#39;YNAB:-294230:2015-12-30:2&#39;. (required).</param>
+        /// <param name="payeeId">payeeId.</param>
+        /// <param name="categoryId">categoryId.</param>
+        /// <param name="transferAccountId">If a transfer transaction, the account to which it transfers.</param>
+        /// <param name="transferTransactionId">If a transfer transaction, the id of transaction on the other side of the transfer.</param>
+        /// <param name="matchedTransactionId">If transaction is matched, the id of the matched transaction.</param>
+        /// <param name="importId">If the Transaction was imported, this field is a unique (by account) import identifier.  If this transaction was imported through File Based Import or Direct Import and not through the API, the import_id will have the format: &#39;YNAB:[milliunit_amount]:[iso_date]:[occurrence]&#39;.  For example, a transaction dated 2015-12-30 in the amount of -$294.23 USD would have an import_id of &#39;YNAB:-294230:2015-12-30:1&#39;.  If a second transaction on the same account was imported and had the same date and same amount, its import_id would be &#39;YNAB:-294230:2015-12-30:2&#39;..</param>
         /// <param name="deleted">Whether or not the transaction has been deleted.  Deleted transactions will only be included in delta requests. (required).</param>
         /// <param name="accountName">accountName (required).</param>
-        /// <param name="payeeName">payeeName (required).</param>
-        /// <param name="categoryName">categoryName (required).</param>
+        /// <param name="payeeName">payeeName.</param>
+        /// <param name="categoryName">categoryName.</param>
         /// <param name="subtransactions">If a split transaction, the subtransactions. (required).</param>
-        public TransactionDetail(string id = default(string), DateTime date = default(DateTime), long amount = default(long), string memo = default(string), ClearedEnum cleared = default(ClearedEnum), bool approved = default(bool), FlagColorEnum flagColor = default(FlagColorEnum), Guid accountId = default(Guid), Guid payeeId = default(Guid), Guid categoryId = default(Guid), Guid transferAccountId = default(Guid), string transferTransactionId = default(string), string matchedTransactionId = default(string), string importId = default(string), bool deleted = default(bool), string accountName = default(string), string payeeName = default(string), string categoryName = default(string), List<SubTransaction> subtransactions = default(List<SubTransaction>))
+        public TransactionDetail(string id = default(string), DateTime date = default(DateTime), long amount = default(long), string memo = default(string), ClearedEnum cleared = default(ClearedEnum), bool approved = default(bool), FlagColorEnum? flagColor = default(FlagColorEnum?), Guid accountId = default(Guid), Guid payeeId = default(Guid), Guid categoryId = default(Guid), Guid transferAccountId = default(Guid), string transferTransactionId = default(string), string matchedTransactionId = default(string), string importId = default(string), bool deleted = default(bool), string accountName = default(string), string payeeName = default(string), string categoryName = default(string), List<SubTransaction> subtransactions = default(List<SubTransaction>))
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -174,16 +174,6 @@ namespace YNAB.SDK.Model
                 this.Amount = amount;
             }
 
-            // to ensure "memo" is required (not null)
-            if (memo == null)
-            {
-                throw new InvalidDataException("memo is a required property for TransactionDetail and cannot be null");
-            }
-            else
-            {
-                this.Memo = memo;
-            }
-
             this.Cleared = cleared;
             // to ensure "approved" is required (not null)
             if (approved == null)
@@ -195,7 +185,6 @@ namespace YNAB.SDK.Model
                 this.Approved = approved;
             }
 
-            this.FlagColor = flagColor;
             // to ensure "accountId" is required (not null)
             if (accountId == null)
             {
@@ -204,66 +193,6 @@ namespace YNAB.SDK.Model
             else
             {
                 this.AccountId = accountId;
-            }
-
-            // to ensure "payeeId" is required (not null)
-            if (payeeId == null)
-            {
-                throw new InvalidDataException("payeeId is a required property for TransactionDetail and cannot be null");
-            }
-            else
-            {
-                this.PayeeId = payeeId;
-            }
-
-            // to ensure "categoryId" is required (not null)
-            if (categoryId == null)
-            {
-                throw new InvalidDataException("categoryId is a required property for TransactionDetail and cannot be null");
-            }
-            else
-            {
-                this.CategoryId = categoryId;
-            }
-
-            // to ensure "transferAccountId" is required (not null)
-            if (transferAccountId == null)
-            {
-                throw new InvalidDataException("transferAccountId is a required property for TransactionDetail and cannot be null");
-            }
-            else
-            {
-                this.TransferAccountId = transferAccountId;
-            }
-
-            // to ensure "transferTransactionId" is required (not null)
-            if (transferTransactionId == null)
-            {
-                throw new InvalidDataException("transferTransactionId is a required property for TransactionDetail and cannot be null");
-            }
-            else
-            {
-                this.TransferTransactionId = transferTransactionId;
-            }
-
-            // to ensure "matchedTransactionId" is required (not null)
-            if (matchedTransactionId == null)
-            {
-                throw new InvalidDataException("matchedTransactionId is a required property for TransactionDetail and cannot be null");
-            }
-            else
-            {
-                this.MatchedTransactionId = matchedTransactionId;
-            }
-
-            // to ensure "importId" is required (not null)
-            if (importId == null)
-            {
-                throw new InvalidDataException("importId is a required property for TransactionDetail and cannot be null");
-            }
-            else
-            {
-                this.ImportId = importId;
             }
 
             // to ensure "deleted" is required (not null)
@@ -286,26 +215,6 @@ namespace YNAB.SDK.Model
                 this.AccountName = accountName;
             }
 
-            // to ensure "payeeName" is required (not null)
-            if (payeeName == null)
-            {
-                throw new InvalidDataException("payeeName is a required property for TransactionDetail and cannot be null");
-            }
-            else
-            {
-                this.PayeeName = payeeName;
-            }
-
-            // to ensure "categoryName" is required (not null)
-            if (categoryName == null)
-            {
-                throw new InvalidDataException("categoryName is a required property for TransactionDetail and cannot be null");
-            }
-            else
-            {
-                this.CategoryName = categoryName;
-            }
-
             // to ensure "subtransactions" is required (not null)
             if (subtransactions == null)
             {
@@ -316,6 +225,16 @@ namespace YNAB.SDK.Model
                 this.Subtransactions = subtransactions;
             }
 
+            this.Memo = memo;
+            this.FlagColor = flagColor;
+            this.PayeeId = payeeId;
+            this.CategoryId = categoryId;
+            this.TransferAccountId = transferAccountId;
+            this.TransferTransactionId = transferTransactionId;
+            this.MatchedTransactionId = matchedTransactionId;
+            this.ImportId = importId;
+            this.PayeeName = payeeName;
+            this.CategoryName = categoryName;
         }
         
         /// <summary>

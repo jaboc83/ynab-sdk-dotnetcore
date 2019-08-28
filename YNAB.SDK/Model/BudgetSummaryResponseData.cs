@@ -40,7 +40,7 @@ namespace YNAB.SDK.Model
         /// Initializes a new instance of the <see cref="BudgetSummaryResponseData" /> class.
         /// </summary>
         /// <param name="budgets">budgets (required).</param>
-        /// <param name="defaultBudget">defaultBudget (required).</param>
+        /// <param name="defaultBudget">defaultBudget.</param>
         public BudgetSummaryResponseData(List<BudgetSummary> budgets = default(List<BudgetSummary>), BudgetSummary defaultBudget = default(BudgetSummary))
         {
             // to ensure "budgets" is required (not null)
@@ -53,16 +53,7 @@ namespace YNAB.SDK.Model
                 this.Budgets = budgets;
             }
 
-            // to ensure "defaultBudget" is required (not null)
-            if (defaultBudget == null)
-            {
-                throw new InvalidDataException("defaultBudget is a required property for BudgetSummaryResponseData and cannot be null");
-            }
-            else
-            {
-                this.DefaultBudget = defaultBudget;
-            }
-
+            this.DefaultBudget = defaultBudget;
         }
         
         /// <summary>

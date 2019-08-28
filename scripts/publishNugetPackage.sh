@@ -76,7 +76,7 @@ echo "PACK STARTED $(timestamp)" + timestamp | tee -a $logPath
 dotnet pack $project_path --configuration Release --force --verbosity normal | tee -a $logPath
 
 echo "NUGET PUSH STARTED $(timestamp)" + timestamp | tee -a $logPath
-#dotnet nuget push $nuget_spec_file --api-key $nuget_api_key --source https://api.nuget.org/v3/index.json | tee -a $logPath
+dotnet nuget push $nuget_spec_file --api-key $nuget_api_key --source https://api.nuget.org/v3/index.json | tee -a $logPath
 
 echo "PUBLISH FINISHED $(timestamp)" + timestamp | tee -a $logPath
 

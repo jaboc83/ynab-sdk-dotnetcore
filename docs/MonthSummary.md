@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Month** | **DateTime** |  | 
-**Note** | **string** |  | 
+**Note** | **string** |  | [optional] 
 **Income** | **long** | The total amount in transactions categorized to &#39;Inflow: To be Budgeted&#39; in the month | 
 **Budgeted** | **long** | The total amount budgeted in the month | 
 **Activity** | **long** | The total amount in transactions in the month, excluding those categorized to &#39;Inflow: To be Budgeted&#39; | 

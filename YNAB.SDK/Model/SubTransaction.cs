@@ -42,10 +42,10 @@ namespace YNAB.SDK.Model
         /// <param name="id">id (required).</param>
         /// <param name="transactionId">transactionId (required).</param>
         /// <param name="amount">The subtransaction amount in milliunits format (required).</param>
-        /// <param name="memo">memo (required).</param>
-        /// <param name="payeeId">payeeId (required).</param>
-        /// <param name="categoryId">categoryId (required).</param>
-        /// <param name="transferAccountId">If a transfer, the account_id which the subtransaction transfers to (required).</param>
+        /// <param name="memo">memo.</param>
+        /// <param name="payeeId">payeeId.</param>
+        /// <param name="categoryId">categoryId.</param>
+        /// <param name="transferAccountId">If a transfer, the account_id which the subtransaction transfers to.</param>
         /// <param name="deleted">Whether or not the subtransaction has been deleted.  Deleted subtransactions will only be included in delta requests. (required).</param>
         public SubTransaction(string id = default(string), string transactionId = default(string), long amount = default(long), string memo = default(string), Guid payeeId = default(Guid), Guid categoryId = default(Guid), Guid transferAccountId = default(Guid), bool deleted = default(bool))
         {
@@ -79,46 +79,6 @@ namespace YNAB.SDK.Model
                 this.Amount = amount;
             }
 
-            // to ensure "memo" is required (not null)
-            if (memo == null)
-            {
-                throw new InvalidDataException("memo is a required property for SubTransaction and cannot be null");
-            }
-            else
-            {
-                this.Memo = memo;
-            }
-
-            // to ensure "payeeId" is required (not null)
-            if (payeeId == null)
-            {
-                throw new InvalidDataException("payeeId is a required property for SubTransaction and cannot be null");
-            }
-            else
-            {
-                this.PayeeId = payeeId;
-            }
-
-            // to ensure "categoryId" is required (not null)
-            if (categoryId == null)
-            {
-                throw new InvalidDataException("categoryId is a required property for SubTransaction and cannot be null");
-            }
-            else
-            {
-                this.CategoryId = categoryId;
-            }
-
-            // to ensure "transferAccountId" is required (not null)
-            if (transferAccountId == null)
-            {
-                throw new InvalidDataException("transferAccountId is a required property for SubTransaction and cannot be null");
-            }
-            else
-            {
-                this.TransferAccountId = transferAccountId;
-            }
-
             // to ensure "deleted" is required (not null)
             if (deleted == null)
             {
@@ -129,6 +89,10 @@ namespace YNAB.SDK.Model
                 this.Deleted = deleted;
             }
 
+            this.Memo = memo;
+            this.PayeeId = payeeId;
+            this.CategoryId = categoryId;
+            this.TransferAccountId = transferAccountId;
         }
         
         /// <summary>

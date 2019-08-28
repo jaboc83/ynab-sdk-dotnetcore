@@ -12,9 +12,9 @@ Name | Type | Description | Notes
 **Budgeted** | **long** | Budgeted amount in milliunits format | 
 **Activity** | **long** | Activity amount in milliunits format | 
 **Balance** | **long** | Balance in milliunits format | 
-**GoalType** | **string** | The type of goal, if the cagegory has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding) | [optional] 
+**GoalType** | **string** | The type of goal, if the category has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding) | [optional] 
 **GoalCreationMonth** | **DateTime** | The month a goal was created | [optional] 
-**GoalTarget** | **long** | The goal target amount in milliunits | [optional] 
+**GoalTarget** | **long** | The goal target amount in milliunits | 
 **GoalTargetMonth** | **DateTime** | If the goal type is &#39;TBD&#39; (Target Category Balance by Date), this is the target month for the goal to be completed | [optional] 
 **GoalPercentageComplete** | **int** | The percentage completion of the goal | [optional] 
 **Deleted** | **bool** | Whether or not the category has been deleted.  Deleted categories will only be included in delta requests. | 

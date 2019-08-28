@@ -32,9 +32,9 @@ namespace YNAB.SDK.Model
     public partial class Category :  IEquatable<Category>, IValidatableObject
     {
         /// <summary>
-        /// The type of goal, if the cagegory has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding)
+        /// The type of goal, if the category has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding)
         /// </summary>
-        /// <value>The type of goal, if the cagegory has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding)</value>
+        /// <value>The type of goal, if the category has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding)</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum GoalTypeEnum
         {
@@ -65,9 +65,9 @@ namespace YNAB.SDK.Model
         }
 
         /// <summary>
-        /// The type of goal, if the cagegory has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding)
+        /// The type of goal, if the category has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding)
         /// </summary>
-        /// <value>The type of goal, if the cagegory has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding)</value>
+        /// <value>The type of goal, if the category has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding)</value>
         [DataMember(Name="goal_type", EmitDefaultValue=false)]
         public GoalTypeEnum? GoalType { get; set; }
         /// <summary>
@@ -87,9 +87,9 @@ namespace YNAB.SDK.Model
         /// <param name="budgeted">Budgeted amount in milliunits format (required).</param>
         /// <param name="activity">Activity amount in milliunits format (required).</param>
         /// <param name="balance">Balance in milliunits format (required).</param>
-        /// <param name="goalType">The type of goal, if the cagegory has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding).</param>
+        /// <param name="goalType">The type of goal, if the category has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding).</param>
         /// <param name="goalCreationMonth">The month a goal was created.</param>
-        /// <param name="goalTarget">The goal target amount in milliunits.</param>
+        /// <param name="goalTarget">The goal target amount in milliunits (required).</param>
         /// <param name="goalTargetMonth">If the goal type is &#39;TBD&#39; (Target Category Balance by Date), this is the target month for the goal to be completed.</param>
         /// <param name="goalPercentageComplete">The percentage completion of the goal.</param>
         /// <param name="deleted">Whether or not the category has been deleted.  Deleted categories will only be included in delta requests. (required).</param>
@@ -175,6 +175,16 @@ namespace YNAB.SDK.Model
                 this.Balance = balance;
             }
 
+            // to ensure "goalTarget" is required (not null)
+            if (goalTarget == null)
+            {
+                throw new InvalidDataException("goalTarget is a required property for Category and cannot be null");
+            }
+            else
+            {
+                this.GoalTarget = goalTarget;
+            }
+
             // to ensure "deleted" is required (not null)
             if (deleted == null)
             {
@@ -188,7 +198,6 @@ namespace YNAB.SDK.Model
             this.OriginalCategoryGroupId = originalCategoryGroupId;
             this.GoalType = goalType;
             this.GoalCreationMonth = goalCreationMonth;
-            this.GoalTarget = goalTarget;
             this.GoalTargetMonth = goalTargetMonth;
             this.GoalPercentageComplete = goalPercentageComplete;
         }

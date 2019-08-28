@@ -8,12 +8,12 @@ Name | Type | Description | Notes
 **DateNext** | **DateTime** | The next date for which the Scheduled Transaction is scheduled. | 
 **Frequency** | **string** |  | 
 **Amount** | **long** | The scheduled transaction amount in milliunits format | 
-**Memo** | **string** |  | 
-**FlagColor** | **string** | The scheduled transaction flag | 
+**Memo** | **string** |  | [optional] 
+**FlagColor** | **string** | The scheduled transaction flag | [optional] 
 **AccountId** | **Guid** |  | 
-**PayeeId** | **Guid** |  | 
-**CategoryId** | **Guid** |  | 
-**TransferAccountId** | **Guid** | If a transfer, the account_id which the scheduled transaction transfers to | 
+**PayeeId** | **Guid** |  | [optional] 
+**CategoryId** | **Guid** |  | [optional] 
+**TransferAccountId** | **Guid** | If a transfer, the account_id which the scheduled transaction transfers to | [optional] 
 **Deleted** | **bool** | Whether or not the scheduled transaction has been deleted.  Deleted scheduled transactions will only be included in delta requests. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

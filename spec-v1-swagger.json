@@ -1052,7 +1052,7 @@
         ],
         "responses": {
           "201": {
-            "description": "The bulk request was processed sucessfully",
+            "description": "The bulk request was processed successfully",
             "schema": {
               "$ref": "#/definitions/BulkResponse"
             }
@@ -1479,7 +1479,7 @@
       "properties": {
         "data": {
           "type": "object",
-          "required": ["budgets", "default_budget"],
+          "required": ["budgets"],
           "properties": {
             "budgets": {
               "type": "array",
@@ -1853,6 +1853,7 @@
         "budgeted",
         "activity",
         "balance",
+        "goal_target",
         "deleted"
       ],
       "properties": {
@@ -1897,7 +1898,7 @@
         "goal_type": {
           "type": "string",
           "enum": ["TB", "TBD", "MF", "NEED", null],
-          "description": "The type of goal, if the cagegory has a goal (TB=Target Category Balance, TBD=Target Category Balance by Date, MF=Monthly Funding)"
+          "description": "The type of goal, if the category has a goal (TB=Target Category Balance, TBD=Target Category Balance by Date, MF=Monthly Funding)"
         },
         "goal_creation_month": {
           "type": "string",
@@ -1985,7 +1986,7 @@
     },
     "Payee": {
       "type": "object",
-      "required": ["id", "name", "transfer_account_id", "deleted"],
+      "required": ["id", "name", "deleted"],
       "properties": {
         "id": {
           "type": "string",
@@ -2140,9 +2141,6 @@
     "UpdateTransaction": {
       "allOf": [
         {
-          "$ref": "#/definitions/SaveTransaction"
-        },
-        {
           "type": "object",
           "required": ["id"],
           "properties": {
@@ -2150,6 +2148,9 @@
               "type": "string"
             }
           }
+        },
+        {
+          "$ref": "#/definitions/SaveTransaction"
         }
       ]
     },
@@ -2274,17 +2275,9 @@
         "id",
         "date",
         "amount",
-        "memo",
         "cleared",
         "approved",
-        "flag_color",
         "account_id",
-        "payee_id",
-        "category_id",
-        "transfer_account_id",
-        "transfer_transaction_id",
-        "matched_transaction_id",
-        "import_id",
         "deleted"
       ],
       "properties": {
@@ -2360,7 +2353,7 @@
         },
         {
           "type": "object",
-          "required": ["account_name", "payee_name", "category_name", "subtransactions"],
+          "required": ["account_name", "subtransactions"],
           "properties": {
             "account_name": {
               "type": "string"
@@ -2389,7 +2382,7 @@
         },
         {
           "type": "object",
-          "required": ["type", "parent_transaction_id", "account_name", "payee_name", "category_name"],
+          "required": ["type", "account_name"],
           "properties": {
             "type": {
               "type": "string",
@@ -2398,7 +2391,7 @@
             },
             "parent_transaction_id": {
               "type": "string",
-              "description": "For subtransaction types, this is the id of the pararent transaction.  For transaction types, this id will be always be null."
+              "description": "For subtransaction types, this is the id of the parent transaction.  For transaction types, this id will be always be null."
             },
             "account_name": {
               "type": "string"
@@ -2483,10 +2476,6 @@
         "id",
         "transaction_id",
         "amount",
-        "memo",
-        "payee_id",
-        "category_id",
-        "transfer_account_id",
         "deleted"
       ],
       "properties": {
@@ -2569,12 +2558,7 @@
         "date_next",
         "frequency",
         "amount",
-        "memo",
-        "flag_color",
         "account_id",
-        "payee_id",
-        "category_id",
-        "transfer_account_id",
         "deleted"
       ],
       "properties": {
@@ -2653,7 +2637,7 @@
         },
         {
           "type": "object",
-          "required": ["account_name", "payee_name", "category_name", "subtransactions"],
+          "required": ["account_name", "subtransactions"],
           "properties": {
             "account_name": {
               "type": "string"
@@ -2681,10 +2665,6 @@
         "id",
         "scheduled_transaction_id",
         "amount",
-        "memo",
-        "payee_id",
-        "category_id",
-        "transfer_account_id",
         "deleted"
       ],
       "properties": {
@@ -2763,7 +2743,7 @@
     },
     "MonthSummary": {
       "type": "object",
-      "required": ["month", "note", "income", "budgeted", "activity", "to_be_budgeted", "deleted"],
+      "required": ["month", "income", "budgeted", "activity", "to_be_budgeted", "deleted"],
       "properties": {
         "month": {
           "type": "string",

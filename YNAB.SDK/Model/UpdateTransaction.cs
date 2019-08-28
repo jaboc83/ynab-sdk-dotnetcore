@@ -123,6 +123,7 @@ namespace YNAB.SDK.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateTransaction" /> class.
         /// </summary>
+        /// <param name="id">id (required).</param>
         /// <param name="accountId">accountId (required).</param>
         /// <param name="date">The transaction date in ISO format (e.g. 2016-12-01).  Future dates (scheduled transactions) are not permitted.  Split transaction dates cannot be changed and if a different date is supplied it will be ignored. (required).</param>
         /// <param name="amount">The transaction amount in milliunits format.  Split transaction amounts cannot be changed and if a different amount is supplied it will be ignored. (required).</param>
@@ -134,9 +135,18 @@ namespace YNAB.SDK.Model
         /// <param name="approved">Whether or not the transaction is approved.  If not supplied, transaction will be unapproved by default..</param>
         /// <param name="flagColor">The transaction flag.</param>
         /// <param name="importId">If specified, the new transaction will be assigned this import_id and considered \&quot;imported\&quot;.  We will also attempt to match this imported transaction to an existing \&quot;user-entered\&quot; transation on the same account, with the same amount, and with a date +/-10 days from the imported transaction date.&lt;br&gt;&lt;br&gt;Transactions imported through File Based Import or Direct Import (not through the API) are assigned an import_id in the format: &#39;YNAB:[milliunit_amount]:[iso_date]:[occurrence]&#39;. For example, a transaction dated 2015-12-30 in the amount of -$294.23 USD would have an import_id of &#39;YNAB:-294230:2015-12-30:1&#39;.  If a second transaction on the same account was imported and had the same date and same amount, its import_id would be &#39;YNAB:-294230:2015-12-30:2&#39;.  Using a consistent format will prevent duplicates through Direct Import and File Based Import.&lt;br&gt;&lt;br&gt;If import_id is omitted or specified as null, the transaction will be treated as a \&quot;user-entered\&quot; transaction. As such, it will be eligible to be matched against transactions later being imported (via DI, FBI, or API)..</param>
-        /// <param name="id">id (required).</param>
-        public UpdateTransaction(Guid accountId = default(Guid), DateTime date = default(DateTime), long amount = default(long), Guid payeeId = default(Guid), string payeeName = default(string), Guid categoryId = default(Guid), string memo = default(string), ClearedEnum? cleared = default(ClearedEnum?), bool approved = default(bool), FlagColorEnum? flagColor = default(FlagColorEnum?), string importId = default(string), string id = default(string))
+        public UpdateTransaction(string id = default(string), Guid accountId = default(Guid), DateTime date = default(DateTime), long amount = default(long), Guid payeeId = default(Guid), string payeeName = default(string), Guid categoryId = default(Guid), string memo = default(string), ClearedEnum? cleared = default(ClearedEnum?), bool approved = default(bool), FlagColorEnum? flagColor = default(FlagColorEnum?), string importId = default(string))
         {
+            // to ensure "id" is required (not null)
+            if (id == null)
+            {
+                throw new InvalidDataException("id is a required property for UpdateTransaction and cannot be null");
+            }
+            else
+            {
+                this.Id = id;
+            }
+
             // to ensure "accountId" is required (not null)
             if (accountId == null)
             {
@@ -167,16 +177,6 @@ namespace YNAB.SDK.Model
                 this.Amount = amount;
             }
 
-            // to ensure "id" is required (not null)
-            if (id == null)
-            {
-                throw new InvalidDataException("id is a required property for UpdateTransaction and cannot be null");
-            }
-            else
-            {
-                this.Id = id;
-            }
-
             this.PayeeId = payeeId;
             this.PayeeName = payeeName;
             this.CategoryId = categoryId;
@@ -187,6 +187,12 @@ namespace YNAB.SDK.Model
             this.ImportId = importId;
         }
         
+        /// <summary>
+        /// Gets or Sets Id
+        /// </summary>
+        [DataMember(Name="id", EmitDefaultValue=false)]
+        public string Id { get; set; }
+
         /// <summary>
         /// Gets or Sets AccountId
         /// </summary>
@@ -250,12 +256,6 @@ namespace YNAB.SDK.Model
         public string ImportId { get; set; }
 
         /// <summary>
-        /// Gets or Sets Id
-        /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
-        public string Id { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -263,6 +263,7 @@ namespace YNAB.SDK.Model
         {
             var sb = new StringBuilder();
             sb.Append("class UpdateTransaction {\n");
+            sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  AccountId: ").Append(AccountId).Append("\n");
             sb.Append("  Date: ").Append(Date).Append("\n");
             sb.Append("  Amount: ").Append(Amount).Append("\n");
@@ -274,7 +275,6 @@ namespace YNAB.SDK.Model
             sb.Append("  Approved: ").Append(Approved).Append("\n");
             sb.Append("  FlagColor: ").Append(FlagColor).Append("\n");
             sb.Append("  ImportId: ").Append(ImportId).Append("\n");
-            sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -309,6 +309,11 @@ namespace YNAB.SDK.Model
                 return false;
 
             return 
+                (
+                    this.Id == input.Id ||
+                    (this.Id != null &&
+                    this.Id.Equals(input.Id))
+                ) && 
                 (
                     this.AccountId == input.AccountId ||
                     (this.AccountId != null &&
@@ -359,11 +364,6 @@ namespace YNAB.SDK.Model
                     this.ImportId == input.ImportId ||
                     (this.ImportId != null &&
                     this.ImportId.Equals(input.ImportId))
-                ) && 
-                (
-                    this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
                 );
         }
 
@@ -376,6 +376,8 @@ namespace YNAB.SDK.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                if (this.Id != null)
+                    hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.AccountId != null)
                     hashCode = hashCode * 59 + this.AccountId.GetHashCode();
                 if (this.Date != null)
@@ -394,8 +396,6 @@ namespace YNAB.SDK.Model
                 hashCode = hashCode * 59 + this.FlagColor.GetHashCode();
                 if (this.ImportId != null)
                     hashCode = hashCode * 59 + this.ImportId.GetHashCode();
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
                 return hashCode;
             }
         }

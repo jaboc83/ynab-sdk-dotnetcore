@@ -41,7 +41,7 @@ namespace YNAB.SDK.Model
         /// </summary>
         /// <param name="id">id (required).</param>
         /// <param name="name">name (required).</param>
-        /// <param name="transferAccountId">If a transfer payee, the account_id to which this payee transfers to (required).</param>
+        /// <param name="transferAccountId">If a transfer payee, the account_id to which this payee transfers to.</param>
         /// <param name="deleted">Whether or not the payee has been deleted.  Deleted payees will only be included in delta requests. (required).</param>
         public Payee(Guid id = default(Guid), string name = default(string), string transferAccountId = default(string), bool deleted = default(bool))
         {
@@ -65,16 +65,6 @@ namespace YNAB.SDK.Model
                 this.Name = name;
             }
 
-            // to ensure "transferAccountId" is required (not null)
-            if (transferAccountId == null)
-            {
-                throw new InvalidDataException("transferAccountId is a required property for Payee and cannot be null");
-            }
-            else
-            {
-                this.TransferAccountId = transferAccountId;
-            }
-
             // to ensure "deleted" is required (not null)
             if (deleted == null)
             {
@@ -85,6 +75,7 @@ namespace YNAB.SDK.Model
                 this.Deleted = deleted;
             }
 
+            this.TransferAccountId = transferAccountId;
         }
         
         /// <summary>

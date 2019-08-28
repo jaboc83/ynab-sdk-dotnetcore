@@ -40,7 +40,7 @@ namespace YNAB.SDK.Model
         /// Initializes a new instance of the <see cref="MonthSummary" /> class.
         /// </summary>
         /// <param name="month">month (required).</param>
-        /// <param name="note">note (required).</param>
+        /// <param name="note">note.</param>
         /// <param name="income">The total amount in transactions categorized to &#39;Inflow: To be Budgeted&#39; in the month (required).</param>
         /// <param name="budgeted">The total amount budgeted in the month (required).</param>
         /// <param name="activity">The total amount in transactions in the month, excluding those categorized to &#39;Inflow: To be Budgeted&#39; (required).</param>
@@ -57,16 +57,6 @@ namespace YNAB.SDK.Model
             else
             {
                 this.Month = month;
-            }
-
-            // to ensure "note" is required (not null)
-            if (note == null)
-            {
-                throw new InvalidDataException("note is a required property for MonthSummary and cannot be null");
-            }
-            else
-            {
-                this.Note = note;
             }
 
             // to ensure "income" is required (not null)
@@ -119,6 +109,7 @@ namespace YNAB.SDK.Model
                 this.Deleted = deleted;
             }
 
+            this.Note = note;
             this.AgeOfMoney = ageOfMoney;
         }
 
