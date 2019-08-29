@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Publish the latest version of the SDK to nuget.org
+
 #### FUNCTIONS
 
 usage() {
@@ -18,7 +20,6 @@ timestamp() {
 #### END FUNCTIONS
 #### ARGUMENT PROCESSING
 
-# Publish the latest version of the SDK to nuget.org
 while (( "$#" )); do
   case "$1" in
     -k|--nuget-api-key)
@@ -59,25 +60,25 @@ fi
 #### END ARGUMENT PROCESSING
 #### VARIABLES
 
-logPath="./publish.log"
-echo "PUBLISH STARTED $(timestamp)" | tee $logPath
+log_path="./publish.log"
+echo "PUBLISH STARTED $(timestamp)" | tee $log_path
 project_path="../YNAB.SDK/YNAB.SDK.csproj"
 
 #### END VARIABLES
 #### MAIN LOGIC
 
-echo "CLEAN STARTED $(timestamp)" | tee -a $logPath
-dotnet clean $project_path --configuration Release --verbosity normal | tee -a $logPath
+echo "CLEAN STARTED $(timestamp)" | tee -a $log_path
+dotnet clean $project_path --configuration Release --verbosity normal | tee -a $log_path
 
-echo "BUILD STARTED $(timestamp)" + timestamp | tee -a $logPath
-dotnet build $project_path --configuration Release --force --verbosity normal | tee -a $logPath
+echo "BUILD STARTED $(timestamp)" + timestamp | tee -a $log_path
+dotnet build $project_path --configuration Release --force --verbosity normal | tee -a $log_path
 
-echo "PACK STARTED $(timestamp)" + timestamp | tee -a $logPath
-dotnet pack $project_path --configuration Release --force --verbosity normal | tee -a $logPath
+echo "PACK STARTED $(timestamp)" + timestamp | tee -a $log_path
+dotnet pack $project_path --configuration Release --force --verbosity normal | tee -a $log_path
 
-echo "NUGET PUSH STARTED $(timestamp)" + timestamp | tee -a $logPath
-dotnet nuget push $nuget_spec_file --api-key $nuget_api_key --source https://api.nuget.org/v3/index.json | tee -a $logPath
+echo "NUGET PUSH STARTED $(timestamp)" + timestamp | tee -a $log_path
+dotnet nuget push $nuget_spec_file --api-key $nuget_api_key --source https://api.nuget.org/v3/index.json | tee -a $log_path
 
-echo "PUBLISH FINISHED $(timestamp)" + timestamp | tee -a $logPath
+echo "PUBLISH FINISHED $(timestamp)" + timestamp | tee -a $log_path
 
 #### END MAIN LOGIC
