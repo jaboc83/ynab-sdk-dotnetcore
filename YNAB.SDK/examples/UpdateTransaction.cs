@@ -6,9 +6,9 @@ namespace YNAB.SDK.Examples
   public class UpdateTransaction
   {
     private readonly API _ynabApi;
-    public UpdateTransaction(string accessToken)
+    public UpdateTransaction(API api)
     {
-      _ynabApi = new API(accessToken);
+      _ynabApi = api;
     }
 
     private async Task ExecuteAsync() {

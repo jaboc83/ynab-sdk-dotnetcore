@@ -4,9 +4,9 @@ using System;
 namespace YNAB.SDK.Examples {
   public class BudgetMonthExample {
     private readonly API _ynabAPI;
-    public BudgetMonthExample(string accessToken)
+    public BudgetMonthExample(API api)
     {
-      _ynabAPI = new API(accessToken);
+      _ynabAPI = api;
     }
 
     public async Task ExecuteAsync(Guid budgetId, string monthId)

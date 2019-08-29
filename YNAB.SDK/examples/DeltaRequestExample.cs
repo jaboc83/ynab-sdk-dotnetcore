@@ -12,9 +12,9 @@ namespace YNAB.SDK.Examples
     private int lastKnownServerKnowledge;
     const int POLL_WAIT_TIME_IN_MS = 5000;
 
-    public DeltaRequestExample(string accessToken)
+    public DeltaRequestExample(API api)
     {
-      _ynabApi = new API(accessToken);
+      _ynabApi = api;
     }
 
     private async Task QueueUpPollAsync(string budgetToFetchId)

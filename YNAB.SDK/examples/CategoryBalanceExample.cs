@@ -4,9 +4,9 @@ using System;
 namespace YNAB.SDK.Examples {
   public class CategoryBalanceExample {
     private readonly API _ynabAPI;
-    public CategoryBalanceExample(string accessToken)
+    public CategoryBalanceExample(API api)
     {
-      _ynabAPI = new API(accessToken);
+      _ynabAPI = api;
     }
 
     public async Task ExecuteAsync(Guid budgetId, Guid categoryId)

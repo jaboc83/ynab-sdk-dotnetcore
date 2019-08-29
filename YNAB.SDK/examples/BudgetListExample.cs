@@ -5,9 +5,9 @@ using System;
 namespace YNAB.SDK.Examples {
   public class BudgetListExample {
     private readonly API _ynabAPI;
-    public BudgetListExample(string accessToken)
+    public BudgetListExample(API api)
     {
-      _ynabAPI = new API(accessToken);
+      _ynabAPI = api;
     }
 
     public async Task ExecuteAsync()

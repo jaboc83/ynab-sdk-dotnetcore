@@ -6,9 +6,9 @@ namespace YNAB.SDK.Examples
   public class UpdateCategoryBudgeted
   {
     private readonly API _ynabApi;
-    public UpdateCategoryBudgeted(string accessToken)
+    public UpdateCategoryBudgeted(API api)
     {
-      _ynabApi = new API(accessToken);
+      _ynabApi = api;
     }
 
     private async Task ExecuteAsync() {

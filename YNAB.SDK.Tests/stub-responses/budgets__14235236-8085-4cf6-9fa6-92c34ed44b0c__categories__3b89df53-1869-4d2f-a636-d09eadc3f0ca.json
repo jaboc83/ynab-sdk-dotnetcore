@@ -1,0 +1,21 @@
+{
+    "data": {
+        "category": {
+            "id": "3b89df53-1869-4d2f-a636-d09eadc3f0ca",
+            "category_group_id": "af29cdb5-e225-4f46-8f1b-cbb237a6f082",
+            "name": "Rent/Mortgage",
+            "hidden": false,
+            "original_category_group_id": null,
+            "note": null,
+            "budgeted": 0,
+            "activity": 0,
+            "balance": 0,
+            "goal_type": null,
+            "goal_creation_month": null,
+            "goal_target": 0,
+            "goal_target_month": null,
+            "goal_percentage_complete": null,
+            "deleted": false
+        }
+    }
+}
