@@ -17,4 +17,8 @@
     <ProjectReference Include="..\YNAB.SDK\YNAB.SDK.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update=".\stub-responses\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

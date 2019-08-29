@@ -13,6 +13,10 @@ namespace YNAB.SDK.Tests
     private readonly BudgetsApi _budgetsApi;
     private readonly string _token = Environment.GetEnvironmentVariable("YNAB_TEST_TOKEN");
 
+    /// <summary>
+    /// Verify that the code examples are all still working
+    /// </summary>
+    /// <returns></returns>
     [Fact]
     public async Task Examples_RunSuccessfully() {
       // Arrange
@@ -26,41 +30,44 @@ namespace YNAB.SDK.Tests
       // Act
       // Assert
       try {
-        var ble = new BudgetListExample(_token);
-        ble.Execute();
-        await ble.ExecuteAsync();
+        using (var stub = new YnabApiStub()) {
+          var api = new API(_token, stub.BasePath);
+          var ble = new BudgetListExample(api);
+          ble.Execute();
+          await ble.ExecuteAsync();
 
-        var bme = new BudgetMonthExample(_token);
-        bme.Execute(budgetId, budgetMonthId);
-        await bme.ExecuteAsync(budgetId, budgetMonthId);
+          var bme = new BudgetMonthExample(api);
+          bme.Execute(budgetId, budgetMonthId);
+          await bme.ExecuteAsync(budgetId, budgetMonthId);
 
-        var btc = new BulkTransactionCreate(_token);
-        // btc.Execute();
-        // await btc.ExecuteAsync();
+          var btc = new BulkTransactionCreate(api);
+          // btc.Execute();
+          // await btc.ExecuteAsync();
 
-        var cbe = new CategoryBalanceExample(_token);
-        cbe.Execute(budgetId, categoryId);
-        await cbe.ExecuteAsync(budgetId, categoryId);
+          var cbe = new CategoryBalanceExample(api);
+          cbe.Execute(budgetId, categoryId);
+          await cbe.ExecuteAsync(budgetId, categoryId);
 
-        var cmt = new CreateMultipleTransactions(_token);
-        // cmt.Execute();
-        // await cmt.ExecuteAsync();
+          var cmt = new CreateMultipleTransactions(api);
+          // cmt.Execute();
+          // await cmt.ExecuteAsync();
 
-        var ct = new CreateTransaction(_token);
-        // ct.Execute();
-        // await ct.ExecuteAsync();
+          var ct = new CreateTransaction(api);
+          // ct.Execute();
+          // await ct.ExecuteAsync();
 
-        var dre = new DeltaRequestExample(_token);
-        dre.Execute();
-        await dre.ExecuteAsync();
+          var dre = new DeltaRequestExample(api);
+          dre.Execute();
+          await dre.ExecuteAsync();
 
-        var ucb = new UpdateCategoryBudgeted(_token);
-        // ucb.Execute();
-        // await ucb.ExecuteAsync();
+          var ucb = new UpdateCategoryBudgeted(api);
+          // ucb.Execute();
+          // await ucb.ExecuteAsync();
 
-        var ut = new UpdateTransaction(_token);
-        // ut.Execute();
-        // await ut.ExecuteAsync();
+          var ut = new UpdateTransaction(api);
+          // ut.Execute();
+          // await ut.ExecuteAsync();
+        }
       } catch (Exception ex) {
         Assert.True(false, ex.Message);
       }

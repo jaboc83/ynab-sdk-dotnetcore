@@ -6,7 +6,7 @@ namespace YNAB.SDK
   public class API {
     private Configuration _config = new Configuration();
     private bool _useHttps;
-    public API(string accessToken, string host = "api.youneedabudget.com", bool useHttps = true)
+    public API(string accessToken, string host = "https://api.youneedabudget.com/v1", bool useHttps = true)
     {
       // TODO: Use this
       _useHttps = useHttps;
