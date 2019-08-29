@@ -5,14 +5,14 @@ namespace YNAB.SDK
 {
   public class API {
     private Configuration _config = new Configuration();
-    private string _host;
     private bool _useHttps;
     public API(string accessToken, string host = "api.youneedabudget.com", bool useHttps = true)
     {
-      _host = host;
+      // TODO: Use this
       _useHttps = useHttps;
       _config.AddApiKey("Authorization", accessToken);
       _config.AddApiKeyPrefix("Authorization", "Bearer");
+      _config.BasePath = host;
     }
 
     public UserApi User { get { return new UserApi(_config); } }
