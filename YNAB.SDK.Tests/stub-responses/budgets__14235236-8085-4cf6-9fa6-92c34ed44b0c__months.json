@@ -4,21 +4,21 @@
             {
                 "month": "2019-07-01",
                 "note": null,
-                "income": null,
-                "budgeted": null,
-                "activity": null,
-                "to_be_budgeted": null,
+                "income": 0,
+                "budgeted": 0,
+                "activity": 0,
+                "to_be_budgeted": 0,
                 "age_of_money": null,
                 "deleted": false
             },
             {
                 "month": "2019-08-01",
                 "note": null,
-                "income": 0,
-                "budgeted": 0,
-                "activity": 0,
+                "income": 3000000,
+                "budgeted": 3000000,
+                "activity": -2125000,
                 "to_be_budgeted": 0,
-                "age_of_money": null,
+                "age_of_money": 14,
                 "deleted": false
             },
             {
@@ -28,7 +28,7 @@
                 "budgeted": 0,
                 "activity": 0,
                 "to_be_budgeted": 0,
-                "age_of_money": null,
+                "age_of_money": 14,
                 "deleted": false
             },
             {
@@ -38,10 +38,10 @@
                 "budgeted": 0,
                 "activity": 0,
                 "to_be_budgeted": 0,
-                "age_of_money": null,
+                "age_of_money": 14,
                 "deleted": false
             }
         ],
-        "server_knowledge": 45
+        "server_knowledge": 146
     }
 }

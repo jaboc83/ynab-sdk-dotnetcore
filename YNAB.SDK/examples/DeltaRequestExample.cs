@@ -67,7 +67,7 @@ namespace YNAB.SDK.Examples
         var categories = budgetContents.Data.Budget.Categories;
         Console.WriteLine("Here is the budget data for the current month: ");
         var currentMonthISO = Utils.GetCurrentMonthInISOFormat();
-        var monthDetailForCurrentMonth = budgetContents.Data.Budget.Months.Find(m => m.Month.ToString("yyyy-MM-dd") == currentMonthISO);
+        var monthDetailForCurrentMonth = budgetContents.Data.Budget.Months.Find(m => Utils.ConvertDateTimeToISOFormat(m.Month) == currentMonthISO);
         if (monthDetailForCurrentMonth != null)
         {
           Console.WriteLine(JsonConvert.SerializeObject(monthDetailForCurrentMonth));
@@ -106,7 +106,7 @@ namespace YNAB.SDK.Examples
         var categories = budgetContents.Data.Budget.Categories;
         Console.WriteLine("Here is the budget data for the current month: ");
         var currentMonthISO = Utils.GetCurrentMonthInISOFormat();
-        var monthDetailForCurrentMonth = budgetContents.Data.Budget.Months.Find(m => m.Month.ToString("yyyy-MM-dd") == currentMonthISO);
+        var monthDetailForCurrentMonth = budgetContents.Data.Budget.Months.Find(m => Utils.ConvertDateTimeToISOFormat(m.Month) == currentMonthISO);
         if (monthDetailForCurrentMonth != null)
         {
           Console.WriteLine(JsonConvert.SerializeObject(monthDetailForCurrentMonth));

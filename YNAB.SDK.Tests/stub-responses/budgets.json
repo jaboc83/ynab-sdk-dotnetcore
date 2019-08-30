@@ -2,49 +2,9 @@
     "data": {
         "budgets": [
             {
-                "id": "bf97ea97-dc44-44c1-ab96-86e8ca1fb549",
-                "name": "Budget A",
-                "last_modified_on": "2018-06-08T15:55:41+00:00",
-                "first_month": "2017-12-01",
-                "last_month": "2019-03-01",
-                "date_format": {
-                    "format": "MM/DD/YYYY"
-                },
-                "currency_format": {
-                    "iso_code": "USD",
-                    "example_format": "123,456.78",
-                    "decimal_digits": 2,
-                    "decimal_separator": ".",
-                    "symbol_first": true,
-                    "group_separator": ",",
-                    "currency_symbol": "$",
-                    "display_symbol": true
-                }
-            },
-            {
-                "id": "e811c292-0a94-441e-a504-d79fe590185e",
-                "name": "Budget B",
-                "last_modified_on": "2018-08-14T20:34:05+00:00",
-                "first_month": "2017-12-01",
-                "last_month": "2019-03-01",
-                "date_format": {
-                    "format": "MM/DD/YYYY"
-                },
-                "currency_format": {
-                    "iso_code": "USD",
-                    "example_format": "123,456.78",
-                    "decimal_digits": 2,
-                    "decimal_separator": ".",
-                    "symbol_first": true,
-                    "group_separator": ",",
-                    "currency_symbol": "$",
-                    "display_symbol": true
-                }
-            },
-            {
                 "id": "14235236-8085-4cf6-9fa6-92c34ed44b0c",
                 "name": "TestBudget",
-                "last_modified_on": "2019-08-26T17:51:05+00:00",
+                "last_modified_on": "2019-08-30T01:07:52+00:00",
                 "first_month": "2019-08-01",
                 "last_month": "2019-09-01",
                 "date_format": {
@@ -63,7 +23,7 @@
             },
             {
                 "id": "d2913610-bba1-4a6c-a530-f1fe07b60360",
-                "name": "Budget D",
+                "name": "Other Budget",
                 "last_modified_on": "2019-08-28T13:31:12+00:00",
                 "first_month": "2015-12-01",
                 "last_month": "2019-09-01",

@@ -24,6 +24,16 @@ namespace YNAB.SDK
     }
 
     /// <summary>
+    /// Convert the date time given to the ISO 8601 date format  (i.e. '2015-12-15')
+    /// </summary>
+    /// <param name="date"></param>
+    /// <returns></returns>
+    public static string ConvertDateTimeToISOFormat(DateTime date)
+    {
+      return date.ToString("yyyy-MM-dd");
+    }
+
+    /// <summary>
     /// Converts a milliunits amount to a currency amount.static See <a href="https://api.youneedabudget.com/#formats">YNAB API Docs<a/> for more detail.
     /// </summary>
     /// <param name="milliunits"> The milliunits amount (i.e. 293294)</parameter>
