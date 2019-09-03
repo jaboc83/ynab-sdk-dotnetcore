@@ -58,7 +58,7 @@ Process
   if(!$?) { throw "FAILED TO PACK" }
   if ($NuspecFile -eq "")
   {
-    $NuspecFile = (Get-ChildItem ../YNAB.SDK/bin/Release/*.nupkg)[0].FullName
+    $NuspecFile = (Get-ChildItem ../YNAB.SDK/bin/Release/*.nupkg | Sort-Object -Descending)[0].FullName
   }
   "`nNUGET PUSH STARTED $(Get-Date)" | Tee-Object -FilePath $logPath -Append
   dotnet nuget push $NuspecFile --api-key $NugetAPIKey --source https://api.nuget.org/v3/index.json | Tee-Object -FilePath $logPath -Append
