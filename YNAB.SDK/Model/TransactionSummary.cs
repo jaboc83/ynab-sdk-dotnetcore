@@ -138,7 +138,7 @@ namespace YNAB.SDK.Model
         /// <param name="matchedTransactionId">If transaction is matched, the id of the matched transaction.</param>
         /// <param name="importId">If the Transaction was imported, this field is a unique (by account) import identifier.  If this transaction was imported through File Based Import or Direct Import and not through the API, the import_id will have the format: &#39;YNAB:[milliunit_amount]:[iso_date]:[occurrence]&#39;.  For example, a transaction dated 2015-12-30 in the amount of -$294.23 USD would have an import_id of &#39;YNAB:-294230:2015-12-30:1&#39;.  If a second transaction on the same account was imported and had the same date and same amount, its import_id would be &#39;YNAB:-294230:2015-12-30:2&#39;..</param>
         /// <param name="deleted">Whether or not the transaction has been deleted.  Deleted transactions will only be included in delta requests. (required).</param>
-        public TransactionSummary(string id = default(string), DateTime date = default(DateTime), long amount = default(long), string memo = default(string), ClearedEnum cleared = default(ClearedEnum), bool approved = default(bool), FlagColorEnum? flagColor = default(FlagColorEnum?), Guid accountId = default(Guid), Guid payeeId = default(Guid), Guid categoryId = default(Guid), Guid transferAccountId = default(Guid), string transferTransactionId = default(string), string matchedTransactionId = default(string), string importId = default(string), bool deleted = default(bool))
+        public TransactionSummary(string id = default(string), DateTime date = default(DateTime), long amount = default(long), string memo = default(string), ClearedEnum cleared = default(ClearedEnum), bool approved = default(bool), FlagColorEnum? flagColor = default(FlagColorEnum?), Guid accountId = default(Guid), Guid? payeeId = default(Guid?), Guid? categoryId = default(Guid?), Guid transferAccountId = default(Guid), string transferTransactionId = default(string), string matchedTransactionId = default(string), string importId = default(string), bool deleted = default(bool))
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -255,13 +255,13 @@ namespace YNAB.SDK.Model
         /// Gets or Sets PayeeId
         /// </summary>
         [DataMember(Name="payee_id", EmitDefaultValue=false)]
-        public Guid PayeeId { get; set; }
+        public Guid? PayeeId { get; set; }
 
         /// <summary>
         /// Gets or Sets CategoryId
         /// </summary>
         [DataMember(Name="category_id", EmitDefaultValue=false)]
-        public Guid CategoryId { get; set; }
+        public Guid? CategoryId { get; set; }
 
         /// <summary>
         /// If a transfer transaction, the account to which it transfers

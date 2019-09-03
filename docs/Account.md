@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Type** | **string** | The type of account. Note: payPal, merchantAccount, investmentAccount, and mortgage types have been deprecated and will be removed in the future. | 
 **OnBudget** | **bool** | Whether this account is on budget or not | 
 **Closed** | **bool** | Whether this account is closed or not | 
-**Note** | **string** |  | 
+**Note** | **string** |  | [optional] 
 **Balance** | **long** | The current balance of the account in milliunits format | 
 **ClearedBalance** | **long** | The current cleared balance of the account in milliunits format | 
 **UnclearedBalance** | **long** | The current uncleared balance of the account in milliunits format | 

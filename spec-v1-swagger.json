@@ -1694,7 +1694,6 @@
         "type",
         "on_budget",
         "closed",
-        "note",
         "balance",
         "cleared_balance",
         "uncleared_balance",
@@ -1849,11 +1848,9 @@
         "category_group_id",
         "name",
         "hidden",
-        "note",
         "budgeted",
         "activity",
         "balance",
-        "goal_target",
         "deleted"
       ],
       "properties": {

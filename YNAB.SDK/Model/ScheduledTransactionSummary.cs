@@ -193,7 +193,7 @@ namespace YNAB.SDK.Model
         /// <param name="categoryId">categoryId.</param>
         /// <param name="transferAccountId">If a transfer, the account_id which the scheduled transaction transfers to.</param>
         /// <param name="deleted">Whether or not the scheduled transaction has been deleted.  Deleted scheduled transactions will only be included in delta requests. (required).</param>
-        public ScheduledTransactionSummary(Guid id = default(Guid), DateTime dateFirst = default(DateTime), DateTime dateNext = default(DateTime), FrequencyEnum frequency = default(FrequencyEnum), long amount = default(long), string memo = default(string), FlagColorEnum? flagColor = default(FlagColorEnum?), Guid accountId = default(Guid), Guid payeeId = default(Guid), Guid categoryId = default(Guid), Guid transferAccountId = default(Guid), bool deleted = default(bool))
+        public ScheduledTransactionSummary(Guid id = default(Guid), DateTime dateFirst = default(DateTime), DateTime dateNext = default(DateTime), FrequencyEnum frequency = default(FrequencyEnum), long amount = default(long), string memo = default(string), FlagColorEnum? flagColor = default(FlagColorEnum?), Guid accountId = default(Guid), Guid? payeeId = default(Guid?), Guid? categoryId = default(Guid?), Guid transferAccountId = default(Guid), bool deleted = default(bool))
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -308,13 +308,13 @@ namespace YNAB.SDK.Model
         /// Gets or Sets PayeeId
         /// </summary>
         [DataMember(Name="payee_id", EmitDefaultValue=false)]
-        public Guid PayeeId { get; set; }
+        public Guid? PayeeId { get; set; }
 
         /// <summary>
         /// Gets or Sets CategoryId
         /// </summary>
         [DataMember(Name="category_id", EmitDefaultValue=false)]
-        public Guid CategoryId { get; set; }
+        public Guid? CategoryId { get; set; }
 
         /// <summary>
         /// If a transfer, the account_id which the scheduled transaction transfers to

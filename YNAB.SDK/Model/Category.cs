@@ -83,13 +83,13 @@ namespace YNAB.SDK.Model
         /// <param name="name">name (required).</param>
         /// <param name="hidden">Whether or not the category is hidden (required).</param>
         /// <param name="originalCategoryGroupId">If category is hidden this is the id of the category group it originally belonged to before it was hidden..</param>
-        /// <param name="note">note (required).</param>
+        /// <param name="note">note.</param>
         /// <param name="budgeted">Budgeted amount in milliunits format (required).</param>
         /// <param name="activity">Activity amount in milliunits format (required).</param>
         /// <param name="balance">Balance in milliunits format (required).</param>
         /// <param name="goalType">The type of goal, if the category has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding).</param>
         /// <param name="goalCreationMonth">The month a goal was created.</param>
-        /// <param name="goalTarget">The goal target amount in milliunits (required).</param>
+        /// <param name="goalTarget">The goal target amount in milliunits.</param>
         /// <param name="goalTargetMonth">If the goal type is &#39;TBD&#39; (Target Category Balance by Date), this is the target month for the goal to be completed.</param>
         /// <param name="goalPercentageComplete">The percentage completion of the goal.</param>
         /// <param name="deleted">Whether or not the category has been deleted.  Deleted categories will only be included in delta requests. (required).</param>
@@ -135,16 +135,6 @@ namespace YNAB.SDK.Model
                 this.Hidden = hidden;
             }
 
-            // to ensure "note" is required (not null)
-            if (note == null)
-            {
-                throw new InvalidDataException("note is a required property for Category and cannot be null");
-            }
-            else
-            {
-                this.Note = note;
-            }
-
             // to ensure "budgeted" is required (not null)
             if (budgeted == null)
             {
@@ -175,16 +165,6 @@ namespace YNAB.SDK.Model
                 this.Balance = balance;
             }
 
-            // to ensure "goalTarget" is required (not null)
-            if (goalTarget == null)
-            {
-                throw new InvalidDataException("goalTarget is a required property for Category and cannot be null");
-            }
-            else
-            {
-                this.GoalTarget = goalTarget;
-            }
-
             // to ensure "deleted" is required (not null)
             if (deleted == null)
             {
@@ -196,8 +176,10 @@ namespace YNAB.SDK.Model
             }
 
             this.OriginalCategoryGroupId = originalCategoryGroupId;
+            this.Note = note;
             this.GoalType = goalType;
             this.GoalCreationMonth = goalCreationMonth;
+            this.GoalTarget = goalTarget;
             this.GoalTargetMonth = goalTargetMonth;
             this.GoalPercentageComplete = goalPercentageComplete;
         }
@@ -274,7 +256,7 @@ namespace YNAB.SDK.Model
         /// </summary>
         /// <value>The goal target amount in milliunits</value>
         [DataMember(Name="goal_target", EmitDefaultValue=false)]
-        public long GoalTarget { get; set; }
+        public long? GoalTarget { get; set; }
 
         /// <summary>
         /// If the goal type is &#39;TBD&#39; (Target Category Balance by Date), this is the target month for the goal to be completed

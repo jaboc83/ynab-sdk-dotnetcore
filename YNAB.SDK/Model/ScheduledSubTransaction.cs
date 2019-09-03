@@ -47,7 +47,7 @@ namespace YNAB.SDK.Model
         /// <param name="categoryId">categoryId.</param>
         /// <param name="transferAccountId">If a transfer, the account_id which the scheduled subtransaction transfers to.</param>
         /// <param name="deleted">Whether or not the scheduled subtransaction has been deleted.  Deleted scheduled subtransactions will only be included in delta requests. (required).</param>
-        public ScheduledSubTransaction(Guid id = default(Guid), Guid scheduledTransactionId = default(Guid), long amount = default(long), string memo = default(string), Guid payeeId = default(Guid), Guid categoryId = default(Guid), Guid transferAccountId = default(Guid), bool deleted = default(bool))
+        public ScheduledSubTransaction(Guid id = default(Guid), Guid scheduledTransactionId = default(Guid), long amount = default(long), string memo = default(string), Guid? payeeId = default(Guid?), Guid? categoryId = default(Guid?), Guid transferAccountId = default(Guid), bool deleted = default(bool))
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -124,13 +124,13 @@ namespace YNAB.SDK.Model
         /// Gets or Sets PayeeId
         /// </summary>
         [DataMember(Name="payee_id", EmitDefaultValue=false)]
-        public Guid PayeeId { get; set; }
+        public Guid? PayeeId { get; set; }
 
         /// <summary>
         /// Gets or Sets CategoryId
         /// </summary>
         [DataMember(Name="category_id", EmitDefaultValue=false)]
-        public Guid CategoryId { get; set; }
+        public Guid? CategoryId { get; set; }
 
         /// <summary>
         /// If a transfer, the account_id which the scheduled subtransaction transfers to

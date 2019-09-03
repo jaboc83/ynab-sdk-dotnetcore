@@ -197,7 +197,7 @@ namespace YNAB.SDK.Model
         /// <param name="payeeName">payeeName.</param>
         /// <param name="categoryName">categoryName.</param>
         /// <param name="subtransactions">If a split scheduled transaction, the subtransactions. (required).</param>
-        public ScheduledTransactionDetail(Guid id = default(Guid), DateTime dateFirst = default(DateTime), DateTime dateNext = default(DateTime), FrequencyEnum frequency = default(FrequencyEnum), long amount = default(long), string memo = default(string), FlagColorEnum? flagColor = default(FlagColorEnum?), Guid accountId = default(Guid), Guid payeeId = default(Guid), Guid categoryId = default(Guid), Guid transferAccountId = default(Guid), bool deleted = default(bool), string accountName = default(string), string payeeName = default(string), string categoryName = default(string), List<ScheduledSubTransaction> subtransactions = default(List<ScheduledSubTransaction>))
+        public ScheduledTransactionDetail(Guid id = default(Guid), DateTime dateFirst = default(DateTime), DateTime dateNext = default(DateTime), FrequencyEnum frequency = default(FrequencyEnum), long amount = default(long), string memo = default(string), FlagColorEnum? flagColor = default(FlagColorEnum?), Guid accountId = default(Guid), Guid? payeeId = default(Guid?), Guid? categoryId = default(Guid?), Guid transferAccountId = default(Guid), bool deleted = default(bool), string accountName = default(string), string payeeName = default(string), string categoryName = default(string), List<ScheduledSubTransaction> subtransactions = default(List<ScheduledSubTransaction>))
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -334,13 +334,13 @@ namespace YNAB.SDK.Model
         /// Gets or Sets PayeeId
         /// </summary>
         [DataMember(Name="payee_id", EmitDefaultValue=false)]
-        public Guid PayeeId { get; set; }
+        public Guid? PayeeId { get; set; }
 
         /// <summary>
         /// Gets or Sets CategoryId
         /// </summary>
         [DataMember(Name="category_id", EmitDefaultValue=false)]
-        public Guid CategoryId { get; set; }
+        public Guid? CategoryId { get; set; }
 
         /// <summary>
         /// If a transfer, the account_id which the scheduled transaction transfers to

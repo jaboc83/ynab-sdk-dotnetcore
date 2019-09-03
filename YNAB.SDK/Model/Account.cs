@@ -125,7 +125,7 @@ namespace YNAB.SDK.Model
         /// <param name="type">The type of account. Note: payPal, merchantAccount, investmentAccount, and mortgage types have been deprecated and will be removed in the future. (required).</param>
         /// <param name="onBudget">Whether this account is on budget or not (required).</param>
         /// <param name="closed">Whether this account is closed or not (required).</param>
-        /// <param name="note">note (required).</param>
+        /// <param name="note">note.</param>
         /// <param name="balance">The current balance of the account in milliunits format (required).</param>
         /// <param name="clearedBalance">The current cleared balance of the account in milliunits format (required).</param>
         /// <param name="unclearedBalance">The current uncleared balance of the account in milliunits format (required).</param>
@@ -172,16 +172,6 @@ namespace YNAB.SDK.Model
             else
             {
                 this.Closed = closed;
-            }
-
-            // to ensure "note" is required (not null)
-            if (note == null)
-            {
-                throw new InvalidDataException("note is a required property for Account and cannot be null");
-            }
-            else
-            {
-                this.Note = note;
             }
 
             // to ensure "balance" is required (not null)
@@ -234,6 +224,7 @@ namespace YNAB.SDK.Model
                 this.Deleted = deleted;
             }
 
+            this.Note = note;
         }
         
         /// <summary>

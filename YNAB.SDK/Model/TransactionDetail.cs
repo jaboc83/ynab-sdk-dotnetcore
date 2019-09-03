@@ -142,7 +142,7 @@ namespace YNAB.SDK.Model
         /// <param name="payeeName">payeeName.</param>
         /// <param name="categoryName">categoryName.</param>
         /// <param name="subtransactions">If a split transaction, the subtransactions. (required).</param>
-        public TransactionDetail(string id = default(string), DateTime date = default(DateTime), long amount = default(long), string memo = default(string), ClearedEnum cleared = default(ClearedEnum), bool approved = default(bool), FlagColorEnum? flagColor = default(FlagColorEnum?), Guid accountId = default(Guid), Guid payeeId = default(Guid), Guid categoryId = default(Guid), Guid? transferAccountId = default(Guid?), string transferTransactionId = default(string), string matchedTransactionId = default(string), string importId = default(string), bool deleted = default(bool), string accountName = default(string), string payeeName = default(string), string categoryName = default(string), List<SubTransaction> subtransactions = default(List<SubTransaction>))
+        public TransactionDetail(string id = default(string), DateTime date = default(DateTime), long amount = default(long), string memo = default(string), ClearedEnum cleared = default(ClearedEnum), bool approved = default(bool), FlagColorEnum? flagColor = default(FlagColorEnum?), Guid accountId = default(Guid), Guid? payeeId = default(Guid?), Guid? categoryId = default(Guid?), Guid? transferAccountId = default(Guid?), string transferTransactionId = default(string), string matchedTransactionId = default(string), string importId = default(string), bool deleted = default(bool), string accountName = default(string), string payeeName = default(string), string categoryName = default(string), List<SubTransaction> subtransactions = default(List<SubTransaction>))
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -281,13 +281,13 @@ namespace YNAB.SDK.Model
         /// Gets or Sets PayeeId
         /// </summary>
         [DataMember(Name="payee_id", EmitDefaultValue=false)]
-        public Guid PayeeId { get; set; }
+        public Guid? PayeeId { get; set; }
 
         /// <summary>
         /// Gets or Sets CategoryId
         /// </summary>
         [DataMember(Name="category_id", EmitDefaultValue=false)]
-        public Guid CategoryId { get; set; }
+        public Guid? CategoryId { get; set; }
 
         /// <summary>
         /// If a transfer transaction, the account to which it transfers
