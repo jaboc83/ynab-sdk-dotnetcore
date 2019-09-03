@@ -40,6 +40,19 @@ namespace YNAB.SDK.Tests
       }
     }
 
+    //[Fact]
+    public async Task LIVE_API_TESTING_FOR_DEBUG()
+    {
+      // Arrange
+      var realToken = Environment.GetEnvironmentVariable("YNAB_TEST_TOKEN");
+      var api = new API(realToken);
+
+      // Act
+      var result = api.Budgets.GetBudgetById("14235236-8085-4cf6-9fa6-92c34ed44b0c");
+      // Assert
+      Assert.NotNull(result);
+    }
+
     [Fact]
     public async Task Budgets_TestBudgetExists()
     {
