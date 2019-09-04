@@ -41,6 +41,13 @@ namespace YNAB.SDK.Tests
             )
             .AddDefaultHeaders();
           }
+          var postEndpoint = "budgets/14235236-8085-4cf6-9fa6-92c34ed44b0c/transactions";
+          _stub.Post(
+            $"/{postEndpoint}",
+            (req, args) => {
+              return "{\"data\":{\"transaction_ids\":[\"013a8128-d78f-42ff-a59e-633a4c75253e\"],\"transaction\":{\"id\":\"013a8128-d78f-42ff-a59e-633a4c75253e\",\"date\":\"2019-09-04\",\"amount\":100,\"memo\":\"TEST\",\"cleared\":\"cleared\",\"approved\":true,\"flag_color\":\"red\",\"account_id\":\"09c21bf0-8bd0-4b7b-b158-4fe2df899991\",\"account_name\":\"Checking Account\",\"payee_id\":\"51b1c8ad-f51e-4782-a0dc-f1b2b2cadd61\",\"payee_name\":\"Starting Balance\",\"category_id\":\"6e6c1877-6fa7-461a-8f5f-0aadf361f8cd\",\"category_name\":\"Immediate Income SubCategory\",\"transfer_account_id\":null,\"transfer_transaction_id\":null,\"matched_transaction_id\":null,\"import_id\":null,\"deleted\":false,\"subtransactions\":[]},\"server_knowledge\":174}}";
+            }
+          );
         }
       }
 
@@ -75,6 +82,12 @@ namespace YNAB.SDK.Tests
     public void AddGetRequest(string relativePath, Stubbery.RequestMatching.CreateStubResponse response)
     {
       _stub.Get(relativePath, response)
+        .AddDefaultHeaders();
+    }
+
+    public void AddPostRequest(string relativePath, Stubbery.RequestMatching.CreateStubResponse response)
+    {
+      _stub.Post(relativePath, response)
         .AddDefaultHeaders();
     }
 

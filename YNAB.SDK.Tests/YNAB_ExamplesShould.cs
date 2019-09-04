@@ -53,8 +53,8 @@ namespace YNAB.SDK.Tests
           // await cmt.ExecuteAsync();
 
           var ct = new CreateTransaction(api);
-          // ct.Execute();
-          // await ct.ExecuteAsync();
+          ct.Execute();
+          await ct.ExecuteAsync();
 
           var dre = new DeltaRequestExample(api);
           dre.Execute();
