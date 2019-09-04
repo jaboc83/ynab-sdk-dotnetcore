@@ -17,13 +17,9 @@ namespace YNAB.SDK.Tests
     public async Task Budgets_FailWithBadAccessTokens() {
       // Arrange
       var badToken = "INVALID_TOKEN";
-      var goodToken = Environment.GetEnvironmentVariable("YNAB_TEST_TOKEN");
-      var ynabApi = new YNAB.SDK.API(goodToken);
+      var ynabApi = new YNAB.SDK.API(badToken);
 
       // Act
-      var ct = new YNAB.SDK.Examples.CreateTransaction(ynabApi);
-      ct.Execute();
-      //await ct.ExecuteAsync();
       // Assert
       Assert.Throws<YNAB.SDK.Client.ApiException>(() => {
         ynabApi.Budgets.GetBudgets();
