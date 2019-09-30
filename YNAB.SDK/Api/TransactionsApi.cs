@@ -21,1974 +21,1974 @@ using YNAB.SDK.Model;
 namespace YNAB.SDK.Api
 {
 
+  /// <summary>
+  /// Represents a collection of functions to interact with the API endpoints
+  /// </summary>
+  public interface ITransactionsApiSync : IApiAccessor
+  {
+    #region Synchronous Operations
     /// <summary>
-    /// Represents a collection of functions to interact with the API endpoints
+    /// Create a single transaction or multiple transactions
     /// </summary>
-    public interface ITransactionsApiSync : IApiAccessor
+    /// <remarks>
+    /// Creates a single transaction or multiple transactions.  If you provide a body containing a &#39;transaction&#39; object, a single transaction will be created and if you provide a body containing a &#39;transactions&#39; array, multiple transactions will be created.  Scheduled transactions cannot be created on this endpoint.
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="data">The transaction or transactions to create.  To create a single transaction you can specify a value for the &#39;transaction&#39; object and to create multiple transactions you can specify an array of &#39;transactions&#39;.  It is expected that you will only provide a value for one of these objects.</param>
+    /// <returns>SaveTransactionsResponse</returns>
+    SaveTransactionsResponse CreateTransaction(string budgetId, SaveTransactionsWrapper data);
+
+    /// <summary>
+    /// Create a single transaction or multiple transactions
+    /// </summary>
+    /// <remarks>
+    /// Creates a single transaction or multiple transactions.  If you provide a body containing a &#39;transaction&#39; object, a single transaction will be created and if you provide a body containing a &#39;transactions&#39; array, multiple transactions will be created.  Scheduled transactions cannot be created on this endpoint.
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="data">The transaction or transactions to create.  To create a single transaction you can specify a value for the &#39;transaction&#39; object and to create multiple transactions you can specify an array of &#39;transactions&#39;.  It is expected that you will only provide a value for one of these objects.</param>
+    /// <returns>ApiResponse of SaveTransactionsResponse</returns>
+    ApiResponse<SaveTransactionsResponse> CreateTransactionWithHttpInfo(string budgetId, SaveTransactionsWrapper data);
+    /// <summary>
+    /// Single transaction
+    /// </summary>
+    /// <remarks>
+    /// Returns a single transaction
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="transactionId">The id of the transaction</param>
+    /// <returns>TransactionResponse</returns>
+    TransactionResponse GetTransactionById(string budgetId, string transactionId);
+
+    /// <summary>
+    /// Single transaction
+    /// </summary>
+    /// <remarks>
+    /// Returns a single transaction
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="transactionId">The id of the transaction</param>
+    /// <returns>ApiResponse of TransactionResponse</returns>
+    ApiResponse<TransactionResponse> GetTransactionByIdWithHttpInfo(string budgetId, string transactionId);
+    /// <summary>
+    /// List transactions
+    /// </summary>
+    /// <remarks>
+    /// Returns budget transactions
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>TransactionsResponse</returns>
+    TransactionsResponse GetTransactions(string budgetId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
+
+    /// <summary>
+    /// List transactions
+    /// </summary>
+    /// <remarks>
+    /// Returns budget transactions
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>ApiResponse of TransactionsResponse</returns>
+    ApiResponse<TransactionsResponse> GetTransactionsWithHttpInfo(string budgetId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
+    /// <summary>
+    /// List account transactions
+    /// </summary>
+    /// <remarks>
+    /// Returns all transactions for a specified account
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="accountId">The id of the account</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>TransactionsResponse</returns>
+    TransactionsResponse GetTransactionsByAccount(string budgetId, string accountId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
+
+    /// <summary>
+    /// List account transactions
+    /// </summary>
+    /// <remarks>
+    /// Returns all transactions for a specified account
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="accountId">The id of the account</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>ApiResponse of TransactionsResponse</returns>
+    ApiResponse<TransactionsResponse> GetTransactionsByAccountWithHttpInfo(string budgetId, string accountId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
+    /// <summary>
+    /// List category transactions
+    /// </summary>
+    /// <remarks>
+    /// Returns all transactions for a specified category
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="categoryId">The id of the category</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>HybridTransactionsResponse</returns>
+    HybridTransactionsResponse GetTransactionsByCategory(string budgetId, string categoryId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
+
+    /// <summary>
+    /// List category transactions
+    /// </summary>
+    /// <remarks>
+    /// Returns all transactions for a specified category
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="categoryId">The id of the category</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>ApiResponse of HybridTransactionsResponse</returns>
+    ApiResponse<HybridTransactionsResponse> GetTransactionsByCategoryWithHttpInfo(string budgetId, string categoryId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
+    /// <summary>
+    /// List payee transactions
+    /// </summary>
+    /// <remarks>
+    /// Returns all transactions for a specified payee
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="payeeId">The id of the payee</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>HybridTransactionsResponse</returns>
+    HybridTransactionsResponse GetTransactionsByPayee(string budgetId, string payeeId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
+
+    /// <summary>
+    /// List payee transactions
+    /// </summary>
+    /// <remarks>
+    /// Returns all transactions for a specified payee
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="payeeId">The id of the payee</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>ApiResponse of HybridTransactionsResponse</returns>
+    ApiResponse<HybridTransactionsResponse> GetTransactionsByPayeeWithHttpInfo(string budgetId, string payeeId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
+    /// <summary>
+    /// Updates an existing transaction
+    /// </summary>
+    /// <remarks>
+    /// Updates a transaction
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="transactionId">The id of the transaction</param>
+    /// <param name="data">The transaction to update</param>
+    /// <returns>TransactionResponse</returns>
+    TransactionResponse UpdateTransaction(string budgetId, string transactionId, SaveTransactionWrapper data);
+
+    /// <summary>
+    /// Updates an existing transaction
+    /// </summary>
+    /// <remarks>
+    /// Updates a transaction
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="transactionId">The id of the transaction</param>
+    /// <param name="data">The transaction to update</param>
+    /// <returns>ApiResponse of TransactionResponse</returns>
+    ApiResponse<TransactionResponse> UpdateTransactionWithHttpInfo(string budgetId, string transactionId, SaveTransactionWrapper data);
+    /// <summary>
+    /// Update multiple transactions
+    /// </summary>
+    /// <remarks>
+    /// Updates multiple transactions, by &#39;id&#39; or &#39;import_id&#39;.
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="data">The transactions to update. Each transaction must have either an &#39;id&#39; or &#39;import_id&#39; specified. If &#39;id&#39; is specified as null an &#39;import_id&#39; value can be provided which will allow transaction(s) to be updated by their import_id. If an id is specified, it will always be used for lookup.</param>
+    /// <returns>SaveTransactionsResponse</returns>
+    SaveTransactionsResponse UpdateTransactions(string budgetId, UpdateTransactionsWrapper data);
+
+    /// <summary>
+    /// Update multiple transactions
+    /// </summary>
+    /// <remarks>
+    /// Updates multiple transactions, by &#39;id&#39; or &#39;import_id&#39;.
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="data">The transactions to update. Each transaction must have either an &#39;id&#39; or &#39;import_id&#39; specified. If &#39;id&#39; is specified as null an &#39;import_id&#39; value can be provided which will allow transaction(s) to be updated by their import_id. If an id is specified, it will always be used for lookup.</param>
+    /// <returns>ApiResponse of SaveTransactionsResponse</returns>
+    ApiResponse<SaveTransactionsResponse> UpdateTransactionsWithHttpInfo(string budgetId, UpdateTransactionsWrapper data);
+    #endregion Synchronous Operations
+  }
+
+  /// <summary>
+  /// Represents a collection of functions to interact with the API endpoints
+  /// </summary>
+  public interface ITransactionsApiAsync : IApiAccessor
+  {
+    #region Asynchronous Operations
+    /// <summary>
+    /// Create a single transaction or multiple transactions
+    /// </summary>
+    /// <remarks>
+    /// Creates a single transaction or multiple transactions.  If you provide a body containing a &#39;transaction&#39; object, a single transaction will be created and if you provide a body containing a &#39;transactions&#39; array, multiple transactions will be created.  Scheduled transactions cannot be created on this endpoint.
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="data">The transaction or transactions to create.  To create a single transaction you can specify a value for the &#39;transaction&#39; object and to create multiple transactions you can specify an array of &#39;transactions&#39;.  It is expected that you will only provide a value for one of these objects.</param>
+    /// <returns>Task of SaveTransactionsResponse</returns>
+    System.Threading.Tasks.Task<SaveTransactionsResponse> CreateTransactionAsync(string budgetId, SaveTransactionsWrapper data);
+
+    /// <summary>
+    /// Create a single transaction or multiple transactions
+    /// </summary>
+    /// <remarks>
+    /// Creates a single transaction or multiple transactions.  If you provide a body containing a &#39;transaction&#39; object, a single transaction will be created and if you provide a body containing a &#39;transactions&#39; array, multiple transactions will be created.  Scheduled transactions cannot be created on this endpoint.
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="data">The transaction or transactions to create.  To create a single transaction you can specify a value for the &#39;transaction&#39; object and to create multiple transactions you can specify an array of &#39;transactions&#39;.  It is expected that you will only provide a value for one of these objects.</param>
+    /// <returns>Task of ApiResponse (SaveTransactionsResponse)</returns>
+    System.Threading.Tasks.Task<ApiResponse<SaveTransactionsResponse>> CreateTransactionAsyncWithHttpInfo(string budgetId, SaveTransactionsWrapper data);
+    /// <summary>
+    /// Single transaction
+    /// </summary>
+    /// <remarks>
+    /// Returns a single transaction
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="transactionId">The id of the transaction</param>
+    /// <returns>Task of TransactionResponse</returns>
+    System.Threading.Tasks.Task<TransactionResponse> GetTransactionByIdAsync(string budgetId, string transactionId);
+
+    /// <summary>
+    /// Single transaction
+    /// </summary>
+    /// <remarks>
+    /// Returns a single transaction
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="transactionId">The id of the transaction</param>
+    /// <returns>Task of ApiResponse (TransactionResponse)</returns>
+    System.Threading.Tasks.Task<ApiResponse<TransactionResponse>> GetTransactionByIdAsyncWithHttpInfo(string budgetId, string transactionId);
+    /// <summary>
+    /// List transactions
+    /// </summary>
+    /// <remarks>
+    /// Returns budget transactions
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>Task of TransactionsResponse</returns>
+    System.Threading.Tasks.Task<TransactionsResponse> GetTransactionsAsync(string budgetId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
+
+    /// <summary>
+    /// List transactions
+    /// </summary>
+    /// <remarks>
+    /// Returns budget transactions
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>Task of ApiResponse (TransactionsResponse)</returns>
+    System.Threading.Tasks.Task<ApiResponse<TransactionsResponse>> GetTransactionsAsyncWithHttpInfo(string budgetId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
+    /// <summary>
+    /// List account transactions
+    /// </summary>
+    /// <remarks>
+    /// Returns all transactions for a specified account
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="accountId">The id of the account</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>Task of TransactionsResponse</returns>
+    System.Threading.Tasks.Task<TransactionsResponse> GetTransactionsByAccountAsync(string budgetId, string accountId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
+
+    /// <summary>
+    /// List account transactions
+    /// </summary>
+    /// <remarks>
+    /// Returns all transactions for a specified account
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="accountId">The id of the account</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>Task of ApiResponse (TransactionsResponse)</returns>
+    System.Threading.Tasks.Task<ApiResponse<TransactionsResponse>> GetTransactionsByAccountAsyncWithHttpInfo(string budgetId, string accountId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
+    /// <summary>
+    /// List category transactions
+    /// </summary>
+    /// <remarks>
+    /// Returns all transactions for a specified category
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="categoryId">The id of the category</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>Task of HybridTransactionsResponse</returns>
+    System.Threading.Tasks.Task<HybridTransactionsResponse> GetTransactionsByCategoryAsync(string budgetId, string categoryId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
+
+    /// <summary>
+    /// List category transactions
+    /// </summary>
+    /// <remarks>
+    /// Returns all transactions for a specified category
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="categoryId">The id of the category</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>Task of ApiResponse (HybridTransactionsResponse)</returns>
+    System.Threading.Tasks.Task<ApiResponse<HybridTransactionsResponse>> GetTransactionsByCategoryAsyncWithHttpInfo(string budgetId, string categoryId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
+    /// <summary>
+    /// List payee transactions
+    /// </summary>
+    /// <remarks>
+    /// Returns all transactions for a specified payee
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="payeeId">The id of the payee</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>Task of HybridTransactionsResponse</returns>
+    System.Threading.Tasks.Task<HybridTransactionsResponse> GetTransactionsByPayeeAsync(string budgetId, string payeeId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
+
+    /// <summary>
+    /// List payee transactions
+    /// </summary>
+    /// <remarks>
+    /// Returns all transactions for a specified payee
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="payeeId">The id of the payee</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>Task of ApiResponse (HybridTransactionsResponse)</returns>
+    System.Threading.Tasks.Task<ApiResponse<HybridTransactionsResponse>> GetTransactionsByPayeeAsyncWithHttpInfo(string budgetId, string payeeId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
+    /// <summary>
+    /// Updates an existing transaction
+    /// </summary>
+    /// <remarks>
+    /// Updates a transaction
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="transactionId">The id of the transaction</param>
+    /// <param name="data">The transaction to update</param>
+    /// <returns>Task of TransactionResponse</returns>
+    System.Threading.Tasks.Task<TransactionResponse> UpdateTransactionAsync(string budgetId, string transactionId, SaveTransactionWrapper data);
+
+    /// <summary>
+    /// Updates an existing transaction
+    /// </summary>
+    /// <remarks>
+    /// Updates a transaction
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="transactionId">The id of the transaction</param>
+    /// <param name="data">The transaction to update</param>
+    /// <returns>Task of ApiResponse (TransactionResponse)</returns>
+    System.Threading.Tasks.Task<ApiResponse<TransactionResponse>> UpdateTransactionAsyncWithHttpInfo(string budgetId, string transactionId, SaveTransactionWrapper data);
+    /// <summary>
+    /// Update multiple transactions
+    /// </summary>
+    /// <remarks>
+    /// Updates multiple transactions, by &#39;id&#39; or &#39;import_id&#39;.
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="data">The transactions to update. Each transaction must have either an &#39;id&#39; or &#39;import_id&#39; specified. If &#39;id&#39; is specified as null an &#39;import_id&#39; value can be provided which will allow transaction(s) to be updated by their import_id. If an id is specified, it will always be used for lookup.</param>
+    /// <returns>Task of SaveTransactionsResponse</returns>
+    System.Threading.Tasks.Task<SaveTransactionsResponse> UpdateTransactionsAsync(string budgetId, UpdateTransactionsWrapper data);
+
+    /// <summary>
+    /// Update multiple transactions
+    /// </summary>
+    /// <remarks>
+    /// Updates multiple transactions, by &#39;id&#39; or &#39;import_id&#39;.
+    /// </remarks>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="data">The transactions to update. Each transaction must have either an &#39;id&#39; or &#39;import_id&#39; specified. If &#39;id&#39; is specified as null an &#39;import_id&#39; value can be provided which will allow transaction(s) to be updated by their import_id. If an id is specified, it will always be used for lookup.</param>
+    /// <returns>Task of ApiResponse (SaveTransactionsResponse)</returns>
+    System.Threading.Tasks.Task<ApiResponse<SaveTransactionsResponse>> UpdateTransactionsAsyncWithHttpInfo(string budgetId, UpdateTransactionsWrapper data);
+    #endregion Asynchronous Operations
+  }
+
+  /// <summary>
+  /// Represents a collection of functions to interact with the API endpoints
+  /// </summary>
+  public interface ITransactionsApi : ITransactionsApiSync, ITransactionsApiAsync
+  {
+
+  }
+
+  /// <summary>
+  /// Represents a collection of functions to interact with the API endpoints
+  /// </summary>
+  public partial class TransactionsApi : ITransactionsApi
+  {
+    private YNAB.SDK.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="TransactionsApi"/> class.
+    /// </summary>
+    /// <returns></returns>
+    public TransactionsApi() : this((string)null)
     {
-        #region Synchronous Operations
-        /// <summary>
-        /// Create a single transaction or multiple transactions
-        /// </summary>
-        /// <remarks>
-        /// Creates a single transaction or multiple transactions.  If you provide a body containing a &#39;transaction&#39; object, a single transaction will be created and if you provide a body containing a &#39;transactions&#39; array, multiple transactions will be created.  Scheduled transactions cannot be created on this endpoint.
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="data">The transaction or transactions to create.  To create a single transaction you can specify a value for the &#39;transaction&#39; object and to create multiple transactions you can specify an array of &#39;transactions&#39;.  It is expected that you will only provide a value for one of these objects.</param>
-        /// <returns>SaveTransactionsResponse</returns>
-        SaveTransactionsResponse CreateTransaction (string budgetId, SaveTransactionsWrapper data);
-
-        /// <summary>
-        /// Create a single transaction or multiple transactions
-        /// </summary>
-        /// <remarks>
-        /// Creates a single transaction or multiple transactions.  If you provide a body containing a &#39;transaction&#39; object, a single transaction will be created and if you provide a body containing a &#39;transactions&#39; array, multiple transactions will be created.  Scheduled transactions cannot be created on this endpoint.
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="data">The transaction or transactions to create.  To create a single transaction you can specify a value for the &#39;transaction&#39; object and to create multiple transactions you can specify an array of &#39;transactions&#39;.  It is expected that you will only provide a value for one of these objects.</param>
-        /// <returns>ApiResponse of SaveTransactionsResponse</returns>
-        ApiResponse<SaveTransactionsResponse> CreateTransactionWithHttpInfo (string budgetId, SaveTransactionsWrapper data);
-        /// <summary>
-        /// Single transaction
-        /// </summary>
-        /// <remarks>
-        /// Returns a single transaction
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="transactionId">The id of the transaction</param>
-        /// <returns>TransactionResponse</returns>
-        TransactionResponse GetTransactionById (string budgetId, string transactionId);
-
-        /// <summary>
-        /// Single transaction
-        /// </summary>
-        /// <remarks>
-        /// Returns a single transaction
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="transactionId">The id of the transaction</param>
-        /// <returns>ApiResponse of TransactionResponse</returns>
-        ApiResponse<TransactionResponse> GetTransactionByIdWithHttpInfo (string budgetId, string transactionId);
-        /// <summary>
-        /// List transactions
-        /// </summary>
-        /// <remarks>
-        /// Returns budget transactions
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>TransactionsResponse</returns>
-        TransactionsResponse GetTransactions (string budgetId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
-
-        /// <summary>
-        /// List transactions
-        /// </summary>
-        /// <remarks>
-        /// Returns budget transactions
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>ApiResponse of TransactionsResponse</returns>
-        ApiResponse<TransactionsResponse> GetTransactionsWithHttpInfo (string budgetId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
-        /// <summary>
-        /// List account transactions
-        /// </summary>
-        /// <remarks>
-        /// Returns all transactions for a specified account
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="accountId">The id of the account</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>TransactionsResponse</returns>
-        TransactionsResponse GetTransactionsByAccount (string budgetId, string accountId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
-
-        /// <summary>
-        /// List account transactions
-        /// </summary>
-        /// <remarks>
-        /// Returns all transactions for a specified account
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="accountId">The id of the account</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>ApiResponse of TransactionsResponse</returns>
-        ApiResponse<TransactionsResponse> GetTransactionsByAccountWithHttpInfo (string budgetId, string accountId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
-        /// <summary>
-        /// List category transactions
-        /// </summary>
-        /// <remarks>
-        /// Returns all transactions for a specified category
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="categoryId">The id of the category</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>HybridTransactionsResponse</returns>
-        HybridTransactionsResponse GetTransactionsByCategory (string budgetId, string categoryId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
-
-        /// <summary>
-        /// List category transactions
-        /// </summary>
-        /// <remarks>
-        /// Returns all transactions for a specified category
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="categoryId">The id of the category</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>ApiResponse of HybridTransactionsResponse</returns>
-        ApiResponse<HybridTransactionsResponse> GetTransactionsByCategoryWithHttpInfo (string budgetId, string categoryId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
-        /// <summary>
-        /// List payee transactions
-        /// </summary>
-        /// <remarks>
-        /// Returns all transactions for a specified payee
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="payeeId">The id of the payee</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>HybridTransactionsResponse</returns>
-        HybridTransactionsResponse GetTransactionsByPayee (string budgetId, string payeeId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
-
-        /// <summary>
-        /// List payee transactions
-        /// </summary>
-        /// <remarks>
-        /// Returns all transactions for a specified payee
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="payeeId">The id of the payee</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>ApiResponse of HybridTransactionsResponse</returns>
-        ApiResponse<HybridTransactionsResponse> GetTransactionsByPayeeWithHttpInfo (string budgetId, string payeeId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
-        /// <summary>
-        /// Updates an existing transaction
-        /// </summary>
-        /// <remarks>
-        /// Updates a transaction
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="transactionId">The id of the transaction</param>
-        /// <param name="data">The transaction to update</param>
-        /// <returns>TransactionResponse</returns>
-        TransactionResponse UpdateTransaction (string budgetId, string transactionId, SaveTransactionWrapper data);
-
-        /// <summary>
-        /// Updates an existing transaction
-        /// </summary>
-        /// <remarks>
-        /// Updates a transaction
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="transactionId">The id of the transaction</param>
-        /// <param name="data">The transaction to update</param>
-        /// <returns>ApiResponse of TransactionResponse</returns>
-        ApiResponse<TransactionResponse> UpdateTransactionWithHttpInfo (string budgetId, string transactionId, SaveTransactionWrapper data);
-        /// <summary>
-        /// Update multiple transactions
-        /// </summary>
-        /// <remarks>
-        /// Updates multiple transactions, by &#39;id&#39; or &#39;import_id&#39;.
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="data">The transactions to update. Each transaction must have either an &#39;id&#39; or &#39;import_id&#39; specified. If &#39;id&#39; is specified as null an &#39;import_id&#39; value can be provided which will allow transaction(s) to be updated by their import_id. If an id is specified, it will always be used for lookup.</param>
-        /// <returns>SaveTransactionsResponse</returns>
-        SaveTransactionsResponse UpdateTransactions (string budgetId, UpdateTransactionsWrapper data);
-
-        /// <summary>
-        /// Update multiple transactions
-        /// </summary>
-        /// <remarks>
-        /// Updates multiple transactions, by &#39;id&#39; or &#39;import_id&#39;.
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="data">The transactions to update. Each transaction must have either an &#39;id&#39; or &#39;import_id&#39; specified. If &#39;id&#39; is specified as null an &#39;import_id&#39; value can be provided which will allow transaction(s) to be updated by their import_id. If an id is specified, it will always be used for lookup.</param>
-        /// <returns>ApiResponse of SaveTransactionsResponse</returns>
-        ApiResponse<SaveTransactionsResponse> UpdateTransactionsWithHttpInfo (string budgetId, UpdateTransactionsWrapper data);
-        #endregion Synchronous Operations
     }
 
     /// <summary>
-    /// Represents a collection of functions to interact with the API endpoints
+    /// Initializes a new instance of the <see cref="TransactionsApi"/> class.
     /// </summary>
-    public interface ITransactionsApiAsync : IApiAccessor
+    /// <returns></returns>
+    public TransactionsApi(String basePath)
     {
-        #region Asynchronous Operations
-        /// <summary>
-        /// Create a single transaction or multiple transactions
-        /// </summary>
-        /// <remarks>
-        /// Creates a single transaction or multiple transactions.  If you provide a body containing a &#39;transaction&#39; object, a single transaction will be created and if you provide a body containing a &#39;transactions&#39; array, multiple transactions will be created.  Scheduled transactions cannot be created on this endpoint.
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="data">The transaction or transactions to create.  To create a single transaction you can specify a value for the &#39;transaction&#39; object and to create multiple transactions you can specify an array of &#39;transactions&#39;.  It is expected that you will only provide a value for one of these objects.</param>
-        /// <returns>Task of SaveTransactionsResponse</returns>
-        System.Threading.Tasks.Task<SaveTransactionsResponse> CreateTransactionAsync (string budgetId, SaveTransactionsWrapper data);
-
-        /// <summary>
-        /// Create a single transaction or multiple transactions
-        /// </summary>
-        /// <remarks>
-        /// Creates a single transaction or multiple transactions.  If you provide a body containing a &#39;transaction&#39; object, a single transaction will be created and if you provide a body containing a &#39;transactions&#39; array, multiple transactions will be created.  Scheduled transactions cannot be created on this endpoint.
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="data">The transaction or transactions to create.  To create a single transaction you can specify a value for the &#39;transaction&#39; object and to create multiple transactions you can specify an array of &#39;transactions&#39;.  It is expected that you will only provide a value for one of these objects.</param>
-        /// <returns>Task of ApiResponse (SaveTransactionsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SaveTransactionsResponse>> CreateTransactionAsyncWithHttpInfo (string budgetId, SaveTransactionsWrapper data);
-        /// <summary>
-        /// Single transaction
-        /// </summary>
-        /// <remarks>
-        /// Returns a single transaction
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="transactionId">The id of the transaction</param>
-        /// <returns>Task of TransactionResponse</returns>
-        System.Threading.Tasks.Task<TransactionResponse> GetTransactionByIdAsync (string budgetId, string transactionId);
-
-        /// <summary>
-        /// Single transaction
-        /// </summary>
-        /// <remarks>
-        /// Returns a single transaction
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="transactionId">The id of the transaction</param>
-        /// <returns>Task of ApiResponse (TransactionResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<TransactionResponse>> GetTransactionByIdAsyncWithHttpInfo (string budgetId, string transactionId);
-        /// <summary>
-        /// List transactions
-        /// </summary>
-        /// <remarks>
-        /// Returns budget transactions
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>Task of TransactionsResponse</returns>
-        System.Threading.Tasks.Task<TransactionsResponse> GetTransactionsAsync (string budgetId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
-
-        /// <summary>
-        /// List transactions
-        /// </summary>
-        /// <remarks>
-        /// Returns budget transactions
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>Task of ApiResponse (TransactionsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<TransactionsResponse>> GetTransactionsAsyncWithHttpInfo (string budgetId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
-        /// <summary>
-        /// List account transactions
-        /// </summary>
-        /// <remarks>
-        /// Returns all transactions for a specified account
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="accountId">The id of the account</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>Task of TransactionsResponse</returns>
-        System.Threading.Tasks.Task<TransactionsResponse> GetTransactionsByAccountAsync (string budgetId, string accountId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
-
-        /// <summary>
-        /// List account transactions
-        /// </summary>
-        /// <remarks>
-        /// Returns all transactions for a specified account
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="accountId">The id of the account</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>Task of ApiResponse (TransactionsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<TransactionsResponse>> GetTransactionsByAccountAsyncWithHttpInfo (string budgetId, string accountId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
-        /// <summary>
-        /// List category transactions
-        /// </summary>
-        /// <remarks>
-        /// Returns all transactions for a specified category
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="categoryId">The id of the category</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>Task of HybridTransactionsResponse</returns>
-        System.Threading.Tasks.Task<HybridTransactionsResponse> GetTransactionsByCategoryAsync (string budgetId, string categoryId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
-
-        /// <summary>
-        /// List category transactions
-        /// </summary>
-        /// <remarks>
-        /// Returns all transactions for a specified category
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="categoryId">The id of the category</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>Task of ApiResponse (HybridTransactionsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<HybridTransactionsResponse>> GetTransactionsByCategoryAsyncWithHttpInfo (string budgetId, string categoryId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
-        /// <summary>
-        /// List payee transactions
-        /// </summary>
-        /// <remarks>
-        /// Returns all transactions for a specified payee
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="payeeId">The id of the payee</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>Task of HybridTransactionsResponse</returns>
-        System.Threading.Tasks.Task<HybridTransactionsResponse> GetTransactionsByPayeeAsync (string budgetId, string payeeId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
-
-        /// <summary>
-        /// List payee transactions
-        /// </summary>
-        /// <remarks>
-        /// Returns all transactions for a specified payee
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="payeeId">The id of the payee</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>Task of ApiResponse (HybridTransactionsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<HybridTransactionsResponse>> GetTransactionsByPayeeAsyncWithHttpInfo (string budgetId, string payeeId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null);
-        /// <summary>
-        /// Updates an existing transaction
-        /// </summary>
-        /// <remarks>
-        /// Updates a transaction
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="transactionId">The id of the transaction</param>
-        /// <param name="data">The transaction to update</param>
-        /// <returns>Task of TransactionResponse</returns>
-        System.Threading.Tasks.Task<TransactionResponse> UpdateTransactionAsync (string budgetId, string transactionId, SaveTransactionWrapper data);
-
-        /// <summary>
-        /// Updates an existing transaction
-        /// </summary>
-        /// <remarks>
-        /// Updates a transaction
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="transactionId">The id of the transaction</param>
-        /// <param name="data">The transaction to update</param>
-        /// <returns>Task of ApiResponse (TransactionResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<TransactionResponse>> UpdateTransactionAsyncWithHttpInfo (string budgetId, string transactionId, SaveTransactionWrapper data);
-        /// <summary>
-        /// Update multiple transactions
-        /// </summary>
-        /// <remarks>
-        /// Updates multiple transactions, by &#39;id&#39; or &#39;import_id&#39;.
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="data">The transactions to update. Each transaction must have either an &#39;id&#39; or &#39;import_id&#39; specified. If &#39;id&#39; is specified as null an &#39;import_id&#39; value can be provided which will allow transaction(s) to be updated by their import_id. If an id is specified, it will always be used for lookup.</param>
-        /// <returns>Task of SaveTransactionsResponse</returns>
-        System.Threading.Tasks.Task<SaveTransactionsResponse> UpdateTransactionsAsync (string budgetId, UpdateTransactionsWrapper data);
-
-        /// <summary>
-        /// Update multiple transactions
-        /// </summary>
-        /// <remarks>
-        /// Updates multiple transactions, by &#39;id&#39; or &#39;import_id&#39;.
-        /// </remarks>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="data">The transactions to update. Each transaction must have either an &#39;id&#39; or &#39;import_id&#39; specified. If &#39;id&#39; is specified as null an &#39;import_id&#39; value can be provided which will allow transaction(s) to be updated by their import_id. If an id is specified, it will always be used for lookup.</param>
-        /// <returns>Task of ApiResponse (SaveTransactionsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SaveTransactionsResponse>> UpdateTransactionsAsyncWithHttpInfo (string budgetId, UpdateTransactionsWrapper data);
-        #endregion Asynchronous Operations
+      this.Configuration = YNAB.SDK.Client.Configuration.MergeConfigurations(
+          YNAB.SDK.Client.GlobalConfiguration.Instance,
+          new YNAB.SDK.Client.Configuration { BasePath = basePath }
+      );
+      this.Client = new YNAB.SDK.Client.ApiClient(this.Configuration.BasePath);
+      this.AsynchronousClient = new YNAB.SDK.Client.ApiClient(this.Configuration.BasePath);
+      this.ExceptionFactory = YNAB.SDK.Client.Configuration.DefaultExceptionFactory;
     }
 
     /// <summary>
-    /// Represents a collection of functions to interact with the API endpoints
+    /// Initializes a new instance of the <see cref="TransactionsApi"/> class
+    /// using Configuration object
     /// </summary>
-    public interface ITransactionsApi : ITransactionsApiSync, ITransactionsApiAsync
+    /// <param name="configuration">An instance of Configuration</param>
+    /// <returns></returns>
+    public TransactionsApi(YNAB.SDK.Client.Configuration configuration)
     {
+      if (configuration == null) throw new ArgumentNullException("configuration");
+
+      this.Configuration = YNAB.SDK.Client.Configuration.MergeConfigurations(
+          YNAB.SDK.Client.GlobalConfiguration.Instance,
+          configuration
+      );
+      this.Client = new YNAB.SDK.Client.ApiClient(this.Configuration.BasePath);
+      this.AsynchronousClient = new YNAB.SDK.Client.ApiClient(this.Configuration.BasePath);
+      ExceptionFactory = YNAB.SDK.Client.Configuration.DefaultExceptionFactory;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="TransactionsApi"/> class
+    /// using a Configuration object and client instance.
+    /// </summary>
+    /// <param name="client">The client interface for synchronous API access.</param>
+    /// <param name="asyncClient">The client interface for asynchronous API access.</param>
+    /// <param name="configuration">The configuration object.</param>
+    public TransactionsApi(YNAB.SDK.Client.ISynchronousClient client, YNAB.SDK.Client.IAsynchronousClient asyncClient, YNAB.SDK.Client.IReadableConfiguration configuration)
+    {
+      if (client == null) throw new ArgumentNullException("client");
+      if (asyncClient == null) throw new ArgumentNullException("asyncClient");
+      if (configuration == null) throw new ArgumentNullException("configuration");
+
+      this.Client = client;
+      this.AsynchronousClient = asyncClient;
+      this.Configuration = configuration;
+      this.ExceptionFactory = YNAB.SDK.Client.Configuration.DefaultExceptionFactory;
+    }
+
+    /// <summary>
+    /// The client for accessing this underlying API asynchronously.
+    /// </summary>
+    public YNAB.SDK.Client.IAsynchronousClient AsynchronousClient { get; set; }
+
+    /// <summary>
+    /// The client for accessing this underlying API synchronously.
+    /// </summary>
+    public YNAB.SDK.Client.ISynchronousClient Client { get; set; }
+
+    /// <summary>
+    /// Gets the base path of the API client.
+    /// </summary>
+    /// <value>The base path</value>
+    public String GetBasePath()
+    {
+      return this.Configuration.BasePath;
+    }
+
+    /// <summary>
+    /// Gets or sets the configuration object
+    /// </summary>
+    /// <value>An instance of the Configuration</value>
+    public YNAB.SDK.Client.IReadableConfiguration Configuration { get; set; }
+
+    /// <summary>
+    /// Provides a factory method hook for the creation of exceptions.
+    /// </summary>
+    public YNAB.SDK.Client.ExceptionFactory ExceptionFactory
+    {
+      get
+      {
+        if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
+        {
+          throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
+        }
+        return _exceptionFactory;
+      }
+      set { _exceptionFactory = value; }
+    }
+
+    /// <summary>
+    /// Create a single transaction or multiple transactions Creates a single transaction or multiple transactions.  If you provide a body containing a &#39;transaction&#39; object, a single transaction will be created and if you provide a body containing a &#39;transactions&#39; array, multiple transactions will be created.  Scheduled transactions cannot be created on this endpoint.
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="data">The transaction or transactions to create.  To create a single transaction you can specify a value for the &#39;transaction&#39; object and to create multiple transactions you can specify an array of &#39;transactions&#39;.  It is expected that you will only provide a value for one of these objects.</param>
+    /// <returns>SaveTransactionsResponse</returns>
+    public SaveTransactionsResponse CreateTransaction(string budgetId, SaveTransactionsWrapper data)
+    {
+      YNAB.SDK.Client.ApiResponse<SaveTransactionsResponse> localVarResponse = CreateTransactionWithHttpInfo(budgetId, data);
+      return localVarResponse.Data;
+    }
+
+    /// <summary>
+    /// Create a single transaction or multiple transactions Creates a single transaction or multiple transactions.  If you provide a body containing a &#39;transaction&#39; object, a single transaction will be created and if you provide a body containing a &#39;transactions&#39; array, multiple transactions will be created.  Scheduled transactions cannot be created on this endpoint.
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="data">The transaction or transactions to create.  To create a single transaction you can specify a value for the &#39;transaction&#39; object and to create multiple transactions you can specify an array of &#39;transactions&#39;.  It is expected that you will only provide a value for one of these objects.</param>
+    /// <returns>ApiResponse of SaveTransactionsResponse</returns>
+    public YNAB.SDK.Client.ApiResponse<SaveTransactionsResponse> CreateTransactionWithHttpInfo(string budgetId, SaveTransactionsWrapper data)
+    {
+      // verify the required parameter 'budgetId' is set
+      if (budgetId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->CreateTransaction");
+
+      // verify the required parameter 'data' is set
+      if (data == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'data' when calling TransactionsApi->CreateTransaction");
+
+      YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
+
+      String[] @contentTypes = new String[] {
+            };
+
+      // to determine the Accept header
+      String[] @accepts = new String[] {
+                "application/json"
+            };
+
+      var localVarContentType = YNAB.SDK.Client.ClientUtils.SelectHeaderContentType(@contentTypes);
+      if (localVarContentType != null) requestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+      var localVarAccept = YNAB.SDK.Client.ClientUtils.SelectHeaderAccept(@accepts);
+      if (localVarAccept != null) requestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+      if (budgetId != null)
+        requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
+      requestOptions.Data = data;
+
+      // authentication (bearer) required
+      if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+      {
+        requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
+      }
+
+      // make the HTTP request
+
+      var response = this.Client.Post<SaveTransactionsResponse>("/budgets/{budget_id}/transactions", requestOptions, this.Configuration);
+
+      if (this.ExceptionFactory != null)
+      {
+        Exception exception = this.ExceptionFactory("CreateTransaction", response);
+        if (exception != null) throw exception;
+      }
+
+      return response;
+    }
+
+    /// <summary>
+    /// Create a single transaction or multiple transactions Creates a single transaction or multiple transactions.  If you provide a body containing a &#39;transaction&#39; object, a single transaction will be created and if you provide a body containing a &#39;transactions&#39; array, multiple transactions will be created.  Scheduled transactions cannot be created on this endpoint.
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="data">The transaction or transactions to create.  To create a single transaction you can specify a value for the &#39;transaction&#39; object and to create multiple transactions you can specify an array of &#39;transactions&#39;.  It is expected that you will only provide a value for one of these objects.</param>
+    /// <returns>Task of SaveTransactionsResponse</returns>
+    public async System.Threading.Tasks.Task<SaveTransactionsResponse> CreateTransactionAsync(string budgetId, SaveTransactionsWrapper data)
+    {
+      YNAB.SDK.Client.ApiResponse<SaveTransactionsResponse> localVarResponse = await CreateTransactionAsyncWithHttpInfo(budgetId, data);
+      return localVarResponse.Data;
 
     }
 
     /// <summary>
-    /// Represents a collection of functions to interact with the API endpoints
+    /// Create a single transaction or multiple transactions Creates a single transaction or multiple transactions.  If you provide a body containing a &#39;transaction&#39; object, a single transaction will be created and if you provide a body containing a &#39;transactions&#39; array, multiple transactions will be created.  Scheduled transactions cannot be created on this endpoint.
     /// </summary>
-    public partial class TransactionsApi : ITransactionsApi
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="data">The transaction or transactions to create.  To create a single transaction you can specify a value for the &#39;transaction&#39; object and to create multiple transactions you can specify an array of &#39;transactions&#39;.  It is expected that you will only provide a value for one of these objects.</param>
+    /// <returns>Task of ApiResponse (SaveTransactionsResponse)</returns>
+    public async System.Threading.Tasks.Task<YNAB.SDK.Client.ApiResponse<SaveTransactionsResponse>> CreateTransactionAsyncWithHttpInfo(string budgetId, SaveTransactionsWrapper data)
     {
-        private YNAB.SDK.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+      // verify the required parameter 'budgetId' is set
+      if (budgetId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->CreateTransaction");
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TransactionsApi"/> class.
-        /// </summary>
-        /// <returns></returns>
-        public TransactionsApi() : this((string) null)
-        {
-        }
+      // verify the required parameter 'data' is set
+      if (data == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'data' when calling TransactionsApi->CreateTransaction");
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TransactionsApi"/> class.
-        /// </summary>
-        /// <returns></returns>
-        public TransactionsApi(String basePath)
-        {
-            this.Configuration = YNAB.SDK.Client.Configuration.MergeConfigurations(
-                YNAB.SDK.Client.GlobalConfiguration.Instance,
-                new YNAB.SDK.Client.Configuration { BasePath = basePath }
-            );
-            this.Client = new YNAB.SDK.Client.ApiClient(this.Configuration.BasePath);
-            this.AsynchronousClient = new YNAB.SDK.Client.ApiClient(this.Configuration.BasePath);
-            this.ExceptionFactory = YNAB.SDK.Client.Configuration.DefaultExceptionFactory;
-        }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TransactionsApi"/> class
-        /// using Configuration object
-        /// </summary>
-        /// <param name="configuration">An instance of Configuration</param>
-        /// <returns></returns>
-        public TransactionsApi(YNAB.SDK.Client.Configuration configuration)
-        {
-            if (configuration == null) throw new ArgumentNullException("configuration");
+      YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
 
-            this.Configuration = YNAB.SDK.Client.Configuration.MergeConfigurations(
-                YNAB.SDK.Client.GlobalConfiguration.Instance,
-                configuration
-            );
-            this.Client = new YNAB.SDK.Client.ApiClient(this.Configuration.BasePath);
-            this.AsynchronousClient = new YNAB.SDK.Client.ApiClient(this.Configuration.BasePath);
-            ExceptionFactory = YNAB.SDK.Client.Configuration.DefaultExceptionFactory;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TransactionsApi"/> class
-        /// using a Configuration object and client instance.
-        /// </summary>
-        /// <param name="client">The client interface for synchronous API access.</param>
-        /// <param name="asyncClient">The client interface for asynchronous API access.</param>
-        /// <param name="configuration">The configuration object.</param>
-        public TransactionsApi(YNAB.SDK.Client.ISynchronousClient client,YNAB.SDK.Client.IAsynchronousClient asyncClient, YNAB.SDK.Client.IReadableConfiguration configuration)
-        {
-            if(client == null) throw new ArgumentNullException("client");
-            if(asyncClient == null) throw new ArgumentNullException("asyncClient");
-            if(configuration == null) throw new ArgumentNullException("configuration");
-
-            this.Client = client;
-            this.AsynchronousClient = asyncClient;
-            this.Configuration = configuration;
-            this.ExceptionFactory = YNAB.SDK.Client.Configuration.DefaultExceptionFactory;
-        }
-
-        /// <summary>
-        /// The client for accessing this underlying API asynchronously.
-        /// </summary>
-        public YNAB.SDK.Client.IAsynchronousClient AsynchronousClient { get; set; }
-
-        /// <summary>
-        /// The client for accessing this underlying API synchronously.
-        /// </summary>
-        public YNAB.SDK.Client.ISynchronousClient Client { get; set; }
-
-        /// <summary>
-        /// Gets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        public String GetBasePath()
-        {
-            return this.Configuration.BasePath;
-        }
-
-        /// <summary>
-        /// Gets or sets the configuration object
-        /// </summary>
-        /// <value>An instance of the Configuration</value>
-        public YNAB.SDK.Client.IReadableConfiguration Configuration {get; set;}
-
-        /// <summary>
-        /// Provides a factory method hook for the creation of exceptions.
-        /// </summary>
-        public YNAB.SDK.Client.ExceptionFactory ExceptionFactory
-        {
-            get
-            {
-                if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-                {
-                    throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-                }
-                return _exceptionFactory;
-            }
-            set { _exceptionFactory = value; }
-        }
-
-        /// <summary>
-        /// Create a single transaction or multiple transactions Creates a single transaction or multiple transactions.  If you provide a body containing a &#39;transaction&#39; object, a single transaction will be created and if you provide a body containing a &#39;transactions&#39; array, multiple transactions will be created.  Scheduled transactions cannot be created on this endpoint.
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="data">The transaction or transactions to create.  To create a single transaction you can specify a value for the &#39;transaction&#39; object and to create multiple transactions you can specify an array of &#39;transactions&#39;.  It is expected that you will only provide a value for one of these objects.</param>
-        /// <returns>SaveTransactionsResponse</returns>
-        public SaveTransactionsResponse CreateTransaction (string budgetId, SaveTransactionsWrapper data)
-        {
-             YNAB.SDK.Client.ApiResponse<SaveTransactionsResponse> localVarResponse = CreateTransactionWithHttpInfo(budgetId, data);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Create a single transaction or multiple transactions Creates a single transaction or multiple transactions.  If you provide a body containing a &#39;transaction&#39; object, a single transaction will be created and if you provide a body containing a &#39;transactions&#39; array, multiple transactions will be created.  Scheduled transactions cannot be created on this endpoint.
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="data">The transaction or transactions to create.  To create a single transaction you can specify a value for the &#39;transaction&#39; object and to create multiple transactions you can specify an array of &#39;transactions&#39;.  It is expected that you will only provide a value for one of these objects.</param>
-        /// <returns>ApiResponse of SaveTransactionsResponse</returns>
-        public YNAB.SDK.Client.ApiResponse< SaveTransactionsResponse > CreateTransactionWithHttpInfo (string budgetId, SaveTransactionsWrapper data)
-        {
-            // verify the required parameter 'budgetId' is set
-            if (budgetId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->CreateTransaction");
-
-            // verify the required parameter 'data' is set
-            if (data == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'data' when calling TransactionsApi->CreateTransaction");
-
-            YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
-
-            String[] @contentTypes = new String[] {
+      String[] @contentTypes = new String[] {
             };
 
-            // to determine the Accept header
-            String[] @accepts = new String[] {
+      // to determine the Accept header
+      String[] @accepts = new String[] {
                 "application/json"
             };
 
-            var localVarContentType = YNAB.SDK.Client.ClientUtils.SelectHeaderContentType(@contentTypes);
-            if (localVarContentType != null) requestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+      var localVarContentType = YNAB.SDK.Client.ClientUtils.SelectHeaderContentType(@contentTypes);
+      if (localVarContentType != null) requestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
 
-            var localVarAccept = YNAB.SDK.Client.ClientUtils.SelectHeaderAccept(@accepts);
-            if (localVarAccept != null) requestOptions.HeaderParameters.Add("Accept", localVarAccept);
+      var localVarAccept = YNAB.SDK.Client.ClientUtils.SelectHeaderAccept(@accepts);
+      if (localVarAccept != null) requestOptions.HeaderParameters.Add("Accept", localVarAccept);
 
-            if (budgetId != null)
-                requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
-            requestOptions.Data = data;
+      if (budgetId != null)
+        requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
+      requestOptions.Data = data;
 
-            // authentication (bearer) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
-            {
-                requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
-            }
+      // authentication (bearer) required
+      if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+      {
+        requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
+      }
 
-            // make the HTTP request
+      // make the HTTP request
 
-            var response = this.Client.Post< SaveTransactionsResponse >("/budgets/{budget_id}/transactions", requestOptions, this.Configuration);
+      var response = await this.AsynchronousClient.PostAsync<SaveTransactionsResponse>("/budgets/{budget_id}/transactions", requestOptions, this.Configuration);
 
-            if (this.ExceptionFactory != null)
-            {
-                Exception exception = this.ExceptionFactory("CreateTransaction", response);
-                if (exception != null) throw exception;
-            }
+      if (this.ExceptionFactory != null)
+      {
+        Exception exception = this.ExceptionFactory("CreateTransaction", response);
+        if (exception != null) throw exception;
+      }
 
-            return response;
-        }
+      return response;
+    }
 
-        /// <summary>
-        /// Create a single transaction or multiple transactions Creates a single transaction or multiple transactions.  If you provide a body containing a &#39;transaction&#39; object, a single transaction will be created and if you provide a body containing a &#39;transactions&#39; array, multiple transactions will be created.  Scheduled transactions cannot be created on this endpoint.
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="data">The transaction or transactions to create.  To create a single transaction you can specify a value for the &#39;transaction&#39; object and to create multiple transactions you can specify an array of &#39;transactions&#39;.  It is expected that you will only provide a value for one of these objects.</param>
-        /// <returns>Task of SaveTransactionsResponse</returns>
-        public async System.Threading.Tasks.Task<SaveTransactionsResponse> CreateTransactionAsync (string budgetId, SaveTransactionsWrapper data)
-        {
-             YNAB.SDK.Client.ApiResponse<SaveTransactionsResponse> localVarResponse = await CreateTransactionAsyncWithHttpInfo(budgetId, data);
-             return localVarResponse.Data;
+    /// <summary>
+    /// Single transaction Returns a single transaction
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="transactionId">The id of the transaction</param>
+    /// <returns>TransactionResponse</returns>
+    public TransactionResponse GetTransactionById(string budgetId, string transactionId)
+    {
+      YNAB.SDK.Client.ApiResponse<TransactionResponse> localVarResponse = GetTransactionByIdWithHttpInfo(budgetId, transactionId);
+      return localVarResponse.Data;
+    }
 
-        }
+    /// <summary>
+    /// Single transaction Returns a single transaction
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="transactionId">The id of the transaction</param>
+    /// <returns>ApiResponse of TransactionResponse</returns>
+    public YNAB.SDK.Client.ApiResponse<TransactionResponse> GetTransactionByIdWithHttpInfo(string budgetId, string transactionId)
+    {
+      // verify the required parameter 'budgetId' is set
+      if (budgetId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->GetTransactionById");
 
-        /// <summary>
-        /// Create a single transaction or multiple transactions Creates a single transaction or multiple transactions.  If you provide a body containing a &#39;transaction&#39; object, a single transaction will be created and if you provide a body containing a &#39;transactions&#39; array, multiple transactions will be created.  Scheduled transactions cannot be created on this endpoint.
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="data">The transaction or transactions to create.  To create a single transaction you can specify a value for the &#39;transaction&#39; object and to create multiple transactions you can specify an array of &#39;transactions&#39;.  It is expected that you will only provide a value for one of these objects.</param>
-        /// <returns>Task of ApiResponse (SaveTransactionsResponse)</returns>
-        public async System.Threading.Tasks.Task<YNAB.SDK.Client.ApiResponse<SaveTransactionsResponse>> CreateTransactionAsyncWithHttpInfo (string budgetId, SaveTransactionsWrapper data)
-        {
-            // verify the required parameter 'budgetId' is set
-            if (budgetId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->CreateTransaction");
+      // verify the required parameter 'transactionId' is set
+      if (transactionId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'transactionId' when calling TransactionsApi->GetTransactionById");
 
-            // verify the required parameter 'data' is set
-            if (data == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'data' when calling TransactionsApi->CreateTransaction");
+      YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
 
-
-            YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
-
-            String[] @contentTypes = new String[] {
+      String[] @contentTypes = new String[] {
             };
 
-            // to determine the Accept header
-            String[] @accepts = new String[] {
+      // to determine the Accept header
+      String[] @accepts = new String[] {
                 "application/json"
             };
 
-            var localVarContentType = YNAB.SDK.Client.ClientUtils.SelectHeaderContentType(@contentTypes);
-            if (localVarContentType != null) requestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-            var localVarAccept = YNAB.SDK.Client.ClientUtils.SelectHeaderAccept(@accepts);
-            if (localVarAccept != null) requestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-            if (budgetId != null)
-                requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
-            requestOptions.Data = data;
-
-            // authentication (bearer) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
-            {
-                requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
-            }
-
-            // make the HTTP request
-
-            var response = await this.AsynchronousClient.PostAsync<SaveTransactionsResponse>("/budgets/{budget_id}/transactions", requestOptions, this.Configuration);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception exception = this.ExceptionFactory("CreateTransaction", response);
-                if (exception != null) throw exception;
-            }
-
-            return response;
-        }
-
-        /// <summary>
-        /// Single transaction Returns a single transaction
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="transactionId">The id of the transaction</param>
-        /// <returns>TransactionResponse</returns>
-        public TransactionResponse GetTransactionById (string budgetId, string transactionId)
-        {
-             YNAB.SDK.Client.ApiResponse<TransactionResponse> localVarResponse = GetTransactionByIdWithHttpInfo(budgetId, transactionId);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Single transaction Returns a single transaction
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="transactionId">The id of the transaction</param>
-        /// <returns>ApiResponse of TransactionResponse</returns>
-        public YNAB.SDK.Client.ApiResponse< TransactionResponse > GetTransactionByIdWithHttpInfo (string budgetId, string transactionId)
-        {
-            // verify the required parameter 'budgetId' is set
-            if (budgetId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->GetTransactionById");
-
-            // verify the required parameter 'transactionId' is set
-            if (transactionId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'transactionId' when calling TransactionsApi->GetTransactionById");
-
-            YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
-
-            String[] @contentTypes = new String[] {
-            };
-
-            // to determine the Accept header
-            String[] @accepts = new String[] {
-                "application/json"
-            };
-
-            var localVarContentType = YNAB.SDK.Client.ClientUtils.SelectHeaderContentType(@contentTypes);
-            if (localVarContentType != null) requestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-            var localVarAccept = YNAB.SDK.Client.ClientUtils.SelectHeaderAccept(@accepts);
-            if (localVarAccept != null) requestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-            if (budgetId != null)
-                requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
-            if (transactionId != null)
-                requestOptions.PathParameters.Add("transaction_id", YNAB.SDK.Client.ClientUtils.ParameterToString(transactionId)); // path parameter
-
-            // authentication (bearer) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
-            {
-                requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
-            }
-
-            // make the HTTP request
-
-            var response = this.Client.Get< TransactionResponse >("/budgets/{budget_id}/transactions/{transaction_id}", requestOptions, this.Configuration);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception exception = this.ExceptionFactory("GetTransactionById", response);
-                if (exception != null) throw exception;
-            }
-
-            return response;
-        }
-
-        /// <summary>
-        /// Single transaction Returns a single transaction
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="transactionId">The id of the transaction</param>
-        /// <returns>Task of TransactionResponse</returns>
-        public async System.Threading.Tasks.Task<TransactionResponse> GetTransactionByIdAsync (string budgetId, string transactionId)
-        {
-             YNAB.SDK.Client.ApiResponse<TransactionResponse> localVarResponse = await GetTransactionByIdAsyncWithHttpInfo(budgetId, transactionId);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Single transaction Returns a single transaction
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="transactionId">The id of the transaction</param>
-        /// <returns>Task of ApiResponse (TransactionResponse)</returns>
-        public async System.Threading.Tasks.Task<YNAB.SDK.Client.ApiResponse<TransactionResponse>> GetTransactionByIdAsyncWithHttpInfo (string budgetId, string transactionId)
-        {
-            // verify the required parameter 'budgetId' is set
-            if (budgetId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->GetTransactionById");
-
-            // verify the required parameter 'transactionId' is set
-            if (transactionId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'transactionId' when calling TransactionsApi->GetTransactionById");
-
-
-            YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
-
-            String[] @contentTypes = new String[] {
-            };
-
-            // to determine the Accept header
-            String[] @accepts = new String[] {
-                "application/json"
-            };
-
-            foreach (var contentType in @contentTypes)
-                requestOptions.HeaderParameters.Add("Content-Type", contentType);
-
-            foreach (var accept in @accepts)
-                requestOptions.HeaderParameters.Add("Accept", accept);
-
-            if (budgetId != null)
-                requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
-            if (transactionId != null)
-                requestOptions.PathParameters.Add("transaction_id", YNAB.SDK.Client.ClientUtils.ParameterToString(transactionId)); // path parameter
-
-            // authentication (bearer) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
-            {
-                requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
-            }
-
-            // make the HTTP request
-
-            var response = await this.AsynchronousClient.GetAsync<TransactionResponse>("/budgets/{budget_id}/transactions/{transaction_id}", requestOptions, this.Configuration);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception exception = this.ExceptionFactory("GetTransactionById", response);
-                if (exception != null) throw exception;
-            }
-
-            return response;
-        }
-
-        /// <summary>
-        /// List transactions Returns budget transactions
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>TransactionsResponse</returns>
-        public TransactionsResponse GetTransactions (string budgetId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
-        {
-             YNAB.SDK.Client.ApiResponse<TransactionsResponse> localVarResponse = GetTransactionsWithHttpInfo(budgetId, sinceDate, type, lastKnowledgeOfServer);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// List transactions Returns budget transactions
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>ApiResponse of TransactionsResponse</returns>
-        public YNAB.SDK.Client.ApiResponse< TransactionsResponse > GetTransactionsWithHttpInfo (string budgetId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
-        {
-            // verify the required parameter 'budgetId' is set
-            if (budgetId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->GetTransactions");
-
-            YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
-
-            String[] @contentTypes = new String[] {
-            };
-
-            // to determine the Accept header
-            String[] @accepts = new String[] {
-                "application/json"
-            };
-
-            var localVarContentType = YNAB.SDK.Client.ClientUtils.SelectHeaderContentType(@contentTypes);
-            if (localVarContentType != null) requestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-            var localVarAccept = YNAB.SDK.Client.ClientUtils.SelectHeaderAccept(@accepts);
-            if (localVarAccept != null) requestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-            if (budgetId != null)
-                requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
-            if (sinceDate != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "since_date", sinceDate))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-            if (type != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "type", type))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-            if (lastKnowledgeOfServer != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "last_knowledge_of_server", lastKnowledgeOfServer))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-
-            // authentication (bearer) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
-            {
-                requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
-            }
-
-            // make the HTTP request
-
-            var response = this.Client.Get< TransactionsResponse >("/budgets/{budget_id}/transactions", requestOptions, this.Configuration);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception exception = this.ExceptionFactory("GetTransactions", response);
-                if (exception != null) throw exception;
-            }
-
-            return response;
-        }
-
-        /// <summary>
-        /// List transactions Returns budget transactions
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>Task of TransactionsResponse</returns>
-        public async System.Threading.Tasks.Task<TransactionsResponse> GetTransactionsAsync (string budgetId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
-        {
-             YNAB.SDK.Client.ApiResponse<TransactionsResponse> localVarResponse = await GetTransactionsAsyncWithHttpInfo(budgetId, sinceDate, type, lastKnowledgeOfServer);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// List transactions Returns budget transactions
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>Task of ApiResponse (TransactionsResponse)</returns>
-        public async System.Threading.Tasks.Task<YNAB.SDK.Client.ApiResponse<TransactionsResponse>> GetTransactionsAsyncWithHttpInfo (string budgetId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
-        {
-            // verify the required parameter 'budgetId' is set
-            if (budgetId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->GetTransactions");
-
-
-            YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
-
-            String[] @contentTypes = new String[] {
-            };
-
-            // to determine the Accept header
-            String[] @accepts = new String[] {
-                "application/json"
-            };
-
-            foreach (var contentType in @contentTypes)
-                requestOptions.HeaderParameters.Add("Content-Type", contentType);
-
-            foreach (var accept in @accepts)
-                requestOptions.HeaderParameters.Add("Accept", accept);
-
-            if (budgetId != null)
-                requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
-            if (sinceDate != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "since_date", sinceDate))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-            if (type != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "type", type))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-            if (lastKnowledgeOfServer != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "last_knowledge_of_server", lastKnowledgeOfServer))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-
-            // authentication (bearer) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
-            {
-                requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
-            }
-
-            // make the HTTP request
-
-            var response = await this.AsynchronousClient.GetAsync<TransactionsResponse>("/budgets/{budget_id}/transactions", requestOptions, this.Configuration);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception exception = this.ExceptionFactory("GetTransactions", response);
-                if (exception != null) throw exception;
-            }
-
-            return response;
-        }
-
-        /// <summary>
-        /// List account transactions Returns all transactions for a specified account
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="accountId">The id of the account</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>TransactionsResponse</returns>
-        public TransactionsResponse GetTransactionsByAccount (string budgetId, string accountId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
-        {
-             YNAB.SDK.Client.ApiResponse<TransactionsResponse> localVarResponse = GetTransactionsByAccountWithHttpInfo(budgetId, accountId, sinceDate, type, lastKnowledgeOfServer);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// List account transactions Returns all transactions for a specified account
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="accountId">The id of the account</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>ApiResponse of TransactionsResponse</returns>
-        public YNAB.SDK.Client.ApiResponse< TransactionsResponse > GetTransactionsByAccountWithHttpInfo (string budgetId, string accountId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
-        {
-            // verify the required parameter 'budgetId' is set
-            if (budgetId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->GetTransactionsByAccount");
-
-            // verify the required parameter 'accountId' is set
-            if (accountId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'accountId' when calling TransactionsApi->GetTransactionsByAccount");
-
-            YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
-
-            String[] @contentTypes = new String[] {
-            };
-
-            // to determine the Accept header
-            String[] @accepts = new String[] {
-                "application/json"
-            };
-
-            var localVarContentType = YNAB.SDK.Client.ClientUtils.SelectHeaderContentType(@contentTypes);
-            if (localVarContentType != null) requestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-            var localVarAccept = YNAB.SDK.Client.ClientUtils.SelectHeaderAccept(@accepts);
-            if (localVarAccept != null) requestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-            if (budgetId != null)
-                requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
-            if (accountId != null)
-                requestOptions.PathParameters.Add("account_id", YNAB.SDK.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            if (sinceDate != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "since_date", sinceDate))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-            if (type != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "type", type))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-            if (lastKnowledgeOfServer != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "last_knowledge_of_server", lastKnowledgeOfServer))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-
-            // authentication (bearer) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
-            {
-                requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
-            }
-
-            // make the HTTP request
-
-            var response = this.Client.Get< TransactionsResponse >("/budgets/{budget_id}/accounts/{account_id}/transactions", requestOptions, this.Configuration);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception exception = this.ExceptionFactory("GetTransactionsByAccount", response);
-                if (exception != null) throw exception;
-            }
-
-            return response;
-        }
-
-        /// <summary>
-        /// List account transactions Returns all transactions for a specified account
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="accountId">The id of the account</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>Task of TransactionsResponse</returns>
-        public async System.Threading.Tasks.Task<TransactionsResponse> GetTransactionsByAccountAsync (string budgetId, string accountId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
-        {
-             YNAB.SDK.Client.ApiResponse<TransactionsResponse> localVarResponse = await GetTransactionsByAccountAsyncWithHttpInfo(budgetId, accountId, sinceDate, type, lastKnowledgeOfServer);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// List account transactions Returns all transactions for a specified account
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="accountId">The id of the account</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>Task of ApiResponse (TransactionsResponse)</returns>
-        public async System.Threading.Tasks.Task<YNAB.SDK.Client.ApiResponse<TransactionsResponse>> GetTransactionsByAccountAsyncWithHttpInfo (string budgetId, string accountId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
-        {
-            // verify the required parameter 'budgetId' is set
-            if (budgetId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->GetTransactionsByAccount");
-
-            // verify the required parameter 'accountId' is set
-            if (accountId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'accountId' when calling TransactionsApi->GetTransactionsByAccount");
-
-
-            YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
-
-            String[] @contentTypes = new String[] {
-            };
-
-            // to determine the Accept header
-            String[] @accepts = new String[] {
-                "application/json"
-            };
-
-            foreach (var contentType in @contentTypes)
-                requestOptions.HeaderParameters.Add("Content-Type", contentType);
-
-            foreach (var accept in @accepts)
-                requestOptions.HeaderParameters.Add("Accept", accept);
-
-            if (budgetId != null)
-                requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
-            if (accountId != null)
-                requestOptions.PathParameters.Add("account_id", YNAB.SDK.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            if (sinceDate != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "since_date", sinceDate))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-            if (type != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "type", type))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-            if (lastKnowledgeOfServer != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "last_knowledge_of_server", lastKnowledgeOfServer))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-
-            // authentication (bearer) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
-            {
-                requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
-            }
-
-            // make the HTTP request
-
-            var response = await this.AsynchronousClient.GetAsync<TransactionsResponse>("/budgets/{budget_id}/accounts/{account_id}/transactions", requestOptions, this.Configuration);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception exception = this.ExceptionFactory("GetTransactionsByAccount", response);
-                if (exception != null) throw exception;
-            }
-
-            return response;
-        }
-
-        /// <summary>
-        /// List category transactions Returns all transactions for a specified category
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="categoryId">The id of the category</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>HybridTransactionsResponse</returns>
-        public HybridTransactionsResponse GetTransactionsByCategory (string budgetId, string categoryId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
-        {
-             YNAB.SDK.Client.ApiResponse<HybridTransactionsResponse> localVarResponse = GetTransactionsByCategoryWithHttpInfo(budgetId, categoryId, sinceDate, type, lastKnowledgeOfServer);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// List category transactions Returns all transactions for a specified category
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="categoryId">The id of the category</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>ApiResponse of HybridTransactionsResponse</returns>
-        public YNAB.SDK.Client.ApiResponse< HybridTransactionsResponse > GetTransactionsByCategoryWithHttpInfo (string budgetId, string categoryId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
-        {
-            // verify the required parameter 'budgetId' is set
-            if (budgetId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->GetTransactionsByCategory");
-
-            // verify the required parameter 'categoryId' is set
-            if (categoryId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'categoryId' when calling TransactionsApi->GetTransactionsByCategory");
-
-            YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
-
-            String[] @contentTypes = new String[] {
-            };
-
-            // to determine the Accept header
-            String[] @accepts = new String[] {
-                "application/json"
-            };
-
-            var localVarContentType = YNAB.SDK.Client.ClientUtils.SelectHeaderContentType(@contentTypes);
-            if (localVarContentType != null) requestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-            var localVarAccept = YNAB.SDK.Client.ClientUtils.SelectHeaderAccept(@accepts);
-            if (localVarAccept != null) requestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-            if (budgetId != null)
-                requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
-            if (categoryId != null)
-                requestOptions.PathParameters.Add("category_id", YNAB.SDK.Client.ClientUtils.ParameterToString(categoryId)); // path parameter
-            if (sinceDate != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "since_date", sinceDate))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-            if (type != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "type", type))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-            if (lastKnowledgeOfServer != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "last_knowledge_of_server", lastKnowledgeOfServer))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-
-            // authentication (bearer) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
-            {
-                requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
-            }
-
-            // make the HTTP request
-
-            var response = this.Client.Get< HybridTransactionsResponse >("/budgets/{budget_id}/categories/{category_id}/transactions", requestOptions, this.Configuration);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception exception = this.ExceptionFactory("GetTransactionsByCategory", response);
-                if (exception != null) throw exception;
-            }
-
-            return response;
-        }
-
-        /// <summary>
-        /// List category transactions Returns all transactions for a specified category
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="categoryId">The id of the category</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>Task of HybridTransactionsResponse</returns>
-        public async System.Threading.Tasks.Task<HybridTransactionsResponse> GetTransactionsByCategoryAsync (string budgetId, string categoryId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
-        {
-             YNAB.SDK.Client.ApiResponse<HybridTransactionsResponse> localVarResponse = await GetTransactionsByCategoryAsyncWithHttpInfo(budgetId, categoryId, sinceDate, type, lastKnowledgeOfServer);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// List category transactions Returns all transactions for a specified category
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="categoryId">The id of the category</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>Task of ApiResponse (HybridTransactionsResponse)</returns>
-        public async System.Threading.Tasks.Task<YNAB.SDK.Client.ApiResponse<HybridTransactionsResponse>> GetTransactionsByCategoryAsyncWithHttpInfo (string budgetId, string categoryId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
-        {
-            // verify the required parameter 'budgetId' is set
-            if (budgetId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->GetTransactionsByCategory");
-
-            // verify the required parameter 'categoryId' is set
-            if (categoryId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'categoryId' when calling TransactionsApi->GetTransactionsByCategory");
-
-
-            YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
-
-            String[] @contentTypes = new String[] {
-            };
-
-            // to determine the Accept header
-            String[] @accepts = new String[] {
-                "application/json"
-            };
-
-            foreach (var contentType in @contentTypes)
-                requestOptions.HeaderParameters.Add("Content-Type", contentType);
-
-            foreach (var accept in @accepts)
-                requestOptions.HeaderParameters.Add("Accept", accept);
-
-            if (budgetId != null)
-                requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
-            if (categoryId != null)
-                requestOptions.PathParameters.Add("category_id", YNAB.SDK.Client.ClientUtils.ParameterToString(categoryId)); // path parameter
-            if (sinceDate != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "since_date", sinceDate))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-            if (type != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "type", type))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-            if (lastKnowledgeOfServer != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "last_knowledge_of_server", lastKnowledgeOfServer))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-
-            // authentication (bearer) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
-            {
-                requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
-            }
-
-            // make the HTTP request
-
-            var response = await this.AsynchronousClient.GetAsync<HybridTransactionsResponse>("/budgets/{budget_id}/categories/{category_id}/transactions", requestOptions, this.Configuration);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception exception = this.ExceptionFactory("GetTransactionsByCategory", response);
-                if (exception != null) throw exception;
-            }
-
-            return response;
-        }
-
-        /// <summary>
-        /// List payee transactions Returns all transactions for a specified payee
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="payeeId">The id of the payee</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>HybridTransactionsResponse</returns>
-        public HybridTransactionsResponse GetTransactionsByPayee (string budgetId, string payeeId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
-        {
-             YNAB.SDK.Client.ApiResponse<HybridTransactionsResponse> localVarResponse = GetTransactionsByPayeeWithHttpInfo(budgetId, payeeId, sinceDate, type, lastKnowledgeOfServer);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// List payee transactions Returns all transactions for a specified payee
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="payeeId">The id of the payee</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>ApiResponse of HybridTransactionsResponse</returns>
-        public YNAB.SDK.Client.ApiResponse< HybridTransactionsResponse > GetTransactionsByPayeeWithHttpInfo (string budgetId, string payeeId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
-        {
-            // verify the required parameter 'budgetId' is set
-            if (budgetId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->GetTransactionsByPayee");
-
-            // verify the required parameter 'payeeId' is set
-            if (payeeId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'payeeId' when calling TransactionsApi->GetTransactionsByPayee");
-
-            YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
-
-            String[] @contentTypes = new String[] {
-            };
-
-            // to determine the Accept header
-            String[] @accepts = new String[] {
-                "application/json"
-            };
-
-            var localVarContentType = YNAB.SDK.Client.ClientUtils.SelectHeaderContentType(@contentTypes);
-            if (localVarContentType != null) requestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-            var localVarAccept = YNAB.SDK.Client.ClientUtils.SelectHeaderAccept(@accepts);
-            if (localVarAccept != null) requestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-            if (budgetId != null)
-                requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
-            if (payeeId != null)
-                requestOptions.PathParameters.Add("payee_id", YNAB.SDK.Client.ClientUtils.ParameterToString(payeeId)); // path parameter
-            if (sinceDate != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "since_date", sinceDate))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-            if (type != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "type", type))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-            if (lastKnowledgeOfServer != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "last_knowledge_of_server", lastKnowledgeOfServer))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-
-            // authentication (bearer) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
-            {
-                requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
-            }
-
-            // make the HTTP request
-
-            var response = this.Client.Get< HybridTransactionsResponse >("/budgets/{budget_id}/payees/{payee_id}/transactions", requestOptions, this.Configuration);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception exception = this.ExceptionFactory("GetTransactionsByPayee", response);
-                if (exception != null) throw exception;
-            }
-
-            return response;
-        }
-
-        /// <summary>
-        /// List payee transactions Returns all transactions for a specified payee
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="payeeId">The id of the payee</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>Task of HybridTransactionsResponse</returns>
-        public async System.Threading.Tasks.Task<HybridTransactionsResponse> GetTransactionsByPayeeAsync (string budgetId, string payeeId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
-        {
-             YNAB.SDK.Client.ApiResponse<HybridTransactionsResponse> localVarResponse = await GetTransactionsByPayeeAsyncWithHttpInfo(budgetId, payeeId, sinceDate, type, lastKnowledgeOfServer);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// List payee transactions Returns all transactions for a specified payee
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="payeeId">The id of the payee</param>
-        /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
-        /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
-        /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
-        /// <returns>Task of ApiResponse (HybridTransactionsResponse)</returns>
-        public async System.Threading.Tasks.Task<YNAB.SDK.Client.ApiResponse<HybridTransactionsResponse>> GetTransactionsByPayeeAsyncWithHttpInfo (string budgetId, string payeeId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
-        {
-            // verify the required parameter 'budgetId' is set
-            if (budgetId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->GetTransactionsByPayee");
-
-            // verify the required parameter 'payeeId' is set
-            if (payeeId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'payeeId' when calling TransactionsApi->GetTransactionsByPayee");
-
-
-            YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
-
-            String[] @contentTypes = new String[] {
-            };
-
-            // to determine the Accept header
-            String[] @accepts = new String[] {
-                "application/json"
-            };
-
-            foreach (var contentType in @contentTypes)
-                requestOptions.HeaderParameters.Add("Content-Type", contentType);
-
-            foreach (var accept in @accepts)
-                requestOptions.HeaderParameters.Add("Accept", accept);
-
-            if (budgetId != null)
-                requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
-            if (payeeId != null)
-                requestOptions.PathParameters.Add("payee_id", YNAB.SDK.Client.ClientUtils.ParameterToString(payeeId)); // path parameter
-            if (sinceDate != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "since_date", sinceDate))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-            if (type != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "type", type))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-            if (lastKnowledgeOfServer != null)
-            {
-                foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "last_knowledge_of_server", lastKnowledgeOfServer))
-                {
-                    foreach (var value in kvp.Value)
-                    {
-                        requestOptions.QueryParameters.Add(kvp.Key, value);
-                    }
-                }
-            }
-
-            // authentication (bearer) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
-            {
-                requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
-            }
-
-            // make the HTTP request
-
-            var response = await this.AsynchronousClient.GetAsync<HybridTransactionsResponse>("/budgets/{budget_id}/payees/{payee_id}/transactions", requestOptions, this.Configuration);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception exception = this.ExceptionFactory("GetTransactionsByPayee", response);
-                if (exception != null) throw exception;
-            }
-
-            return response;
-        }
-
-        /// <summary>
-        /// Updates an existing transaction Updates a transaction
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="transactionId">The id of the transaction</param>
-        /// <param name="data">The transaction to update</param>
-        /// <returns>TransactionResponse</returns>
-        public TransactionResponse UpdateTransaction (string budgetId, string transactionId, SaveTransactionWrapper data)
-        {
-             YNAB.SDK.Client.ApiResponse<TransactionResponse> localVarResponse = UpdateTransactionWithHttpInfo(budgetId, transactionId, data);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Updates an existing transaction Updates a transaction
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="transactionId">The id of the transaction</param>
-        /// <param name="data">The transaction to update</param>
-        /// <returns>ApiResponse of TransactionResponse</returns>
-        public YNAB.SDK.Client.ApiResponse< TransactionResponse > UpdateTransactionWithHttpInfo (string budgetId, string transactionId, SaveTransactionWrapper data)
-        {
-            // verify the required parameter 'budgetId' is set
-            if (budgetId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->UpdateTransaction");
-
-            // verify the required parameter 'transactionId' is set
-            if (transactionId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'transactionId' when calling TransactionsApi->UpdateTransaction");
-
-            // verify the required parameter 'data' is set
-            if (data == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'data' when calling TransactionsApi->UpdateTransaction");
-
-            YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
-
-            String[] @contentTypes = new String[] {
-            };
-
-            // to determine the Accept header
-            String[] @accepts = new String[] {
-                "application/json"
-            };
-
-            var localVarContentType = YNAB.SDK.Client.ClientUtils.SelectHeaderContentType(@contentTypes);
-            if (localVarContentType != null) requestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-            var localVarAccept = YNAB.SDK.Client.ClientUtils.SelectHeaderAccept(@accepts);
-            if (localVarAccept != null) requestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-            if (budgetId != null)
-                requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
-            if (transactionId != null)
-                requestOptions.PathParameters.Add("transaction_id", YNAB.SDK.Client.ClientUtils.ParameterToString(transactionId)); // path parameter
-            requestOptions.Data = data;
-
-            // authentication (bearer) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
-            {
-                requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
-            }
-
-            // make the HTTP request
-
-            var response = this.Client.Put< TransactionResponse >("/budgets/{budget_id}/transactions/{transaction_id}", requestOptions, this.Configuration);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception exception = this.ExceptionFactory("UpdateTransaction", response);
-                if (exception != null) throw exception;
-            }
-
-            return response;
-        }
-
-        /// <summary>
-        /// Updates an existing transaction Updates a transaction
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="transactionId">The id of the transaction</param>
-        /// <param name="data">The transaction to update</param>
-        /// <returns>Task of TransactionResponse</returns>
-        public async System.Threading.Tasks.Task<TransactionResponse> UpdateTransactionAsync (string budgetId, string transactionId, SaveTransactionWrapper data)
-        {
-             YNAB.SDK.Client.ApiResponse<TransactionResponse> localVarResponse = await UpdateTransactionAsyncWithHttpInfo(budgetId, transactionId, data);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Updates an existing transaction Updates a transaction
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="transactionId">The id of the transaction</param>
-        /// <param name="data">The transaction to update</param>
-        /// <returns>Task of ApiResponse (TransactionResponse)</returns>
-        public async System.Threading.Tasks.Task<YNAB.SDK.Client.ApiResponse<TransactionResponse>> UpdateTransactionAsyncWithHttpInfo (string budgetId, string transactionId, SaveTransactionWrapper data)
-        {
-            // verify the required parameter 'budgetId' is set
-            if (budgetId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->UpdateTransaction");
-
-            // verify the required parameter 'transactionId' is set
-            if (transactionId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'transactionId' when calling TransactionsApi->UpdateTransaction");
-
-            // verify the required parameter 'data' is set
-            if (data == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'data' when calling TransactionsApi->UpdateTransaction");
-
-
-            YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
-
-            String[] @contentTypes = new String[] {
-            };
-
-            // to determine the Accept header
-            String[] @accepts = new String[] {
-                "application/json"
-            };
-
-            foreach (var contentType in @contentTypes)
-                requestOptions.HeaderParameters.Add("Content-Type", contentType);
-
-            foreach (var accept in @accepts)
-                requestOptions.HeaderParameters.Add("Accept", accept);
-
-            if (budgetId != null)
-                requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
-            if (transactionId != null)
-                requestOptions.PathParameters.Add("transaction_id", YNAB.SDK.Client.ClientUtils.ParameterToString(transactionId)); // path parameter
-            requestOptions.Data = data;
-
-            // authentication (bearer) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
-            {
-                requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
-            }
-
-            // make the HTTP request
-
-            var response = await this.AsynchronousClient.PutAsync<TransactionResponse>("/budgets/{budget_id}/transactions/{transaction_id}", requestOptions, this.Configuration);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception exception = this.ExceptionFactory("UpdateTransaction", response);
-                if (exception != null) throw exception;
-            }
-
-            return response;
-        }
-
-        /// <summary>
-        /// Update multiple transactions Updates multiple transactions, by &#39;id&#39; or &#39;import_id&#39;.
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="data">The transactions to update. Each transaction must have either an &#39;id&#39; or &#39;import_id&#39; specified. If &#39;id&#39; is specified as null an &#39;import_id&#39; value can be provided which will allow transaction(s) to be updated by their import_id. If an id is specified, it will always be used for lookup.</param>
-        /// <returns>SaveTransactionsResponse</returns>
-        public SaveTransactionsResponse UpdateTransactions (string budgetId, UpdateTransactionsWrapper data)
-        {
-             YNAB.SDK.Client.ApiResponse<SaveTransactionsResponse> localVarResponse = UpdateTransactionsWithHttpInfo(budgetId, data);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Update multiple transactions Updates multiple transactions, by &#39;id&#39; or &#39;import_id&#39;.
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="data">The transactions to update. Each transaction must have either an &#39;id&#39; or &#39;import_id&#39; specified. If &#39;id&#39; is specified as null an &#39;import_id&#39; value can be provided which will allow transaction(s) to be updated by their import_id. If an id is specified, it will always be used for lookup.</param>
-        /// <returns>ApiResponse of SaveTransactionsResponse</returns>
-        public YNAB.SDK.Client.ApiResponse< SaveTransactionsResponse > UpdateTransactionsWithHttpInfo (string budgetId, UpdateTransactionsWrapper data)
-        {
-            // verify the required parameter 'budgetId' is set
-            if (budgetId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->UpdateTransactions");
-
-            // verify the required parameter 'data' is set
-            if (data == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'data' when calling TransactionsApi->UpdateTransactions");
-
-            YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
-
-            String[] @contentTypes = new String[] {
-            };
-
-            // to determine the Accept header
-            String[] @accepts = new String[] {
-                "application/json"
-            };
-
-            var localVarContentType = YNAB.SDK.Client.ClientUtils.SelectHeaderContentType(@contentTypes);
-            if (localVarContentType != null) requestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-            var localVarAccept = YNAB.SDK.Client.ClientUtils.SelectHeaderAccept(@accepts);
-            if (localVarAccept != null) requestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-            if (budgetId != null)
-                requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
-            requestOptions.Data = data;
-
-            // authentication (bearer) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
-            {
-                requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
-            }
-
-            // make the HTTP request
-
-            var response = this.Client.Patch< SaveTransactionsResponse >("/budgets/{budget_id}/transactions", requestOptions, this.Configuration);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception exception = this.ExceptionFactory("UpdateTransactions", response);
-                if (exception != null) throw exception;
-            }
-
-            return response;
-        }
-
-        /// <summary>
-        /// Update multiple transactions Updates multiple transactions, by &#39;id&#39; or &#39;import_id&#39;.
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="data">The transactions to update. Each transaction must have either an &#39;id&#39; or &#39;import_id&#39; specified. If &#39;id&#39; is specified as null an &#39;import_id&#39; value can be provided which will allow transaction(s) to be updated by their import_id. If an id is specified, it will always be used for lookup.</param>
-        /// <returns>Task of SaveTransactionsResponse</returns>
-        public async System.Threading.Tasks.Task<SaveTransactionsResponse> UpdateTransactionsAsync (string budgetId, UpdateTransactionsWrapper data)
-        {
-             YNAB.SDK.Client.ApiResponse<SaveTransactionsResponse> localVarResponse = await UpdateTransactionsAsyncWithHttpInfo(budgetId, data);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Update multiple transactions Updates multiple transactions, by &#39;id&#39; or &#39;import_id&#39;.
-        /// </summary>
-        /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
-        /// <param name="data">The transactions to update. Each transaction must have either an &#39;id&#39; or &#39;import_id&#39; specified. If &#39;id&#39; is specified as null an &#39;import_id&#39; value can be provided which will allow transaction(s) to be updated by their import_id. If an id is specified, it will always be used for lookup.</param>
-        /// <returns>Task of ApiResponse (SaveTransactionsResponse)</returns>
-        public async System.Threading.Tasks.Task<YNAB.SDK.Client.ApiResponse<SaveTransactionsResponse>> UpdateTransactionsAsyncWithHttpInfo (string budgetId, UpdateTransactionsWrapper data)
-        {
-            // verify the required parameter 'budgetId' is set
-            if (budgetId == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->UpdateTransactions");
-
-            // verify the required parameter 'data' is set
-            if (data == null)
-                throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'data' when calling TransactionsApi->UpdateTransactions");
-
-
-            YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
-
-            String[] @contentTypes = new String[] {
-            };
-
-            // to determine the Accept header
-            String[] @accepts = new String[] {
-                "application/json"
-            };
-
-            foreach (var contentType in @contentTypes)
-                requestOptions.HeaderParameters.Add("Content-Type", contentType);
-
-            foreach (var accept in @accepts)
-                requestOptions.HeaderParameters.Add("Accept", accept);
-
-            if (budgetId != null)
-                requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
-            requestOptions.Data = data;
-
-            // authentication (bearer) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
-            {
-                requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
-            }
-
-            // make the HTTP request
-
-            var response = await this.AsynchronousClient.PatchAsync<SaveTransactionsResponse>("/budgets/{budget_id}/transactions", requestOptions, this.Configuration);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception exception = this.ExceptionFactory("UpdateTransactions", response);
-                if (exception != null) throw exception;
-            }
-
-            return response;
-        }
+      var localVarContentType = YNAB.SDK.Client.ClientUtils.SelectHeaderContentType(@contentTypes);
+      if (localVarContentType != null) requestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+      var localVarAccept = YNAB.SDK.Client.ClientUtils.SelectHeaderAccept(@accepts);
+      if (localVarAccept != null) requestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+      if (budgetId != null)
+        requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
+      if (transactionId != null)
+        requestOptions.PathParameters.Add("transaction_id", YNAB.SDK.Client.ClientUtils.ParameterToString(transactionId)); // path parameter
+
+      // authentication (bearer) required
+      if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+      {
+        requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
+      }
+
+      // make the HTTP request
+
+      var response = this.Client.Get<TransactionResponse>("/budgets/{budget_id}/transactions/{transaction_id}", requestOptions, this.Configuration);
+
+      if (this.ExceptionFactory != null)
+      {
+        Exception exception = this.ExceptionFactory("GetTransactionById", response);
+        if (exception != null) throw exception;
+      }
+
+      return response;
+    }
+
+    /// <summary>
+    /// Single transaction Returns a single transaction
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="transactionId">The id of the transaction</param>
+    /// <returns>Task of TransactionResponse</returns>
+    public async System.Threading.Tasks.Task<TransactionResponse> GetTransactionByIdAsync(string budgetId, string transactionId)
+    {
+      YNAB.SDK.Client.ApiResponse<TransactionResponse> localVarResponse = await GetTransactionByIdAsyncWithHttpInfo(budgetId, transactionId);
+      return localVarResponse.Data;
 
     }
+
+    /// <summary>
+    /// Single transaction Returns a single transaction
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="transactionId">The id of the transaction</param>
+    /// <returns>Task of ApiResponse (TransactionResponse)</returns>
+    public async System.Threading.Tasks.Task<YNAB.SDK.Client.ApiResponse<TransactionResponse>> GetTransactionByIdAsyncWithHttpInfo(string budgetId, string transactionId)
+    {
+      // verify the required parameter 'budgetId' is set
+      if (budgetId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->GetTransactionById");
+
+      // verify the required parameter 'transactionId' is set
+      if (transactionId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'transactionId' when calling TransactionsApi->GetTransactionById");
+
+
+      YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
+
+      String[] @contentTypes = new String[] {
+            };
+
+      // to determine the Accept header
+      String[] @accepts = new String[] {
+                "application/json"
+            };
+
+      foreach (var contentType in @contentTypes)
+        requestOptions.HeaderParameters.Add("Content-Type", contentType);
+
+      foreach (var accept in @accepts)
+        requestOptions.HeaderParameters.Add("Accept", accept);
+
+      if (budgetId != null)
+        requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
+      if (transactionId != null)
+        requestOptions.PathParameters.Add("transaction_id", YNAB.SDK.Client.ClientUtils.ParameterToString(transactionId)); // path parameter
+
+      // authentication (bearer) required
+      if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+      {
+        requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
+      }
+
+      // make the HTTP request
+
+      var response = await this.AsynchronousClient.GetAsync<TransactionResponse>("/budgets/{budget_id}/transactions/{transaction_id}", requestOptions, this.Configuration);
+
+      if (this.ExceptionFactory != null)
+      {
+        Exception exception = this.ExceptionFactory("GetTransactionById", response);
+        if (exception != null) throw exception;
+      }
+
+      return response;
+    }
+
+    /// <summary>
+    /// List transactions Returns budget transactions
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>TransactionsResponse</returns>
+    public TransactionsResponse GetTransactions(string budgetId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
+    {
+      YNAB.SDK.Client.ApiResponse<TransactionsResponse> localVarResponse = GetTransactionsWithHttpInfo(budgetId, sinceDate, type, lastKnowledgeOfServer);
+      return localVarResponse.Data;
+    }
+
+    /// <summary>
+    /// List transactions Returns budget transactions
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>ApiResponse of TransactionsResponse</returns>
+    public YNAB.SDK.Client.ApiResponse<TransactionsResponse> GetTransactionsWithHttpInfo(string budgetId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
+    {
+      // verify the required parameter 'budgetId' is set
+      if (budgetId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->GetTransactions");
+
+      YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
+
+      String[] @contentTypes = new String[] {
+            };
+
+      // to determine the Accept header
+      String[] @accepts = new String[] {
+                "application/json"
+            };
+
+      var localVarContentType = YNAB.SDK.Client.ClientUtils.SelectHeaderContentType(@contentTypes);
+      if (localVarContentType != null) requestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+      var localVarAccept = YNAB.SDK.Client.ClientUtils.SelectHeaderAccept(@accepts);
+      if (localVarAccept != null) requestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+      if (budgetId != null)
+        requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
+      if (sinceDate != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "since_date", sinceDate))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+      if (type != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "type", type))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+      if (lastKnowledgeOfServer != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "last_knowledge_of_server", lastKnowledgeOfServer))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+
+      // authentication (bearer) required
+      if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+      {
+        requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
+      }
+
+      // make the HTTP request
+
+      var response = this.Client.Get<TransactionsResponse>("/budgets/{budget_id}/transactions", requestOptions, this.Configuration);
+
+      if (this.ExceptionFactory != null)
+      {
+        Exception exception = this.ExceptionFactory("GetTransactions", response);
+        if (exception != null) throw exception;
+      }
+
+      return response;
+    }
+
+    /// <summary>
+    /// List transactions Returns budget transactions
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>Task of TransactionsResponse</returns>
+    public async System.Threading.Tasks.Task<TransactionsResponse> GetTransactionsAsync(string budgetId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
+    {
+      YNAB.SDK.Client.ApiResponse<TransactionsResponse> localVarResponse = await GetTransactionsAsyncWithHttpInfo(budgetId, sinceDate, type, lastKnowledgeOfServer);
+      return localVarResponse.Data;
+
+    }
+
+    /// <summary>
+    /// List transactions Returns budget transactions
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>Task of ApiResponse (TransactionsResponse)</returns>
+    public async System.Threading.Tasks.Task<YNAB.SDK.Client.ApiResponse<TransactionsResponse>> GetTransactionsAsyncWithHttpInfo(string budgetId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
+    {
+      // verify the required parameter 'budgetId' is set
+      if (budgetId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->GetTransactions");
+
+
+      YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
+
+      String[] @contentTypes = new String[] {
+            };
+
+      // to determine the Accept header
+      String[] @accepts = new String[] {
+                "application/json"
+            };
+
+      foreach (var contentType in @contentTypes)
+        requestOptions.HeaderParameters.Add("Content-Type", contentType);
+
+      foreach (var accept in @accepts)
+        requestOptions.HeaderParameters.Add("Accept", accept);
+
+      if (budgetId != null)
+        requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
+      if (sinceDate != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "since_date", sinceDate))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+      if (type != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "type", type))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+      if (lastKnowledgeOfServer != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "last_knowledge_of_server", lastKnowledgeOfServer))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+
+      // authentication (bearer) required
+      if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+      {
+        requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
+      }
+
+      // make the HTTP request
+
+      var response = await this.AsynchronousClient.GetAsync<TransactionsResponse>("/budgets/{budget_id}/transactions", requestOptions, this.Configuration);
+
+      if (this.ExceptionFactory != null)
+      {
+        Exception exception = this.ExceptionFactory("GetTransactions", response);
+        if (exception != null) throw exception;
+      }
+
+      return response;
+    }
+
+    /// <summary>
+    /// List account transactions Returns all transactions for a specified account
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="accountId">The id of the account</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>TransactionsResponse</returns>
+    public TransactionsResponse GetTransactionsByAccount(string budgetId, string accountId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
+    {
+      YNAB.SDK.Client.ApiResponse<TransactionsResponse> localVarResponse = GetTransactionsByAccountWithHttpInfo(budgetId, accountId, sinceDate, type, lastKnowledgeOfServer);
+      return localVarResponse.Data;
+    }
+
+    /// <summary>
+    /// List account transactions Returns all transactions for a specified account
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="accountId">The id of the account</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>ApiResponse of TransactionsResponse</returns>
+    public YNAB.SDK.Client.ApiResponse<TransactionsResponse> GetTransactionsByAccountWithHttpInfo(string budgetId, string accountId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
+    {
+      // verify the required parameter 'budgetId' is set
+      if (budgetId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->GetTransactionsByAccount");
+
+      // verify the required parameter 'accountId' is set
+      if (accountId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'accountId' when calling TransactionsApi->GetTransactionsByAccount");
+
+      YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
+
+      String[] @contentTypes = new String[] {
+            };
+
+      // to determine the Accept header
+      String[] @accepts = new String[] {
+                "application/json"
+            };
+
+      var localVarContentType = YNAB.SDK.Client.ClientUtils.SelectHeaderContentType(@contentTypes);
+      if (localVarContentType != null) requestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+      var localVarAccept = YNAB.SDK.Client.ClientUtils.SelectHeaderAccept(@accepts);
+      if (localVarAccept != null) requestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+      if (budgetId != null)
+        requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
+      if (accountId != null)
+        requestOptions.PathParameters.Add("account_id", YNAB.SDK.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+      if (sinceDate != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "since_date", sinceDate))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+      if (type != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "type", type))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+      if (lastKnowledgeOfServer != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "last_knowledge_of_server", lastKnowledgeOfServer))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+
+      // authentication (bearer) required
+      if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+      {
+        requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
+      }
+
+      // make the HTTP request
+
+      var response = this.Client.Get<TransactionsResponse>("/budgets/{budget_id}/accounts/{account_id}/transactions", requestOptions, this.Configuration);
+
+      if (this.ExceptionFactory != null)
+      {
+        Exception exception = this.ExceptionFactory("GetTransactionsByAccount", response);
+        if (exception != null) throw exception;
+      }
+
+      return response;
+    }
+
+    /// <summary>
+    /// List account transactions Returns all transactions for a specified account
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="accountId">The id of the account</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>Task of TransactionsResponse</returns>
+    public async System.Threading.Tasks.Task<TransactionsResponse> GetTransactionsByAccountAsync(string budgetId, string accountId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
+    {
+      YNAB.SDK.Client.ApiResponse<TransactionsResponse> localVarResponse = await GetTransactionsByAccountAsyncWithHttpInfo(budgetId, accountId, sinceDate, type, lastKnowledgeOfServer);
+      return localVarResponse.Data;
+
+    }
+
+    /// <summary>
+    /// List account transactions Returns all transactions for a specified account
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="accountId">The id of the account</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>Task of ApiResponse (TransactionsResponse)</returns>
+    public async System.Threading.Tasks.Task<YNAB.SDK.Client.ApiResponse<TransactionsResponse>> GetTransactionsByAccountAsyncWithHttpInfo(string budgetId, string accountId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
+    {
+      // verify the required parameter 'budgetId' is set
+      if (budgetId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->GetTransactionsByAccount");
+
+      // verify the required parameter 'accountId' is set
+      if (accountId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'accountId' when calling TransactionsApi->GetTransactionsByAccount");
+
+
+      YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
+
+      String[] @contentTypes = new String[] {
+            };
+
+      // to determine the Accept header
+      String[] @accepts = new String[] {
+                "application/json"
+            };
+
+      foreach (var contentType in @contentTypes)
+        requestOptions.HeaderParameters.Add("Content-Type", contentType);
+
+      foreach (var accept in @accepts)
+        requestOptions.HeaderParameters.Add("Accept", accept);
+
+      if (budgetId != null)
+        requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
+      if (accountId != null)
+        requestOptions.PathParameters.Add("account_id", YNAB.SDK.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+      if (sinceDate != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "since_date", sinceDate))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+      if (type != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "type", type))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+      if (lastKnowledgeOfServer != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "last_knowledge_of_server", lastKnowledgeOfServer))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+
+      // authentication (bearer) required
+      if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+      {
+        requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
+      }
+
+      // make the HTTP request
+
+      var response = await this.AsynchronousClient.GetAsync<TransactionsResponse>("/budgets/{budget_id}/accounts/{account_id}/transactions", requestOptions, this.Configuration);
+
+      if (this.ExceptionFactory != null)
+      {
+        Exception exception = this.ExceptionFactory("GetTransactionsByAccount", response);
+        if (exception != null) throw exception;
+      }
+
+      return response;
+    }
+
+    /// <summary>
+    /// List category transactions Returns all transactions for a specified category
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="categoryId">The id of the category</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>HybridTransactionsResponse</returns>
+    public HybridTransactionsResponse GetTransactionsByCategory(string budgetId, string categoryId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
+    {
+      YNAB.SDK.Client.ApiResponse<HybridTransactionsResponse> localVarResponse = GetTransactionsByCategoryWithHttpInfo(budgetId, categoryId, sinceDate, type, lastKnowledgeOfServer);
+      return localVarResponse.Data;
+    }
+
+    /// <summary>
+    /// List category transactions Returns all transactions for a specified category
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="categoryId">The id of the category</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>ApiResponse of HybridTransactionsResponse</returns>
+    public YNAB.SDK.Client.ApiResponse<HybridTransactionsResponse> GetTransactionsByCategoryWithHttpInfo(string budgetId, string categoryId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
+    {
+      // verify the required parameter 'budgetId' is set
+      if (budgetId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->GetTransactionsByCategory");
+
+      // verify the required parameter 'categoryId' is set
+      if (categoryId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'categoryId' when calling TransactionsApi->GetTransactionsByCategory");
+
+      YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
+
+      String[] @contentTypes = new String[] {
+            };
+
+      // to determine the Accept header
+      String[] @accepts = new String[] {
+                "application/json"
+            };
+
+      var localVarContentType = YNAB.SDK.Client.ClientUtils.SelectHeaderContentType(@contentTypes);
+      if (localVarContentType != null) requestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+      var localVarAccept = YNAB.SDK.Client.ClientUtils.SelectHeaderAccept(@accepts);
+      if (localVarAccept != null) requestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+      if (budgetId != null)
+        requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
+      if (categoryId != null)
+        requestOptions.PathParameters.Add("category_id", YNAB.SDK.Client.ClientUtils.ParameterToString(categoryId)); // path parameter
+      if (sinceDate != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "since_date", sinceDate))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+      if (type != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "type", type))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+      if (lastKnowledgeOfServer != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "last_knowledge_of_server", lastKnowledgeOfServer))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+
+      // authentication (bearer) required
+      if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+      {
+        requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
+      }
+
+      // make the HTTP request
+
+      var response = this.Client.Get<HybridTransactionsResponse>("/budgets/{budget_id}/categories/{category_id}/transactions", requestOptions, this.Configuration);
+
+      if (this.ExceptionFactory != null)
+      {
+        Exception exception = this.ExceptionFactory("GetTransactionsByCategory", response);
+        if (exception != null) throw exception;
+      }
+
+      return response;
+    }
+
+    /// <summary>
+    /// List category transactions Returns all transactions for a specified category
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="categoryId">The id of the category</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>Task of HybridTransactionsResponse</returns>
+    public async System.Threading.Tasks.Task<HybridTransactionsResponse> GetTransactionsByCategoryAsync(string budgetId, string categoryId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
+    {
+      YNAB.SDK.Client.ApiResponse<HybridTransactionsResponse> localVarResponse = await GetTransactionsByCategoryAsyncWithHttpInfo(budgetId, categoryId, sinceDate, type, lastKnowledgeOfServer);
+      return localVarResponse.Data;
+
+    }
+
+    /// <summary>
+    /// List category transactions Returns all transactions for a specified category
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="categoryId">The id of the category</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>Task of ApiResponse (HybridTransactionsResponse)</returns>
+    public async System.Threading.Tasks.Task<YNAB.SDK.Client.ApiResponse<HybridTransactionsResponse>> GetTransactionsByCategoryAsyncWithHttpInfo(string budgetId, string categoryId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
+    {
+      // verify the required parameter 'budgetId' is set
+      if (budgetId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->GetTransactionsByCategory");
+
+      // verify the required parameter 'categoryId' is set
+      if (categoryId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'categoryId' when calling TransactionsApi->GetTransactionsByCategory");
+
+
+      YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
+
+      String[] @contentTypes = new String[] {
+            };
+
+      // to determine the Accept header
+      String[] @accepts = new String[] {
+                "application/json"
+            };
+
+      foreach (var contentType in @contentTypes)
+        requestOptions.HeaderParameters.Add("Content-Type", contentType);
+
+      foreach (var accept in @accepts)
+        requestOptions.HeaderParameters.Add("Accept", accept);
+
+      if (budgetId != null)
+        requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
+      if (categoryId != null)
+        requestOptions.PathParameters.Add("category_id", YNAB.SDK.Client.ClientUtils.ParameterToString(categoryId)); // path parameter
+      if (sinceDate != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "since_date", sinceDate))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+      if (type != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "type", type))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+      if (lastKnowledgeOfServer != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "last_knowledge_of_server", lastKnowledgeOfServer))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+
+      // authentication (bearer) required
+      if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+      {
+        requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
+      }
+
+      // make the HTTP request
+
+      var response = await this.AsynchronousClient.GetAsync<HybridTransactionsResponse>("/budgets/{budget_id}/categories/{category_id}/transactions", requestOptions, this.Configuration);
+
+      if (this.ExceptionFactory != null)
+      {
+        Exception exception = this.ExceptionFactory("GetTransactionsByCategory", response);
+        if (exception != null) throw exception;
+      }
+
+      return response;
+    }
+
+    /// <summary>
+    /// List payee transactions Returns all transactions for a specified payee
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="payeeId">The id of the payee</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>HybridTransactionsResponse</returns>
+    public HybridTransactionsResponse GetTransactionsByPayee(string budgetId, string payeeId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
+    {
+      YNAB.SDK.Client.ApiResponse<HybridTransactionsResponse> localVarResponse = GetTransactionsByPayeeWithHttpInfo(budgetId, payeeId, sinceDate, type, lastKnowledgeOfServer);
+      return localVarResponse.Data;
+    }
+
+    /// <summary>
+    /// List payee transactions Returns all transactions for a specified payee
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="payeeId">The id of the payee</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>ApiResponse of HybridTransactionsResponse</returns>
+    public YNAB.SDK.Client.ApiResponse<HybridTransactionsResponse> GetTransactionsByPayeeWithHttpInfo(string budgetId, string payeeId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
+    {
+      // verify the required parameter 'budgetId' is set
+      if (budgetId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->GetTransactionsByPayee");
+
+      // verify the required parameter 'payeeId' is set
+      if (payeeId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'payeeId' when calling TransactionsApi->GetTransactionsByPayee");
+
+      YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
+
+      String[] @contentTypes = new String[] {
+            };
+
+      // to determine the Accept header
+      String[] @accepts = new String[] {
+                "application/json"
+            };
+
+      var localVarContentType = YNAB.SDK.Client.ClientUtils.SelectHeaderContentType(@contentTypes);
+      if (localVarContentType != null) requestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+      var localVarAccept = YNAB.SDK.Client.ClientUtils.SelectHeaderAccept(@accepts);
+      if (localVarAccept != null) requestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+      if (budgetId != null)
+        requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
+      if (payeeId != null)
+        requestOptions.PathParameters.Add("payee_id", YNAB.SDK.Client.ClientUtils.ParameterToString(payeeId)); // path parameter
+      if (sinceDate != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "since_date", sinceDate))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+      if (type != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "type", type))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+      if (lastKnowledgeOfServer != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "last_knowledge_of_server", lastKnowledgeOfServer))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+
+      // authentication (bearer) required
+      if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+      {
+        requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
+      }
+
+      // make the HTTP request
+
+      var response = this.Client.Get<HybridTransactionsResponse>("/budgets/{budget_id}/payees/{payee_id}/transactions", requestOptions, this.Configuration);
+
+      if (this.ExceptionFactory != null)
+      {
+        Exception exception = this.ExceptionFactory("GetTransactionsByPayee", response);
+        if (exception != null) throw exception;
+      }
+
+      return response;
+    }
+
+    /// <summary>
+    /// List payee transactions Returns all transactions for a specified payee
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="payeeId">The id of the payee</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>Task of HybridTransactionsResponse</returns>
+    public async System.Threading.Tasks.Task<HybridTransactionsResponse> GetTransactionsByPayeeAsync(string budgetId, string payeeId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
+    {
+      YNAB.SDK.Client.ApiResponse<HybridTransactionsResponse> localVarResponse = await GetTransactionsByPayeeAsyncWithHttpInfo(budgetId, payeeId, sinceDate, type, lastKnowledgeOfServer);
+      return localVarResponse.Data;
+
+    }
+
+    /// <summary>
+    /// List payee transactions Returns all transactions for a specified payee
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="payeeId">The id of the payee</param>
+    /// <param name="sinceDate">If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)</param>
+    /// <param name="type">If specified, only transactions of the specified type will be included. &#39;uncategorized&#39; and &#39;unapproved&#39; are currently supported. (optional)</param>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional)</param>
+    /// <returns>Task of ApiResponse (HybridTransactionsResponse)</returns>
+    public async System.Threading.Tasks.Task<YNAB.SDK.Client.ApiResponse<HybridTransactionsResponse>> GetTransactionsByPayeeAsyncWithHttpInfo(string budgetId, string payeeId, DateTime? sinceDate = null, string type = null, long? lastKnowledgeOfServer = null)
+    {
+      // verify the required parameter 'budgetId' is set
+      if (budgetId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->GetTransactionsByPayee");
+
+      // verify the required parameter 'payeeId' is set
+      if (payeeId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'payeeId' when calling TransactionsApi->GetTransactionsByPayee");
+
+
+      YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
+
+      String[] @contentTypes = new String[] {
+            };
+
+      // to determine the Accept header
+      String[] @accepts = new String[] {
+                "application/json"
+            };
+
+      foreach (var contentType in @contentTypes)
+        requestOptions.HeaderParameters.Add("Content-Type", contentType);
+
+      foreach (var accept in @accepts)
+        requestOptions.HeaderParameters.Add("Accept", accept);
+
+      if (budgetId != null)
+        requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
+      if (payeeId != null)
+        requestOptions.PathParameters.Add("payee_id", YNAB.SDK.Client.ClientUtils.ParameterToString(payeeId)); // path parameter
+      if (sinceDate != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "since_date", sinceDate))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+      if (type != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "type", type))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+      if (lastKnowledgeOfServer != null)
+      {
+        foreach (var kvp in YNAB.SDK.Client.ClientUtils.ParameterToMultiMap("", "last_knowledge_of_server", lastKnowledgeOfServer))
+        {
+          foreach (var value in kvp.Value)
+          {
+            requestOptions.QueryParameters.Add(kvp.Key, value);
+          }
+        }
+      }
+
+      // authentication (bearer) required
+      if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+      {
+        requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
+      }
+
+      // make the HTTP request
+
+      var response = await this.AsynchronousClient.GetAsync<HybridTransactionsResponse>("/budgets/{budget_id}/payees/{payee_id}/transactions", requestOptions, this.Configuration);
+
+      if (this.ExceptionFactory != null)
+      {
+        Exception exception = this.ExceptionFactory("GetTransactionsByPayee", response);
+        if (exception != null) throw exception;
+      }
+
+      return response;
+    }
+
+    /// <summary>
+    /// Updates an existing transaction Updates a transaction
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="transactionId">The id of the transaction</param>
+    /// <param name="data">The transaction to update</param>
+    /// <returns>TransactionResponse</returns>
+    public TransactionResponse UpdateTransaction(string budgetId, string transactionId, SaveTransactionWrapper data)
+    {
+      YNAB.SDK.Client.ApiResponse<TransactionResponse> localVarResponse = UpdateTransactionWithHttpInfo(budgetId, transactionId, data);
+      return localVarResponse.Data;
+    }
+
+    /// <summary>
+    /// Updates an existing transaction Updates a transaction
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="transactionId">The id of the transaction</param>
+    /// <param name="data">The transaction to update</param>
+    /// <returns>ApiResponse of TransactionResponse</returns>
+    public YNAB.SDK.Client.ApiResponse<TransactionResponse> UpdateTransactionWithHttpInfo(string budgetId, string transactionId, SaveTransactionWrapper data)
+    {
+      // verify the required parameter 'budgetId' is set
+      if (budgetId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->UpdateTransaction");
+
+      // verify the required parameter 'transactionId' is set
+      if (transactionId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'transactionId' when calling TransactionsApi->UpdateTransaction");
+
+      // verify the required parameter 'data' is set
+      if (data == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'data' when calling TransactionsApi->UpdateTransaction");
+
+      YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
+
+      String[] @contentTypes = new String[] {
+            };
+
+      // to determine the Accept header
+      String[] @accepts = new String[] {
+                "application/json"
+            };
+
+      var localVarContentType = YNAB.SDK.Client.ClientUtils.SelectHeaderContentType(@contentTypes);
+      if (localVarContentType != null) requestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+      var localVarAccept = YNAB.SDK.Client.ClientUtils.SelectHeaderAccept(@accepts);
+      if (localVarAccept != null) requestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+      if (budgetId != null)
+        requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
+      if (transactionId != null)
+        requestOptions.PathParameters.Add("transaction_id", YNAB.SDK.Client.ClientUtils.ParameterToString(transactionId)); // path parameter
+      requestOptions.Data = data;
+
+      // authentication (bearer) required
+      if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+      {
+        requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
+      }
+
+      // make the HTTP request
+
+      var response = this.Client.Put<TransactionResponse>("/budgets/{budget_id}/transactions/{transaction_id}", requestOptions, this.Configuration);
+
+      if (this.ExceptionFactory != null)
+      {
+        Exception exception = this.ExceptionFactory("UpdateTransaction", response);
+        if (exception != null) throw exception;
+      }
+
+      return response;
+    }
+
+    /// <summary>
+    /// Updates an existing transaction Updates a transaction
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="transactionId">The id of the transaction</param>
+    /// <param name="data">The transaction to update</param>
+    /// <returns>Task of TransactionResponse</returns>
+    public async System.Threading.Tasks.Task<TransactionResponse> UpdateTransactionAsync(string budgetId, string transactionId, SaveTransactionWrapper data)
+    {
+      YNAB.SDK.Client.ApiResponse<TransactionResponse> localVarResponse = await UpdateTransactionAsyncWithHttpInfo(budgetId, transactionId, data);
+      return localVarResponse.Data;
+
+    }
+
+    /// <summary>
+    /// Updates an existing transaction Updates a transaction
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="transactionId">The id of the transaction</param>
+    /// <param name="data">The transaction to update</param>
+    /// <returns>Task of ApiResponse (TransactionResponse)</returns>
+    public async System.Threading.Tasks.Task<YNAB.SDK.Client.ApiResponse<TransactionResponse>> UpdateTransactionAsyncWithHttpInfo(string budgetId, string transactionId, SaveTransactionWrapper data)
+    {
+      // verify the required parameter 'budgetId' is set
+      if (budgetId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->UpdateTransaction");
+
+      // verify the required parameter 'transactionId' is set
+      if (transactionId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'transactionId' when calling TransactionsApi->UpdateTransaction");
+
+      // verify the required parameter 'data' is set
+      if (data == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'data' when calling TransactionsApi->UpdateTransaction");
+
+
+      YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
+
+      String[] @contentTypes = new String[] {
+            };
+
+      // to determine the Accept header
+      String[] @accepts = new String[] {
+                "application/json"
+            };
+
+      foreach (var contentType in @contentTypes)
+        requestOptions.HeaderParameters.Add("Content-Type", contentType);
+
+      foreach (var accept in @accepts)
+        requestOptions.HeaderParameters.Add("Accept", accept);
+
+      if (budgetId != null)
+        requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
+      if (transactionId != null)
+        requestOptions.PathParameters.Add("transaction_id", YNAB.SDK.Client.ClientUtils.ParameterToString(transactionId)); // path parameter
+      requestOptions.Data = data;
+
+      // authentication (bearer) required
+      if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+      {
+        requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
+      }
+
+      // make the HTTP request
+
+      var response = await this.AsynchronousClient.PutAsync<TransactionResponse>("/budgets/{budget_id}/transactions/{transaction_id}", requestOptions, this.Configuration);
+
+      if (this.ExceptionFactory != null)
+      {
+        Exception exception = this.ExceptionFactory("UpdateTransaction", response);
+        if (exception != null) throw exception;
+      }
+
+      return response;
+    }
+
+    /// <summary>
+    /// Update multiple transactions Updates multiple transactions, by &#39;id&#39; or &#39;import_id&#39;.
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="data">The transactions to update. Each transaction must have either an &#39;id&#39; or &#39;import_id&#39; specified. If &#39;id&#39; is specified as null an &#39;import_id&#39; value can be provided which will allow transaction(s) to be updated by their import_id. If an id is specified, it will always be used for lookup.</param>
+    /// <returns>SaveTransactionsResponse</returns>
+    public SaveTransactionsResponse UpdateTransactions(string budgetId, UpdateTransactionsWrapper data)
+    {
+      YNAB.SDK.Client.ApiResponse<SaveTransactionsResponse> localVarResponse = UpdateTransactionsWithHttpInfo(budgetId, data);
+      return localVarResponse.Data;
+    }
+
+    /// <summary>
+    /// Update multiple transactions Updates multiple transactions, by &#39;id&#39; or &#39;import_id&#39;.
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="data">The transactions to update. Each transaction must have either an &#39;id&#39; or &#39;import_id&#39; specified. If &#39;id&#39; is specified as null an &#39;import_id&#39; value can be provided which will allow transaction(s) to be updated by their import_id. If an id is specified, it will always be used for lookup.</param>
+    /// <returns>ApiResponse of SaveTransactionsResponse</returns>
+    public YNAB.SDK.Client.ApiResponse<SaveTransactionsResponse> UpdateTransactionsWithHttpInfo(string budgetId, UpdateTransactionsWrapper data)
+    {
+      // verify the required parameter 'budgetId' is set
+      if (budgetId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->UpdateTransactions");
+
+      // verify the required parameter 'data' is set
+      if (data == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'data' when calling TransactionsApi->UpdateTransactions");
+
+      YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
+
+      String[] @contentTypes = new String[] {
+            };
+
+      // to determine the Accept header
+      String[] @accepts = new String[] {
+                "application/json"
+            };
+
+      var localVarContentType = YNAB.SDK.Client.ClientUtils.SelectHeaderContentType(@contentTypes);
+      if (localVarContentType != null) requestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+      var localVarAccept = YNAB.SDK.Client.ClientUtils.SelectHeaderAccept(@accepts);
+      if (localVarAccept != null) requestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+      if (budgetId != null)
+        requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
+      requestOptions.Data = data;
+
+      // authentication (bearer) required
+      if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+      {
+        requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
+      }
+
+      // make the HTTP request
+
+      var response = this.Client.Patch<SaveTransactionsResponse>("/budgets/{budget_id}/transactions", requestOptions, this.Configuration);
+
+      if (this.ExceptionFactory != null)
+      {
+        Exception exception = this.ExceptionFactory("UpdateTransactions", response);
+        if (exception != null) throw exception;
+      }
+
+      return response;
+    }
+
+    /// <summary>
+    /// Update multiple transactions Updates multiple transactions, by &#39;id&#39; or &#39;import_id&#39;.
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="data">The transactions to update. Each transaction must have either an &#39;id&#39; or &#39;import_id&#39; specified. If &#39;id&#39; is specified as null an &#39;import_id&#39; value can be provided which will allow transaction(s) to be updated by their import_id. If an id is specified, it will always be used for lookup.</param>
+    /// <returns>Task of SaveTransactionsResponse</returns>
+    public async System.Threading.Tasks.Task<SaveTransactionsResponse> UpdateTransactionsAsync(string budgetId, UpdateTransactionsWrapper data)
+    {
+      YNAB.SDK.Client.ApiResponse<SaveTransactionsResponse> localVarResponse = await UpdateTransactionsAsyncWithHttpInfo(budgetId, data);
+      return localVarResponse.Data;
+
+    }
+
+    /// <summary>
+    /// Update multiple transactions Updates multiple transactions, by &#39;id&#39; or &#39;import_id&#39;.
+    /// </summary>
+    /// <exception cref="YNAB.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="budgetId">The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)</param>
+    /// <param name="data">The transactions to update. Each transaction must have either an &#39;id&#39; or &#39;import_id&#39; specified. If &#39;id&#39; is specified as null an &#39;import_id&#39; value can be provided which will allow transaction(s) to be updated by their import_id. If an id is specified, it will always be used for lookup.</param>
+    /// <returns>Task of ApiResponse (SaveTransactionsResponse)</returns>
+    public async System.Threading.Tasks.Task<YNAB.SDK.Client.ApiResponse<SaveTransactionsResponse>> UpdateTransactionsAsyncWithHttpInfo(string budgetId, UpdateTransactionsWrapper data)
+    {
+      // verify the required parameter 'budgetId' is set
+      if (budgetId == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'budgetId' when calling TransactionsApi->UpdateTransactions");
+
+      // verify the required parameter 'data' is set
+      if (data == null)
+        throw new YNAB.SDK.Client.ApiException(400, "Missing required parameter 'data' when calling TransactionsApi->UpdateTransactions");
+
+
+      YNAB.SDK.Client.RequestOptions requestOptions = new YNAB.SDK.Client.RequestOptions();
+
+      String[] @contentTypes = new String[] {
+            };
+
+      // to determine the Accept header
+      String[] @accepts = new String[] {
+                "application/json"
+            };
+
+      foreach (var contentType in @contentTypes)
+        requestOptions.HeaderParameters.Add("Content-Type", contentType);
+
+      foreach (var accept in @accepts)
+        requestOptions.HeaderParameters.Add("Accept", accept);
+
+      if (budgetId != null)
+        requestOptions.PathParameters.Add("budget_id", YNAB.SDK.Client.ClientUtils.ParameterToString(budgetId)); // path parameter
+      requestOptions.Data = data;
+
+      // authentication (bearer) required
+      if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+      {
+        requestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
+      }
+
+      // make the HTTP request
+
+      var response = await this.AsynchronousClient.PatchAsync<SaveTransactionsResponse>("/budgets/{budget_id}/transactions", requestOptions, this.Configuration);
+
+      if (this.ExceptionFactory != null)
+      {
+        Exception exception = this.ExceptionFactory("UpdateTransactions", response);
+        if (exception != null) throw exception;
+      }
+
+      return response;
+    }
+
+  }
 }

@@ -25,431 +25,431 @@ using OpenAPIDateConverter = YNAB.SDK.Client.OpenAPIDateConverter;
 
 namespace YNAB.SDK.Model
 {
+  /// <summary>
+  /// Category
+  /// </summary>
+  [DataContract]
+  public partial class Category : IEquatable<Category>, IValidatableObject
+  {
     /// <summary>
-    /// Category
+    /// The type of goal, if the category has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding)
     /// </summary>
-    [DataContract]
-    public partial class Category :  IEquatable<Category>, IValidatableObject
+    /// <value>The type of goal, if the category has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding)</value>
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum GoalTypeEnum
     {
-        /// <summary>
-        /// The type of goal, if the category has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding)
-        /// </summary>
-        /// <value>The type of goal, if the category has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding)</value>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum GoalTypeEnum
-        {
-            /// <summary>
-            /// Enum TB for value: TB
-            /// </summary>
-            [EnumMember(Value = "TB")]
-            TB = 1,
+      /// <summary>
+      /// Enum TB for value: TB
+      /// </summary>
+      [EnumMember(Value = "TB")]
+      TB = 1,
 
-            /// <summary>
-            /// Enum TBD for value: TBD
-            /// </summary>
-            [EnumMember(Value = "TBD")]
-            TBD = 2,
+      /// <summary>
+      /// Enum TBD for value: TBD
+      /// </summary>
+      [EnumMember(Value = "TBD")]
+      TBD = 2,
 
-            /// <summary>
-            /// Enum MF for value: MF
-            /// </summary>
-            [EnumMember(Value = "MF")]
-            MF = 3,
+      /// <summary>
+      /// Enum MF for value: MF
+      /// </summary>
+      [EnumMember(Value = "MF")]
+      MF = 3,
 
-            /// <summary>
-            /// Enum NEED for value: NEED
-            /// </summary>
-            [EnumMember(Value = "NEED")]
-            NEED = 4
+      /// <summary>
+      /// Enum NEED for value: NEED
+      /// </summary>
+      [EnumMember(Value = "NEED")]
+      NEED = 4
 
-        }
-
-        /// <summary>
-        /// The type of goal, if the category has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding)
-        /// </summary>
-        /// <value>The type of goal, if the category has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding)</value>
-        [DataMember(Name="goal_type", EmitDefaultValue=false)]
-        public GoalTypeEnum? GoalType { get; set; }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Category" /> class.
-        /// </summary>
-        [JsonConstructorAttribute]
-        protected Category() { }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Category" /> class.
-        /// </summary>
-        /// <param name="id">id (required).</param>
-        /// <param name="categoryGroupId">categoryGroupId (required).</param>
-        /// <param name="name">name (required).</param>
-        /// <param name="hidden">Whether or not the category is hidden (required).</param>
-        /// <param name="originalCategoryGroupId">If category is hidden this is the id of the category group it originally belonged to before it was hidden..</param>
-        /// <param name="note">note.</param>
-        /// <param name="budgeted">Budgeted amount in milliunits format (required).</param>
-        /// <param name="activity">Activity amount in milliunits format (required).</param>
-        /// <param name="balance">Balance in milliunits format (required).</param>
-        /// <param name="goalType">The type of goal, if the category has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding).</param>
-        /// <param name="goalCreationMonth">The month a goal was created.</param>
-        /// <param name="goalTarget">The goal target amount in milliunits.</param>
-        /// <param name="goalTargetMonth">If the goal type is &#39;TBD&#39; (Target Category Balance by Date), this is the target month for the goal to be completed.</param>
-        /// <param name="goalPercentageComplete">The percentage completion of the goal.</param>
-        /// <param name="deleted">Whether or not the category has been deleted.  Deleted categories will only be included in delta requests. (required).</param>
-        public Category(Guid id = default(Guid), Guid categoryGroupId = default(Guid), string name = default(string), bool hidden = default(bool), Guid originalCategoryGroupId = default(Guid), string note = default(string), long budgeted = default(long), long activity = default(long), long balance = default(long), GoalTypeEnum? goalType = default(GoalTypeEnum?), DateTime goalCreationMonth = default(DateTime), long goalTarget = default(long), DateTime goalTargetMonth = default(DateTime), int goalPercentageComplete = default(int), bool deleted = default(bool))
-        {
-            // to ensure "id" is required (not null)
-            if (id == null)
-            {
-                throw new InvalidDataException("id is a required property for Category and cannot be null");
-            }
-            else
-            {
-                this.Id = id;
-            }
-
-            // to ensure "categoryGroupId" is required (not null)
-            if (categoryGroupId == null)
-            {
-                throw new InvalidDataException("categoryGroupId is a required property for Category and cannot be null");
-            }
-            else
-            {
-                this.CategoryGroupId = categoryGroupId;
-            }
-
-            // to ensure "name" is required (not null)
-            if (name == null)
-            {
-                throw new InvalidDataException("name is a required property for Category and cannot be null");
-            }
-            else
-            {
-                this.Name = name;
-            }
-
-            // to ensure "hidden" is required (not null)
-            if (hidden == null)
-            {
-                throw new InvalidDataException("hidden is a required property for Category and cannot be null");
-            }
-            else
-            {
-                this.Hidden = hidden;
-            }
-
-            // to ensure "budgeted" is required (not null)
-            if (budgeted == null)
-            {
-                throw new InvalidDataException("budgeted is a required property for Category and cannot be null");
-            }
-            else
-            {
-                this.Budgeted = budgeted;
-            }
-
-            // to ensure "activity" is required (not null)
-            if (activity == null)
-            {
-                throw new InvalidDataException("activity is a required property for Category and cannot be null");
-            }
-            else
-            {
-                this.Activity = activity;
-            }
-
-            // to ensure "balance" is required (not null)
-            if (balance == null)
-            {
-                throw new InvalidDataException("balance is a required property for Category and cannot be null");
-            }
-            else
-            {
-                this.Balance = balance;
-            }
-
-            // to ensure "deleted" is required (not null)
-            if (deleted == null)
-            {
-                throw new InvalidDataException("deleted is a required property for Category and cannot be null");
-            }
-            else
-            {
-                this.Deleted = deleted;
-            }
-
-            this.OriginalCategoryGroupId = originalCategoryGroupId;
-            this.Note = note;
-            this.GoalType = goalType;
-            this.GoalCreationMonth = goalCreationMonth;
-            this.GoalTarget = goalTarget;
-            this.GoalTargetMonth = goalTargetMonth;
-            this.GoalPercentageComplete = goalPercentageComplete;
-        }
-
-        /// <summary>
-        /// Gets or Sets Id
-        /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
-        public Guid Id { get; set; }
-
-        /// <summary>
-        /// Gets or Sets CategoryGroupId
-        /// </summary>
-        [DataMember(Name="category_group_id", EmitDefaultValue=false)]
-        public Guid CategoryGroupId { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Name
-        /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Whether or not the category is hidden
-        /// </summary>
-        /// <value>Whether or not the category is hidden</value>
-        [DataMember(Name="hidden", EmitDefaultValue=false)]
-        public bool Hidden { get; set; }
-
-        /// <summary>
-        /// If category is hidden this is the id of the category group it originally belonged to before it was hidden.
-        /// </summary>
-        /// <value>If category is hidden this is the id of the category group it originally belonged to before it was hidden.</value>
-        [DataMember(Name="original_category_group_id", EmitDefaultValue=false)]
-        public Guid? OriginalCategoryGroupId { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Note
-        /// </summary>
-        [DataMember(Name="note", EmitDefaultValue=false)]
-        public string Note { get; set; }
-
-        /// <summary>
-        /// Budgeted amount in milliunits format
-        /// </summary>
-        /// <value>Budgeted amount in milliunits format</value>
-        [DataMember(Name="budgeted", EmitDefaultValue=false)]
-        public long Budgeted { get; set; }
-
-        /// <summary>
-        /// Activity amount in milliunits format
-        /// </summary>
-        /// <value>Activity amount in milliunits format</value>
-        [DataMember(Name="activity", EmitDefaultValue=false)]
-        public long Activity { get; set; }
-
-        /// <summary>
-        /// Balance in milliunits format
-        /// </summary>
-        /// <value>Balance in milliunits format</value>
-        [DataMember(Name="balance", EmitDefaultValue=false)]
-        public long Balance { get; set; }
-
-        /// <summary>
-        /// The month a goal was created
-        /// </summary>
-        /// <value>The month a goal was created</value>
-        [DataMember(Name="goal_creation_month", EmitDefaultValue=false)]
-        [JsonConverter(typeof(OpenAPIDateConverter))]
-        public DateTime? GoalCreationMonth { get; set; }
-
-        /// <summary>
-        /// The goal target amount in milliunits
-        /// </summary>
-        /// <value>The goal target amount in milliunits</value>
-        [DataMember(Name="goal_target", EmitDefaultValue=false)]
-        public long? GoalTarget { get; set; }
-
-        /// <summary>
-        /// If the goal type is &#39;TBD&#39; (Target Category Balance by Date), this is the target month for the goal to be completed
-        /// </summary>
-        /// <value>If the goal type is &#39;TBD&#39; (Target Category Balance by Date), this is the target month for the goal to be completed</value>
-        [DataMember(Name="goal_target_month", EmitDefaultValue=false)]
-        [JsonConverter(typeof(OpenAPIDateConverter))]
-        public DateTime? GoalTargetMonth { get; set; }
-
-        /// <summary>
-        /// The percentage completion of the goal
-        /// </summary>
-        /// <value>The percentage completion of the goal</value>
-        [DataMember(Name="goal_percentage_complete", EmitDefaultValue=false)]
-        public int? GoalPercentageComplete { get; set; }
-
-        /// <summary>
-        /// Whether or not the category has been deleted.  Deleted categories will only be included in delta requests.
-        /// </summary>
-        /// <value>Whether or not the category has been deleted.  Deleted categories will only be included in delta requests.</value>
-        [DataMember(Name="deleted", EmitDefaultValue=false)]
-        public bool Deleted { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-            sb.Append("class Category {\n");
-            sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("  CategoryGroupId: ").Append(CategoryGroupId).Append("\n");
-            sb.Append("  Name: ").Append(Name).Append("\n");
-            sb.Append("  Hidden: ").Append(Hidden).Append("\n");
-            sb.Append("  OriginalCategoryGroupId: ").Append(OriginalCategoryGroupId).Append("\n");
-            sb.Append("  Note: ").Append(Note).Append("\n");
-            sb.Append("  Budgeted: ").Append(Budgeted).Append("\n");
-            sb.Append("  Activity: ").Append(Activity).Append("\n");
-            sb.Append("  Balance: ").Append(Balance).Append("\n");
-            sb.Append("  GoalType: ").Append(GoalType).Append("\n");
-            sb.Append("  GoalCreationMonth: ").Append(GoalCreationMonth).Append("\n");
-            sb.Append("  GoalTarget: ").Append(GoalTarget).Append("\n");
-            sb.Append("  GoalTargetMonth: ").Append(GoalTargetMonth).Append("\n");
-            sb.Append("  GoalPercentageComplete: ").Append(GoalPercentageComplete).Append("\n");
-            sb.Append("  Deleted: ").Append(Deleted).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
-        }
-
-        /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
-        /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
-
-        /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as Category);
-        }
-
-        /// <summary>
-        /// Returns true if Category instances are equal
-        /// </summary>
-        /// <param name="input">Instance of Category to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(Category input)
-        {
-            if (input == null)
-                return false;
-
-            return
-                (
-                    this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
-                ) &&
-                (
-                    this.CategoryGroupId == input.CategoryGroupId ||
-                    (this.CategoryGroupId != null &&
-                    this.CategoryGroupId.Equals(input.CategoryGroupId))
-                ) &&
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) &&
-                (
-                    this.Hidden == input.Hidden ||
-                    this.Hidden.Equals(input.Hidden)
-                ) &&
-                (
-                    this.OriginalCategoryGroupId == input.OriginalCategoryGroupId ||
-                    (this.OriginalCategoryGroupId != null &&
-                    this.OriginalCategoryGroupId.Equals(input.OriginalCategoryGroupId))
-                ) &&
-                (
-                    this.Note == input.Note ||
-                    (this.Note != null &&
-                    this.Note.Equals(input.Note))
-                ) &&
-                (
-                    this.Budgeted == input.Budgeted ||
-                    this.Budgeted.Equals(input.Budgeted)
-                ) &&
-                (
-                    this.Activity == input.Activity ||
-                    this.Activity.Equals(input.Activity)
-                ) &&
-                (
-                    this.Balance == input.Balance ||
-                    this.Balance.Equals(input.Balance)
-                ) &&
-                (
-                    this.GoalType == input.GoalType ||
-                    this.GoalType.Equals(input.GoalType)
-                ) &&
-                (
-                    this.GoalCreationMonth == input.GoalCreationMonth ||
-                    (this.GoalCreationMonth != null &&
-                    this.GoalCreationMonth.Equals(input.GoalCreationMonth))
-                ) &&
-                (
-                    this.GoalTarget == input.GoalTarget ||
-                    this.GoalTarget.Equals(input.GoalTarget)
-                ) &&
-                (
-                    this.GoalTargetMonth == input.GoalTargetMonth ||
-                    (this.GoalTargetMonth != null &&
-                    this.GoalTargetMonth.Equals(input.GoalTargetMonth))
-                ) &&
-                (
-                    this.GoalPercentageComplete == input.GoalPercentageComplete ||
-                    this.GoalPercentageComplete.Equals(input.GoalPercentageComplete)
-                ) &&
-                (
-                    this.Deleted == input.Deleted ||
-                    this.Deleted.Equals(input.Deleted)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.CategoryGroupId != null)
-                    hashCode = hashCode * 59 + this.CategoryGroupId.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                hashCode = hashCode * 59 + this.Hidden.GetHashCode();
-                if (this.OriginalCategoryGroupId != null)
-                    hashCode = hashCode * 59 + this.OriginalCategoryGroupId.GetHashCode();
-                if (this.Note != null)
-                    hashCode = hashCode * 59 + this.Note.GetHashCode();
-                hashCode = hashCode * 59 + this.Budgeted.GetHashCode();
-                hashCode = hashCode * 59 + this.Activity.GetHashCode();
-                hashCode = hashCode * 59 + this.Balance.GetHashCode();
-                hashCode = hashCode * 59 + this.GoalType.GetHashCode();
-                if (this.GoalCreationMonth != null)
-                    hashCode = hashCode * 59 + this.GoalCreationMonth.GetHashCode();
-                hashCode = hashCode * 59 + this.GoalTarget.GetHashCode();
-                if (this.GoalTargetMonth != null)
-                    hashCode = hashCode * 59 + this.GoalTargetMonth.GetHashCode();
-                hashCode = hashCode * 59 + this.GoalPercentageComplete.GetHashCode();
-                hashCode = hashCode * 59 + this.Deleted.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-        {
-            yield break;
-        }
     }
+
+    /// <summary>
+    /// The type of goal, if the category has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding)
+    /// </summary>
+    /// <value>The type of goal, if the category has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding)</value>
+    [DataMember(Name = "goal_type", EmitDefaultValue = false)]
+    public GoalTypeEnum? GoalType { get; set; }
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Category" /> class.
+    /// </summary>
+    [JsonConstructorAttribute]
+    protected Category() { }
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Category" /> class.
+    /// </summary>
+    /// <param name="id">id (required).</param>
+    /// <param name="categoryGroupId">categoryGroupId (required).</param>
+    /// <param name="name">name (required).</param>
+    /// <param name="hidden">Whether or not the category is hidden (required).</param>
+    /// <param name="originalCategoryGroupId">If category is hidden this is the id of the category group it originally belonged to before it was hidden..</param>
+    /// <param name="note">note.</param>
+    /// <param name="budgeted">Budgeted amount in milliunits format (required).</param>
+    /// <param name="activity">Activity amount in milliunits format (required).</param>
+    /// <param name="balance">Balance in milliunits format (required).</param>
+    /// <param name="goalType">The type of goal, if the category has a goal (TB&#x3D;Target Category Balance, TBD&#x3D;Target Category Balance by Date, MF&#x3D;Monthly Funding).</param>
+    /// <param name="goalCreationMonth">The month a goal was created.</param>
+    /// <param name="goalTarget">The goal target amount in milliunits.</param>
+    /// <param name="goalTargetMonth">If the goal type is &#39;TBD&#39; (Target Category Balance by Date), this is the target month for the goal to be completed.</param>
+    /// <param name="goalPercentageComplete">The percentage completion of the goal.</param>
+    /// <param name="deleted">Whether or not the category has been deleted.  Deleted categories will only be included in delta requests. (required).</param>
+    public Category(Guid id = default(Guid), Guid categoryGroupId = default(Guid), string name = default(string), bool hidden = default(bool), Guid originalCategoryGroupId = default(Guid), string note = default(string), long budgeted = default(long), long activity = default(long), long balance = default(long), GoalTypeEnum? goalType = default(GoalTypeEnum?), DateTime goalCreationMonth = default(DateTime), long goalTarget = default(long), DateTime goalTargetMonth = default(DateTime), int goalPercentageComplete = default(int), bool deleted = default(bool))
+    {
+      // to ensure "id" is required (not null)
+      if (id == null)
+      {
+        throw new InvalidDataException("id is a required property for Category and cannot be null");
+      }
+      else
+      {
+        this.Id = id;
+      }
+
+      // to ensure "categoryGroupId" is required (not null)
+      if (categoryGroupId == null)
+      {
+        throw new InvalidDataException("categoryGroupId is a required property for Category and cannot be null");
+      }
+      else
+      {
+        this.CategoryGroupId = categoryGroupId;
+      }
+
+      // to ensure "name" is required (not null)
+      if (name == null)
+      {
+        throw new InvalidDataException("name is a required property for Category and cannot be null");
+      }
+      else
+      {
+        this.Name = name;
+      }
+
+      // to ensure "hidden" is required (not null)
+      if (hidden == null)
+      {
+        throw new InvalidDataException("hidden is a required property for Category and cannot be null");
+      }
+      else
+      {
+        this.Hidden = hidden;
+      }
+
+      // to ensure "budgeted" is required (not null)
+      if (budgeted == null)
+      {
+        throw new InvalidDataException("budgeted is a required property for Category and cannot be null");
+      }
+      else
+      {
+        this.Budgeted = budgeted;
+      }
+
+      // to ensure "activity" is required (not null)
+      if (activity == null)
+      {
+        throw new InvalidDataException("activity is a required property for Category and cannot be null");
+      }
+      else
+      {
+        this.Activity = activity;
+      }
+
+      // to ensure "balance" is required (not null)
+      if (balance == null)
+      {
+        throw new InvalidDataException("balance is a required property for Category and cannot be null");
+      }
+      else
+      {
+        this.Balance = balance;
+      }
+
+      // to ensure "deleted" is required (not null)
+      if (deleted == null)
+      {
+        throw new InvalidDataException("deleted is a required property for Category and cannot be null");
+      }
+      else
+      {
+        this.Deleted = deleted;
+      }
+
+      this.OriginalCategoryGroupId = originalCategoryGroupId;
+      this.Note = note;
+      this.GoalType = goalType;
+      this.GoalCreationMonth = goalCreationMonth;
+      this.GoalTarget = goalTarget;
+      this.GoalTargetMonth = goalTargetMonth;
+      this.GoalPercentageComplete = goalPercentageComplete;
+    }
+
+    /// <summary>
+    /// Gets or Sets Id
+    /// </summary>
+    [DataMember(Name = "id", EmitDefaultValue = false)]
+    public Guid Id { get; set; }
+
+    /// <summary>
+    /// Gets or Sets CategoryGroupId
+    /// </summary>
+    [DataMember(Name = "category_group_id", EmitDefaultValue = false)]
+    public Guid CategoryGroupId { get; set; }
+
+    /// <summary>
+    /// Gets or Sets Name
+    /// </summary>
+    [DataMember(Name = "name", EmitDefaultValue = false)]
+    public string Name { get; set; }
+
+    /// <summary>
+    /// Whether or not the category is hidden
+    /// </summary>
+    /// <value>Whether or not the category is hidden</value>
+    [DataMember(Name = "hidden", EmitDefaultValue = false)]
+    public bool Hidden { get; set; }
+
+    /// <summary>
+    /// If category is hidden this is the id of the category group it originally belonged to before it was hidden.
+    /// </summary>
+    /// <value>If category is hidden this is the id of the category group it originally belonged to before it was hidden.</value>
+    [DataMember(Name = "original_category_group_id", EmitDefaultValue = false)]
+    public Guid? OriginalCategoryGroupId { get; set; }
+
+    /// <summary>
+    /// Gets or Sets Note
+    /// </summary>
+    [DataMember(Name = "note", EmitDefaultValue = false)]
+    public string Note { get; set; }
+
+    /// <summary>
+    /// Budgeted amount in milliunits format
+    /// </summary>
+    /// <value>Budgeted amount in milliunits format</value>
+    [DataMember(Name = "budgeted", EmitDefaultValue = false)]
+    public long Budgeted { get; set; }
+
+    /// <summary>
+    /// Activity amount in milliunits format
+    /// </summary>
+    /// <value>Activity amount in milliunits format</value>
+    [DataMember(Name = "activity", EmitDefaultValue = false)]
+    public long Activity { get; set; }
+
+    /// <summary>
+    /// Balance in milliunits format
+    /// </summary>
+    /// <value>Balance in milliunits format</value>
+    [DataMember(Name = "balance", EmitDefaultValue = false)]
+    public long Balance { get; set; }
+
+    /// <summary>
+    /// The month a goal was created
+    /// </summary>
+    /// <value>The month a goal was created</value>
+    [DataMember(Name = "goal_creation_month", EmitDefaultValue = false)]
+    [JsonConverter(typeof(OpenAPIDateConverter))]
+    public DateTime? GoalCreationMonth { get; set; }
+
+    /// <summary>
+    /// The goal target amount in milliunits
+    /// </summary>
+    /// <value>The goal target amount in milliunits</value>
+    [DataMember(Name = "goal_target", EmitDefaultValue = false)]
+    public long? GoalTarget { get; set; }
+
+    /// <summary>
+    /// If the goal type is &#39;TBD&#39; (Target Category Balance by Date), this is the target month for the goal to be completed
+    /// </summary>
+    /// <value>If the goal type is &#39;TBD&#39; (Target Category Balance by Date), this is the target month for the goal to be completed</value>
+    [DataMember(Name = "goal_target_month", EmitDefaultValue = false)]
+    [JsonConverter(typeof(OpenAPIDateConverter))]
+    public DateTime? GoalTargetMonth { get; set; }
+
+    /// <summary>
+    /// The percentage completion of the goal
+    /// </summary>
+    /// <value>The percentage completion of the goal</value>
+    [DataMember(Name = "goal_percentage_complete", EmitDefaultValue = false)]
+    public int? GoalPercentageComplete { get; set; }
+
+    /// <summary>
+    /// Whether or not the category has been deleted.  Deleted categories will only be included in delta requests.
+    /// </summary>
+    /// <value>Whether or not the category has been deleted.  Deleted categories will only be included in delta requests.</value>
+    [DataMember(Name = "deleted", EmitDefaultValue = false)]
+    public bool Deleted { get; set; }
+
+    /// <summary>
+    /// Returns the string presentation of the object
+    /// </summary>
+    /// <returns>String presentation of the object</returns>
+    public override string ToString()
+    {
+      var sb = new StringBuilder();
+      sb.Append("class Category {\n");
+      sb.Append("  Id: ").Append(Id).Append("\n");
+      sb.Append("  CategoryGroupId: ").Append(CategoryGroupId).Append("\n");
+      sb.Append("  Name: ").Append(Name).Append("\n");
+      sb.Append("  Hidden: ").Append(Hidden).Append("\n");
+      sb.Append("  OriginalCategoryGroupId: ").Append(OriginalCategoryGroupId).Append("\n");
+      sb.Append("  Note: ").Append(Note).Append("\n");
+      sb.Append("  Budgeted: ").Append(Budgeted).Append("\n");
+      sb.Append("  Activity: ").Append(Activity).Append("\n");
+      sb.Append("  Balance: ").Append(Balance).Append("\n");
+      sb.Append("  GoalType: ").Append(GoalType).Append("\n");
+      sb.Append("  GoalCreationMonth: ").Append(GoalCreationMonth).Append("\n");
+      sb.Append("  GoalTarget: ").Append(GoalTarget).Append("\n");
+      sb.Append("  GoalTargetMonth: ").Append(GoalTargetMonth).Append("\n");
+      sb.Append("  GoalPercentageComplete: ").Append(GoalPercentageComplete).Append("\n");
+      sb.Append("  Deleted: ").Append(Deleted).Append("\n");
+      sb.Append("}\n");
+      return sb.ToString();
+    }
+
+    /// <summary>
+    /// Returns the JSON string presentation of the object
+    /// </summary>
+    /// <returns>JSON string presentation of the object</returns>
+    public virtual string ToJson()
+    {
+      return JsonConvert.SerializeObject(this, Formatting.Indented);
+    }
+
+    /// <summary>
+    /// Returns true if objects are equal
+    /// </summary>
+    /// <param name="input">Object to be compared</param>
+    /// <returns>Boolean</returns>
+    public override bool Equals(object input)
+    {
+      return this.Equals(input as Category);
+    }
+
+    /// <summary>
+    /// Returns true if Category instances are equal
+    /// </summary>
+    /// <param name="input">Instance of Category to be compared</param>
+    /// <returns>Boolean</returns>
+    public bool Equals(Category input)
+    {
+      if (input == null)
+        return false;
+
+      return
+          (
+              this.Id == input.Id ||
+              (this.Id != null &&
+              this.Id.Equals(input.Id))
+          ) &&
+          (
+              this.CategoryGroupId == input.CategoryGroupId ||
+              (this.CategoryGroupId != null &&
+              this.CategoryGroupId.Equals(input.CategoryGroupId))
+          ) &&
+          (
+              this.Name == input.Name ||
+              (this.Name != null &&
+              this.Name.Equals(input.Name))
+          ) &&
+          (
+              this.Hidden == input.Hidden ||
+              this.Hidden.Equals(input.Hidden)
+          ) &&
+          (
+              this.OriginalCategoryGroupId == input.OriginalCategoryGroupId ||
+              (this.OriginalCategoryGroupId != null &&
+              this.OriginalCategoryGroupId.Equals(input.OriginalCategoryGroupId))
+          ) &&
+          (
+              this.Note == input.Note ||
+              (this.Note != null &&
+              this.Note.Equals(input.Note))
+          ) &&
+          (
+              this.Budgeted == input.Budgeted ||
+              this.Budgeted.Equals(input.Budgeted)
+          ) &&
+          (
+              this.Activity == input.Activity ||
+              this.Activity.Equals(input.Activity)
+          ) &&
+          (
+              this.Balance == input.Balance ||
+              this.Balance.Equals(input.Balance)
+          ) &&
+          (
+              this.GoalType == input.GoalType ||
+              this.GoalType.Equals(input.GoalType)
+          ) &&
+          (
+              this.GoalCreationMonth == input.GoalCreationMonth ||
+              (this.GoalCreationMonth != null &&
+              this.GoalCreationMonth.Equals(input.GoalCreationMonth))
+          ) &&
+          (
+              this.GoalTarget == input.GoalTarget ||
+              this.GoalTarget.Equals(input.GoalTarget)
+          ) &&
+          (
+              this.GoalTargetMonth == input.GoalTargetMonth ||
+              (this.GoalTargetMonth != null &&
+              this.GoalTargetMonth.Equals(input.GoalTargetMonth))
+          ) &&
+          (
+              this.GoalPercentageComplete == input.GoalPercentageComplete ||
+              this.GoalPercentageComplete.Equals(input.GoalPercentageComplete)
+          ) &&
+          (
+              this.Deleted == input.Deleted ||
+              this.Deleted.Equals(input.Deleted)
+          );
+    }
+
+    /// <summary>
+    /// Gets the hash code
+    /// </summary>
+    /// <returns>Hash code</returns>
+    public override int GetHashCode()
+    {
+      unchecked // Overflow is fine, just wrap
+      {
+        int hashCode = 41;
+        if (this.Id != null)
+          hashCode = hashCode * 59 + this.Id.GetHashCode();
+        if (this.CategoryGroupId != null)
+          hashCode = hashCode * 59 + this.CategoryGroupId.GetHashCode();
+        if (this.Name != null)
+          hashCode = hashCode * 59 + this.Name.GetHashCode();
+        hashCode = hashCode * 59 + this.Hidden.GetHashCode();
+        if (this.OriginalCategoryGroupId != null)
+          hashCode = hashCode * 59 + this.OriginalCategoryGroupId.GetHashCode();
+        if (this.Note != null)
+          hashCode = hashCode * 59 + this.Note.GetHashCode();
+        hashCode = hashCode * 59 + this.Budgeted.GetHashCode();
+        hashCode = hashCode * 59 + this.Activity.GetHashCode();
+        hashCode = hashCode * 59 + this.Balance.GetHashCode();
+        hashCode = hashCode * 59 + this.GoalType.GetHashCode();
+        if (this.GoalCreationMonth != null)
+          hashCode = hashCode * 59 + this.GoalCreationMonth.GetHashCode();
+        hashCode = hashCode * 59 + this.GoalTarget.GetHashCode();
+        if (this.GoalTargetMonth != null)
+          hashCode = hashCode * 59 + this.GoalTargetMonth.GetHashCode();
+        hashCode = hashCode * 59 + this.GoalPercentageComplete.GetHashCode();
+        hashCode = hashCode * 59 + this.Deleted.GetHashCode();
+        return hashCode;
+      }
+    }
+
+    /// <summary>
+    /// To validate all properties of the instance
+    /// </summary>
+    /// <param name="validationContext">Validation context</param>
+    /// <returns>Validation Result</returns>
+    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+    {
+      yield break;
+    }
+  }
 
 }

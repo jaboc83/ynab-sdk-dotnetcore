@@ -25,214 +25,214 @@ using OpenAPIDateConverter = YNAB.SDK.Client.OpenAPIDateConverter;
 
 namespace YNAB.SDK.Model
 {
+  /// <summary>
+  /// PayeeLocation
+  /// </summary>
+  [DataContract]
+  public partial class PayeeLocation : IEquatable<PayeeLocation>, IValidatableObject
+  {
     /// <summary>
-    /// PayeeLocation
+    /// Initializes a new instance of the <see cref="PayeeLocation" /> class.
     /// </summary>
-    [DataContract]
-    public partial class PayeeLocation :  IEquatable<PayeeLocation>, IValidatableObject
+    [JsonConstructorAttribute]
+    protected PayeeLocation() { }
+    /// <summary>
+    /// Initializes a new instance of the <see cref="PayeeLocation" /> class.
+    /// </summary>
+    /// <param name="id">id (required).</param>
+    /// <param name="payeeId">payeeId (required).</param>
+    /// <param name="latitude">latitude (required).</param>
+    /// <param name="longitude">longitude (required).</param>
+    /// <param name="deleted">Whether or not the payee location has been deleted.  Deleted payee locations will only be included in delta requests. (required).</param>
+    public PayeeLocation(Guid id = default(Guid), Guid? payeeId = default(Guid?), string latitude = default(string), string longitude = default(string), bool deleted = default(bool))
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PayeeLocation" /> class.
-        /// </summary>
-        [JsonConstructorAttribute]
-        protected PayeeLocation() { }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PayeeLocation" /> class.
-        /// </summary>
-        /// <param name="id">id (required).</param>
-        /// <param name="payeeId">payeeId (required).</param>
-        /// <param name="latitude">latitude (required).</param>
-        /// <param name="longitude">longitude (required).</param>
-        /// <param name="deleted">Whether or not the payee location has been deleted.  Deleted payee locations will only be included in delta requests. (required).</param>
-        public PayeeLocation(Guid id = default(Guid), Guid? payeeId = default(Guid?), string latitude = default(string), string longitude = default(string), bool deleted = default(bool))
-        {
-            // to ensure "id" is required (not null)
-            if (id == null)
-            {
-                throw new InvalidDataException("id is a required property for PayeeLocation and cannot be null");
-            }
-            else
-            {
-                this.Id = id;
-            }
+      // to ensure "id" is required (not null)
+      if (id == null)
+      {
+        throw new InvalidDataException("id is a required property for PayeeLocation and cannot be null");
+      }
+      else
+      {
+        this.Id = id;
+      }
 
-            // to ensure "payeeId" is required (not null)
-            if (payeeId == null)
-            {
-                throw new InvalidDataException("payeeId is a required property for PayeeLocation and cannot be null");
-            }
-            else
-            {
-                this.PayeeId = payeeId;
-            }
+      // to ensure "payeeId" is required (not null)
+      if (payeeId == null)
+      {
+        throw new InvalidDataException("payeeId is a required property for PayeeLocation and cannot be null");
+      }
+      else
+      {
+        this.PayeeId = payeeId;
+      }
 
-            // to ensure "latitude" is required (not null)
-            if (latitude == null)
-            {
-                throw new InvalidDataException("latitude is a required property for PayeeLocation and cannot be null");
-            }
-            else
-            {
-                this.Latitude = latitude;
-            }
+      // to ensure "latitude" is required (not null)
+      if (latitude == null)
+      {
+        throw new InvalidDataException("latitude is a required property for PayeeLocation and cannot be null");
+      }
+      else
+      {
+        this.Latitude = latitude;
+      }
 
-            // to ensure "longitude" is required (not null)
-            if (longitude == null)
-            {
-                throw new InvalidDataException("longitude is a required property for PayeeLocation and cannot be null");
-            }
-            else
-            {
-                this.Longitude = longitude;
-            }
+      // to ensure "longitude" is required (not null)
+      if (longitude == null)
+      {
+        throw new InvalidDataException("longitude is a required property for PayeeLocation and cannot be null");
+      }
+      else
+      {
+        this.Longitude = longitude;
+      }
 
-            // to ensure "deleted" is required (not null)
-            if (deleted == null)
-            {
-                throw new InvalidDataException("deleted is a required property for PayeeLocation and cannot be null");
-            }
-            else
-            {
-                this.Deleted = deleted;
-            }
+      // to ensure "deleted" is required (not null)
+      if (deleted == null)
+      {
+        throw new InvalidDataException("deleted is a required property for PayeeLocation and cannot be null");
+      }
+      else
+      {
+        this.Deleted = deleted;
+      }
 
-        }
-
-        /// <summary>
-        /// Gets or Sets Id
-        /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
-        public Guid Id { get; set; }
-
-        /// <summary>
-        /// Gets or Sets PayeeId
-        /// </summary>
-        [DataMember(Name="payee_id", EmitDefaultValue=false)]
-        public Guid? PayeeId { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Latitude
-        /// </summary>
-        [DataMember(Name="latitude", EmitDefaultValue=false)]
-        public string Latitude { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Longitude
-        /// </summary>
-        [DataMember(Name="longitude", EmitDefaultValue=false)]
-        public string Longitude { get; set; }
-
-        /// <summary>
-        /// Whether or not the payee location has been deleted.  Deleted payee locations will only be included in delta requests.
-        /// </summary>
-        /// <value>Whether or not the payee location has been deleted.  Deleted payee locations will only be included in delta requests.</value>
-        [DataMember(Name="deleted", EmitDefaultValue=false)]
-        public bool Deleted { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-            sb.Append("class PayeeLocation {\n");
-            sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("  PayeeId: ").Append(PayeeId).Append("\n");
-            sb.Append("  Latitude: ").Append(Latitude).Append("\n");
-            sb.Append("  Longitude: ").Append(Longitude).Append("\n");
-            sb.Append("  Deleted: ").Append(Deleted).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
-        }
-
-        /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
-        /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
-
-        /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as PayeeLocation);
-        }
-
-        /// <summary>
-        /// Returns true if PayeeLocation instances are equal
-        /// </summary>
-        /// <param name="input">Instance of PayeeLocation to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(PayeeLocation input)
-        {
-            if (input == null)
-                return false;
-
-            return
-                (
-                    this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
-                ) &&
-                (
-                    this.PayeeId == input.PayeeId ||
-                    (this.PayeeId != null &&
-                    this.PayeeId.Equals(input.PayeeId))
-                ) &&
-                (
-                    this.Latitude == input.Latitude ||
-                    (this.Latitude != null &&
-                    this.Latitude.Equals(input.Latitude))
-                ) &&
-                (
-                    this.Longitude == input.Longitude ||
-                    (this.Longitude != null &&
-                    this.Longitude.Equals(input.Longitude))
-                ) &&
-                (
-                    this.Deleted == input.Deleted ||
-                    this.Deleted.Equals(input.Deleted)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.PayeeId != null)
-                    hashCode = hashCode * 59 + this.PayeeId.GetHashCode();
-                if (this.Latitude != null)
-                    hashCode = hashCode * 59 + this.Latitude.GetHashCode();
-                if (this.Longitude != null)
-                    hashCode = hashCode * 59 + this.Longitude.GetHashCode();
-                hashCode = hashCode * 59 + this.Deleted.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-        {
-            yield break;
-        }
     }
+
+    /// <summary>
+    /// Gets or Sets Id
+    /// </summary>
+    [DataMember(Name = "id", EmitDefaultValue = false)]
+    public Guid Id { get; set; }
+
+    /// <summary>
+    /// Gets or Sets PayeeId
+    /// </summary>
+    [DataMember(Name = "payee_id", EmitDefaultValue = false)]
+    public Guid? PayeeId { get; set; }
+
+    /// <summary>
+    /// Gets or Sets Latitude
+    /// </summary>
+    [DataMember(Name = "latitude", EmitDefaultValue = false)]
+    public string Latitude { get; set; }
+
+    /// <summary>
+    /// Gets or Sets Longitude
+    /// </summary>
+    [DataMember(Name = "longitude", EmitDefaultValue = false)]
+    public string Longitude { get; set; }
+
+    /// <summary>
+    /// Whether or not the payee location has been deleted.  Deleted payee locations will only be included in delta requests.
+    /// </summary>
+    /// <value>Whether or not the payee location has been deleted.  Deleted payee locations will only be included in delta requests.</value>
+    [DataMember(Name = "deleted", EmitDefaultValue = false)]
+    public bool Deleted { get; set; }
+
+    /// <summary>
+    /// Returns the string presentation of the object
+    /// </summary>
+    /// <returns>String presentation of the object</returns>
+    public override string ToString()
+    {
+      var sb = new StringBuilder();
+      sb.Append("class PayeeLocation {\n");
+      sb.Append("  Id: ").Append(Id).Append("\n");
+      sb.Append("  PayeeId: ").Append(PayeeId).Append("\n");
+      sb.Append("  Latitude: ").Append(Latitude).Append("\n");
+      sb.Append("  Longitude: ").Append(Longitude).Append("\n");
+      sb.Append("  Deleted: ").Append(Deleted).Append("\n");
+      sb.Append("}\n");
+      return sb.ToString();
+    }
+
+    /// <summary>
+    /// Returns the JSON string presentation of the object
+    /// </summary>
+    /// <returns>JSON string presentation of the object</returns>
+    public virtual string ToJson()
+    {
+      return JsonConvert.SerializeObject(this, Formatting.Indented);
+    }
+
+    /// <summary>
+    /// Returns true if objects are equal
+    /// </summary>
+    /// <param name="input">Object to be compared</param>
+    /// <returns>Boolean</returns>
+    public override bool Equals(object input)
+    {
+      return this.Equals(input as PayeeLocation);
+    }
+
+    /// <summary>
+    /// Returns true if PayeeLocation instances are equal
+    /// </summary>
+    /// <param name="input">Instance of PayeeLocation to be compared</param>
+    /// <returns>Boolean</returns>
+    public bool Equals(PayeeLocation input)
+    {
+      if (input == null)
+        return false;
+
+      return
+          (
+              this.Id == input.Id ||
+              (this.Id != null &&
+              this.Id.Equals(input.Id))
+          ) &&
+          (
+              this.PayeeId == input.PayeeId ||
+              (this.PayeeId != null &&
+              this.PayeeId.Equals(input.PayeeId))
+          ) &&
+          (
+              this.Latitude == input.Latitude ||
+              (this.Latitude != null &&
+              this.Latitude.Equals(input.Latitude))
+          ) &&
+          (
+              this.Longitude == input.Longitude ||
+              (this.Longitude != null &&
+              this.Longitude.Equals(input.Longitude))
+          ) &&
+          (
+              this.Deleted == input.Deleted ||
+              this.Deleted.Equals(input.Deleted)
+          );
+    }
+
+    /// <summary>
+    /// Gets the hash code
+    /// </summary>
+    /// <returns>Hash code</returns>
+    public override int GetHashCode()
+    {
+      unchecked // Overflow is fine, just wrap
+      {
+        int hashCode = 41;
+        if (this.Id != null)
+          hashCode = hashCode * 59 + this.Id.GetHashCode();
+        if (this.PayeeId != null)
+          hashCode = hashCode * 59 + this.PayeeId.GetHashCode();
+        if (this.Latitude != null)
+          hashCode = hashCode * 59 + this.Latitude.GetHashCode();
+        if (this.Longitude != null)
+          hashCode = hashCode * 59 + this.Longitude.GetHashCode();
+        hashCode = hashCode * 59 + this.Deleted.GetHashCode();
+        return hashCode;
+      }
+    }
+
+    /// <summary>
+    /// To validate all properties of the instance
+    /// </summary>
+    /// <param name="validationContext">Validation context</param>
+    /// <returns>Validation Result</returns>
+    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+    {
+      yield break;
+    }
+  }
 
 }
