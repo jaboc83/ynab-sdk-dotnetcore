@@ -1,4 +1,5 @@
 # YNAB.SDK.Model.SaveMonthCategory
+
 ## Properties
 
 Name | Type | Description | Notes

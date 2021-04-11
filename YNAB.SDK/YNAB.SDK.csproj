@@ -8,13 +8,15 @@
     <Version>1.2.0</Version>
     <Authors>Jake Moening</Authors>
     <PackageProjectUrl>https://github.com/jaboc83/ynab-sdk-dotnetcore</PackageProjectUrl>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>YNAB.SDK</RootNamespace>
     <Copyright>2019 Jake Moening</Copyright>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageIcon>icon.png</PackageIcon>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <RepositoryUrl>https://github.com/jaboc83/ynab-sdk-dotnetcore.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,8 +24,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
-    <PackageReference Include="RestSharp" Version="106.6.10" />
+    <PackageReference Include="JsonSubTypes" Version="1.8.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="RestSharp" Version="106.11.7" />
+    <PackageReference Include="Polly" Version="7.2.1" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <None Include="../icon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>

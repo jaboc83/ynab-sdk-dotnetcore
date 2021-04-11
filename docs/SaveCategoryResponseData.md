@@ -1,4 +1,5 @@
 # YNAB.SDK.Model.SaveCategoryResponseData
+
 ## Properties
 
 Name | Type | Description | Notes

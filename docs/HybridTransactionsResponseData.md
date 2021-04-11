@@ -1,4 +1,5 @@
 # YNAB.SDK.Model.HybridTransactionsResponseData
+
 ## Properties
 
 Name | Type | Description | Notes

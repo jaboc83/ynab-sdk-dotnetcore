@@ -1,4 +1,5 @@
 # YNAB.SDK.Model.MonthSummariesResponseData
+
 ## Properties
 
 Name | Type | Description | Notes

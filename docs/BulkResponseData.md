@@ -1,4 +1,5 @@
 # YNAB.SDK.Model.BulkResponseData
+
 ## Properties
 
 Name | Type | Description | Notes

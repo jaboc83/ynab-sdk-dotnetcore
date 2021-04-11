@@ -1,4 +1,5 @@
 # YNAB.SDK.Model.MonthDetailAllOf
+
 ## Properties
 
 Name | Type | Description | Notes

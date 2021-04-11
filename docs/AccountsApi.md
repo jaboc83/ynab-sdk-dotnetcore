@@ -4,9 +4,89 @@ All URIs are relative to *https://api.youneedabudget.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**CreateAccount**](AccountsApi.md#createaccount) | **POST** /budgets/{budget_id}/accounts | Create a new account
 [**GetAccountById**](AccountsApi.md#getaccountbyid) | **GET** /budgets/{budget_id}/accounts/{account_id} | Single account
 [**GetAccounts**](AccountsApi.md#getaccounts) | **GET** /budgets/{budget_id}/accounts | Account list
 
+
+<a name="createaccount"></a>
+# **CreateAccount**
+> AccountResponse CreateAccount (string budgetId, SaveAccountWrapper data)
+
+Create a new account
+
+Creates a new account
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using YNAB.SDK.Api;
+using YNAB.SDK.Client;
+using YNAB.SDK.Model;
+
+namespace Example
+{
+    public class CreateAccountExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://api.youneedabudget.com/v1";
+            // Configure API key authorization: bearer
+            config.AddApiKey("Authorization", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // config.AddApiKeyPrefix("Authorization", "Bearer");
+
+            var apiInstance = new AccountsApi(config);
+            var budgetId = budgetId_example;  // string | The id of the budget (\"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)
+            var data = new SaveAccountWrapper(); // SaveAccountWrapper | The account to create.
+
+            try
+            {
+                // Create a new account
+                AccountResponse result = apiInstance.CreateAccount(budgetId, data);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling AccountsApi.CreateAccount: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **budgetId** | **string**| The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget) | 
+ **data** | [**SaveAccountWrapper**](SaveAccountWrapper.md)| The account to create. | 
+
+### Return type
+
+[**AccountResponse**](AccountResponse.md)
+
+### Authorization
+
+[bearer](../README.md#bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | The account was successfully created |  -  |
+| **400** | The request could not be understood due to malformed syntax or validation error(s). |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 <a name="getaccountbyid"></a>
 # **GetAccountById**
@@ -30,14 +110,15 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration.Default.BasePath = "https://api.youneedabudget.com/v1";
+            Configuration config = new Configuration();
+            config.BasePath = "https://api.youneedabudget.com/v1";
             // Configure API key authorization: bearer
-            Configuration.Default.AddApiKey("Authorization", "YOUR_API_KEY");
+            config.AddApiKey("Authorization", "YOUR_API_KEY");
             // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // Configuration.Default.AddApiKeyPrefix("Authorization", "Bearer");
+            // config.AddApiKeyPrefix("Authorization", "Bearer");
 
-            var apiInstance = new AccountsApi(Configuration.Default);
-            var budgetId = budgetId_example;  // string | The id of the budget (\"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)
+            var apiInstance = new AccountsApi(config);
+            var budgetId = budgetId_example;  // string | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).
             var accountId = new Guid(); // Guid | The id of the account
 
             try
@@ -61,7 +142,7 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budgetId** | **string**| The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget) | 
+ **budgetId** | **string**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget). | 
  **accountId** | [**Guid**](Guid.md)| The id of the account | 
 
 ### Return type
@@ -76,6 +157,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -108,15 +190,16 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration.Default.BasePath = "https://api.youneedabudget.com/v1";
+            Configuration config = new Configuration();
+            config.BasePath = "https://api.youneedabudget.com/v1";
             // Configure API key authorization: bearer
-            Configuration.Default.AddApiKey("Authorization", "YOUR_API_KEY");
+            config.AddApiKey("Authorization", "YOUR_API_KEY");
             // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // Configuration.Default.AddApiKeyPrefix("Authorization", "Bearer");
+            // config.AddApiKeyPrefix("Authorization", "Bearer");
 
-            var apiInstance = new AccountsApi(Configuration.Default);
-            var budgetId = budgetId_example;  // string | The id of the budget (\"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)
-            var lastKnowledgeOfServer = 789;  // long? | The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional) 
+            var apiInstance = new AccountsApi(config);
+            var budgetId = budgetId_example;  // string | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).
+            var lastKnowledgeOfServer = 789;  // long? | The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included. (optional) 
 
             try
             {
@@ -139,8 +222,8 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budgetId** | **string**| The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget) | 
- **lastKnowledgeOfServer** | **long?**| The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. | [optional] 
+ **budgetId** | **string**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget). | 
+ **lastKnowledgeOfServer** | **long?**| The starting server knowledge.  If provided, only entities that have changed since &#x60;last_knowledge_of_server&#x60; will be included. | [optional] 
 
 ### Return type
 
@@ -154,6 +237,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

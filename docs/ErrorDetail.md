@@ -1,4 +1,5 @@
 # YNAB.SDK.Model.ErrorDetail
+
 ## Properties
 
 Name | Type | Description | Notes

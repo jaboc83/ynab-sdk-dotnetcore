@@ -1,4 +1,5 @@
 # YNAB.SDK.Model.AccountResponseData
+
 ## Properties
 
 Name | Type | Description | Notes

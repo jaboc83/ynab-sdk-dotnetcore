@@ -1,4 +1,5 @@
 # YNAB.SDK.Model.UpdateTransactionsWrapper
+
 ## Properties
 
 Name | Type | Description | Notes

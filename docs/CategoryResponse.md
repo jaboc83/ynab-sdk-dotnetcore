@@ -1,4 +1,5 @@
 # YNAB.SDK.Model.CategoryResponse
+
 ## Properties
 
 Name | Type | Description | Notes

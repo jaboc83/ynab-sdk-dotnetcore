@@ -29,14 +29,15 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration.Default.BasePath = "https://api.youneedabudget.com/v1";
+            Configuration config = new Configuration();
+            config.BasePath = "https://api.youneedabudget.com/v1";
             // Configure API key authorization: bearer
-            Configuration.Default.AddApiKey("Authorization", "YOUR_API_KEY");
+            config.AddApiKey("Authorization", "YOUR_API_KEY");
             // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // Configuration.Default.AddApiKeyPrefix("Authorization", "Bearer");
+            // config.AddApiKeyPrefix("Authorization", "Bearer");
 
-            var apiInstance = new DeprecatedApi(Configuration.Default);
-            var budgetId = budgetId_example;  // string | The id of the budget (\"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)
+            var apiInstance = new DeprecatedApi(config);
+            var budgetId = budgetId_example;  // string | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).
             var transactions = new BulkTransactions(); // BulkTransactions | The list of transactions to create
 
             try
@@ -60,7 +61,7 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budgetId** | **string**| The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget) | 
+ **budgetId** | **string**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget). | 
  **transactions** | [**BulkTransactions**](BulkTransactions.md)| The list of transactions to create | 
 
 ### Return type
@@ -75,6 +76,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
