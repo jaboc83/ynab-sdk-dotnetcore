@@ -1,4 +1,5 @@
 # YNAB.SDK.Model.PayeeLocationResponse
+
 ## Properties
 
 Name | Type | Description | Notes

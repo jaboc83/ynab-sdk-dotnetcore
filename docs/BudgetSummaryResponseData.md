@@ -1,4 +1,5 @@
 # YNAB.SDK.Model.BudgetSummaryResponseData
+
 ## Properties
 
 Name | Type | Description | Notes

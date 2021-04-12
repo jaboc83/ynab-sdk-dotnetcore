@@ -1,4 +1,5 @@
 # YNAB.SDK.Model.UserResponseData
+
 ## Properties
 
 Name | Type | Description | Notes

@@ -1,4 +1,5 @@
 # YNAB.SDK.Model.BulkTransactions
+
 ## Properties
 
 Name | Type | Description | Notes

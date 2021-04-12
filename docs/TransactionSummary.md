@@ -1,4 +1,5 @@
 # YNAB.SDK.Model.TransactionSummary
+
 ## Properties
 
 Name | Type | Description | Notes

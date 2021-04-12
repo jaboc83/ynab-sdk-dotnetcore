@@ -1,4 +1,5 @@
 # YNAB.SDK.Model.UpdateTransactionAllOf
+
 ## Properties
 
 Name | Type | Description | Notes

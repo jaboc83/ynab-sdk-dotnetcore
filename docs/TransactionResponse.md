@@ -1,4 +1,5 @@
 # YNAB.SDK.Model.TransactionResponse
+
 ## Properties
 
 Name | Type | Description | Notes

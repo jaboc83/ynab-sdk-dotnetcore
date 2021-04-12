@@ -1,4 +1,5 @@
 # YNAB.SDK.Model.ScheduledTransactionDetail
+
 ## Properties
 
 Name | Type | Description | Notes

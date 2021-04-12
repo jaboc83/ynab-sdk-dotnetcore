@@ -31,15 +31,16 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration.Default.BasePath = "https://api.youneedabudget.com/v1";
+            Configuration config = new Configuration();
+            config.BasePath = "https://api.youneedabudget.com/v1";
             // Configure API key authorization: bearer
-            Configuration.Default.AddApiKey("Authorization", "YOUR_API_KEY");
+            config.AddApiKey("Authorization", "YOUR_API_KEY");
             // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // Configuration.Default.AddApiKeyPrefix("Authorization", "Bearer");
+            // config.AddApiKeyPrefix("Authorization", "Bearer");
 
-            var apiInstance = new BudgetsApi(Configuration.Default);
-            var budgetId = budgetId_example;  // string | The id of the budget (\"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)
-            var lastKnowledgeOfServer = 789;  // long? | The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. (optional) 
+            var apiInstance = new BudgetsApi(config);
+            var budgetId = budgetId_example;  // string | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).
+            var lastKnowledgeOfServer = 789;  // long? | The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included. (optional) 
 
             try
             {
@@ -62,8 +63,8 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budgetId** | **string**| The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget) | 
- **lastKnowledgeOfServer** | **long?**| The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. | [optional] 
+ **budgetId** | **string**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget). | 
+ **lastKnowledgeOfServer** | **long?**| The starting server knowledge.  If provided, only entities that have changed since &#x60;last_knowledge_of_server&#x60; will be included. | [optional] 
 
 ### Return type
 
@@ -77,6 +78,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -109,14 +111,15 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration.Default.BasePath = "https://api.youneedabudget.com/v1";
+            Configuration config = new Configuration();
+            config.BasePath = "https://api.youneedabudget.com/v1";
             // Configure API key authorization: bearer
-            Configuration.Default.AddApiKey("Authorization", "YOUR_API_KEY");
+            config.AddApiKey("Authorization", "YOUR_API_KEY");
             // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // Configuration.Default.AddApiKeyPrefix("Authorization", "Bearer");
+            // config.AddApiKeyPrefix("Authorization", "Bearer");
 
-            var apiInstance = new BudgetsApi(Configuration.Default);
-            var budgetId = budgetId_example;  // string | The id of the budget (\"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)
+            var apiInstance = new BudgetsApi(config);
+            var budgetId = budgetId_example;  // string | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).
 
             try
             {
@@ -139,7 +142,7 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budgetId** | **string**| The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget) | 
+ **budgetId** | **string**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget). | 
 
 ### Return type
 
@@ -154,6 +157,7 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -165,7 +169,7 @@ Name | Type | Description  | Notes
 
 <a name="getbudgets"></a>
 # **GetBudgets**
-> BudgetSummaryResponse GetBudgets ()
+> BudgetSummaryResponse GetBudgets (bool? includeAccounts = null)
 
 List budgets
 
@@ -185,18 +189,20 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration.Default.BasePath = "https://api.youneedabudget.com/v1";
+            Configuration config = new Configuration();
+            config.BasePath = "https://api.youneedabudget.com/v1";
             // Configure API key authorization: bearer
-            Configuration.Default.AddApiKey("Authorization", "YOUR_API_KEY");
+            config.AddApiKey("Authorization", "YOUR_API_KEY");
             // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // Configuration.Default.AddApiKeyPrefix("Authorization", "Bearer");
+            // config.AddApiKeyPrefix("Authorization", "Bearer");
 
-            var apiInstance = new BudgetsApi(Configuration.Default);
+            var apiInstance = new BudgetsApi(config);
+            var includeAccounts = true;  // bool? | Whether to include the list of budget accounts (optional) 
 
             try
             {
                 // List budgets
-                BudgetSummaryResponse result = apiInstance.GetBudgets();
+                BudgetSummaryResponse result = apiInstance.GetBudgets(includeAccounts);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -211,7 +217,10 @@ namespace Example
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **includeAccounts** | **bool?**| Whether to include the list of budget accounts | [optional] 
 
 ### Return type
 
@@ -225,6 +234,7 @@ This endpoint does not need any parameter.
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

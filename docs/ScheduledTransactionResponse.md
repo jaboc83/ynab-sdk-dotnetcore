@@ -1,4 +1,5 @@
 # YNAB.SDK.Model.ScheduledTransactionResponse
+
 ## Properties
 
 Name | Type | Description | Notes

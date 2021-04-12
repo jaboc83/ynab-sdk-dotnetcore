@@ -1,4 +1,5 @@
 # YNAB.SDK.Model.CategoryGroup
+
 ## Properties
 
 Name | Type | Description | Notes

@@ -1,4 +1,5 @@
 # YNAB.SDK.Model.PayeesResponse
+
 ## Properties
 
 Name | Type | Description | Notes
