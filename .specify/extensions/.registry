@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "extensions": {
+    "checkpoint": {
+      "version": "1.0.0",
+      "source": "local",
+      "manifest_hash": "sha256:f1f8587fcfee109d13e5fd2837df498439695218b32d00083f6e98095fca64c0",
+      "enabled": true,
+      "priority": 10,
+      "registered_commands": {
+        "claude": [
+          "speckit.checkpoint.commit"
+        ]
+      },
+      "registered_skills": [
+        "speckit-checkpoint.commit"
+      ],
+      "installed_at": "2026-03-26T15:50:32.550382+00:00"
+    },
+    "doctor": {
+      "version": "1.0.0",
+      "source": "local",
+      "manifest_hash": "sha256:45150c8ac10b6b002ebea9de34a203911951fe3a89cb8635a2a149082c02eeed",
+      "enabled": true,
+      "priority": 10,
+      "registered_commands": {
+        "claude": [
+          "speckit.doctor.check",
+          "speckit.doctor"
+        ]
+      },
+      "registered_skills": [
+        "speckit-doctor.check"
+      ],
+      "installed_at": "2026-03-26T15:50:33.511024+00:00"
+    }
+  }
+}
